@@ -4,6 +4,7 @@ import 'package:docshpere/core/utils/screen_size/screen_size.dart';
 import 'package:docshpere/features/authentication/view/components/custom_signIn_button.dart';
 import 'package:docshpere/features/authentication/view/components/custom_text_form_field.dart';
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 
 class RegisterComponentsWidgets extends StatelessWidget {
   const RegisterComponentsWidgets({
@@ -20,7 +21,7 @@ class RegisterComponentsWidgets extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 10.0),
+      padding: const EdgeInsets.symmetric(horizontal: 20.0),
       child: Column(
         children: [
           SizedBox(
@@ -79,9 +80,11 @@ class RegisterComponentsWidgets extends StatelessWidget {
                   obscureText: true,
                 ),
                
-                Space.hSpace40,
+                Spacer(),
                 CustomSignInButton(
-                    buttonText: 'SIGN IN', action: () {}, isWhiteColor: false),
+                    buttonText: 'SIGN UP', action: () {
+                      context.go('/login');
+                    }, isWhiteColor: false),
                 Space.hSpace5,
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
@@ -91,9 +94,11 @@ class RegisterComponentsWidgets extends StatelessWidget {
                       style: AuthenticationSyles.normalText,
                     ),
                     TextButton(
-                      onPressed: () {},
+                      onPressed: () {
+                        context.go('/login');
+                      },
                       child: Text(
-                        'Sign up',
+                        'Sign In',
                         style:
                             AuthenticationSyles.signupOrRegisterTextButtonStyle,
                       ),

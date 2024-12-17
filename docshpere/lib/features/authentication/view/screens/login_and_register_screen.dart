@@ -7,6 +7,7 @@ import 'package:docshpere/core/utils/screen_size/screen_size.dart';
 import 'package:docshpere/features/authentication/view/components/backgound_stack_widget.dart';
 import 'package:docshpere/features/authentication/view/components/custom_signIn_button.dart';
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 
 class LoginAndRegisterScreen extends StatelessWidget {
   const LoginAndRegisterScreen({super.key});
@@ -38,9 +39,13 @@ class LoginAndRegisterScreen extends StatelessWidget {
               Space.hSpace40,
                     
                     CustomSignInButton(
-                        buttonText: 'SIGN IN', action: () {}, isWhiteColor: true),
+                        buttonText: 'SIGN IN', action: () {
+                          context.go('/login');
+                        }, isWhiteColor: true),
                     CustomSignInButton(
-                        buttonText: 'SIGN UP', action: () {}, isWhiteColor: false),
+                        buttonText: 'SIGN UP', action: () {
+                          context.go('/register');
+                        }, isWhiteColor: false),
               Space.hSpace5,
                     Padding(
                       padding: const EdgeInsets.all(8.0),
@@ -79,18 +84,20 @@ class LoginAndRegisterScreen extends StatelessWidget {
                               Icon(
                                 Icons.hexagon_rounded,
                                 size: 75,
+                                color: MyColors.darkGreyColor,
                               ),
                               Icon(
                                 Icons.hexagon_rounded,
-                                size: 70,
+                                size: 72,
                                 color: MyColors.whiteColor,
                               ),
                             ],
                           ),
                         ),
-                        Text(
-                          'G',
-                          style: TextStyle(fontSize: 30),
+                        SizedBox(
+                          width: 35,
+                          height: 35,
+                          child: Image.asset('asset/Drawer icons/google_img.png'),
                         )
                       ],
                     )

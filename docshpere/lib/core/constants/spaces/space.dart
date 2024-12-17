@@ -23,4 +23,5 @@ class Space {
   static const hSpace60 = SizedBox(height: 60);
   static const hSpace70 = SizedBox(height: 70);
   static const hSpace80 = SizedBox(height: 80);
+  static const hSpace100 = SizedBox(height: 100);
 }

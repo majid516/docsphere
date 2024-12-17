@@ -16,21 +16,24 @@ class CustomSignInButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ConstrainedBox(
-      constraints: BoxConstraints(maxWidth: 350),
-      child: Container(
-        width: ScreenSize.width * 0.8,
-        height: 50,
-        decoration: BoxDecoration(
-          color: !isWhiteColor? MyColors.primaryColor : MyColors.whiteColor,
-          borderRadius: BorderRadius.circular(30),
-          border: isWhiteColor ? Border.all(width: 2,color: MyColors.primaryColor):Border(),
+    return InkWell(
+      onTap: action,
+      child: ConstrainedBox(
+        constraints: BoxConstraints(maxWidth: 350),
+        child: Container(
+          width: ScreenSize.width * 0.8,
+          height: 45,
+          decoration: BoxDecoration(
+            color: !isWhiteColor? MyColors.primaryColor : MyColors.whiteColor,
+            borderRadius: BorderRadius.circular(30),
+            border: isWhiteColor ? Border.all(width: 2,color: MyColors.primaryColor):Border(),
+          ),
+          child: Center(
+              child: Text(
+            buttonText,
+            style:isWhiteColor? AuthenticationSyles.buttonTextStyleBlue : AuthenticationSyles.buttonTextStyleWhite,
+          )),
         ),
-        child: Center(
-            child: Text(
-          buttonText,
-          style:isWhiteColor? AuthenticationSyles.buttonTextStyleBlue : AuthenticationSyles.buttonTextStyleWhite,
-        )),
       ),
     );
   }

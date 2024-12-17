@@ -1,9 +1,12 @@
+import 'dart:developer';
+
 import 'package:docshpere/core/constants/spaces/space.dart';
 import 'package:docshpere/core/constants/text_styles/authentication_syles.dart';
 import 'package:docshpere/core/utils/screen_size/screen_size.dart';
 import 'package:docshpere/features/authentication/view/components/custom_signIn_button.dart';
 import 'package:docshpere/features/authentication/view/components/custom_text_form_field.dart';
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 
 class LoginComponentsWidgets extends StatelessWidget {
   const LoginComponentsWidgets({
@@ -18,7 +21,7 @@ class LoginComponentsWidgets extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 10.0),
+      padding: const EdgeInsets.symmetric(horizontal: 20.0),
       child: Column(
         children: [
           SizedBox(
@@ -56,7 +59,6 @@ class LoginComponentsWidgets extends StatelessWidget {
                   trailing: Icon(Icons.remove_red_eye),
                   obscureText: true,
                 ),
-                Space.hSpace10,
                 Row(
                   mainAxisAlignment: MainAxisAlignment.end,
                   children: [
@@ -69,10 +71,11 @@ class LoginComponentsWidgets extends StatelessWidget {
                     ),
                   ],
                 ),
-                Space.hSpace80,
+                    Spacer(),
                 CustomSignInButton(
-                    buttonText: 'SIGN IN', action: () {}, isWhiteColor: false),
-                Space.hSpace20,
+                    buttonText: 'SIGN IN', action: () {
+                      context.go('/home');
+                    }, isWhiteColor: false),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
@@ -81,7 +84,9 @@ class LoginComponentsWidgets extends StatelessWidget {
                       style: AuthenticationSyles.normalText,
                     ),
                     TextButton(
-                      onPressed: () {},
+                      onPressed: () {
+                         context.go('/register');
+                      },
                       child: Text(
                         'Sign up',
                         style:
