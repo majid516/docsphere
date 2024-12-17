@@ -11,6 +11,7 @@ class MyColors {
   static const Color secondaryColor = Color(0xFF17ADE0);
   static const Color ternaryColor = Color(0xFF43BEE6);
   static const Color appGreenColor = Color(0xFF279C85);
+  static const Color blueIconsColor = Color.fromARGB(255, 10, 141, 188);
   static const Color lightGreyColor = Color(0xFFAFAFAF);
   static const Color darkGreyColor = Color(0xFF818181);
   static const Gradient themeGradient = LinearGradient( transform: GradientRotation(90 * pi / 180), colors: [Color.fromARGB(222, 67, 189, 230), primaryColor]);

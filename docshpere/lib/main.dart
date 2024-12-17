@@ -1,5 +1,4 @@
 import 'package:docshpere/core/utils/screen_size/screen_size.dart';
-import 'package:docshpere/features/authentication/view/screens/login_screen.dart';
 import 'package:docshpere/features/home/view/screens/home_screen.dart';
 import 'package:flutter/material.dart';
 
