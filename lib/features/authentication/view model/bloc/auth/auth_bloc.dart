@@ -1,7 +1,6 @@
-import 'dart:developer';
-
 import 'package:bloc/bloc.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:docshpere/features/authentication/services/register_user.dart';
+import 'package:docshpere/features/authentication/services/sigin_user.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
@@ -16,74 +15,31 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
         await registerUser(event.name, event.email, event.password);
         emit(AuthState.loadedState());
       } catch (e) {
-        emit(AuthState.errorState());
+        emit(AuthState.errorState(e.toString()));
       }
     });
     on<SignIn>((event, emit) async {
-      try {
-        await signInUser(event.email, event.password);
-        emit(AuthState.loadedState());
-      } catch (e) {
-        emit(AuthState.errorState());
-      }
-    });
-   
-  }
-}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-Future<void> registerUser(String name, String email, String password) async {
+  emit(AuthState.loadingState());
   try {
-    UserCredential userCredential =
-        await FirebaseAuth.instance.createUserWithEmailAndPassword(
-      email: email,
-      password: password,
-    );
-    String uid = userCredential.user!.uid;
-
-    await FirebaseFirestore.instance.collection('users').doc(uid).set({
-      'uid': uid,
-      'name': name,
-      'email': email,
-      'role': 'user',
-      'profileImage': '',
-      'medicalRecords': [],
-      'appointments': [],
-      'notifications': [],
-    });
-
-    log("User registered successfully!");
+    await signInUser(event.email, event.password);
+    emit(AuthState.loadedState());
+  } on FirebaseAuthException catch (e) {
+    String errorMessage;
+    switch (e.code) {
+      case 'user-not-found':
+        errorMessage = "No user found for that email.";
+        break;
+      case 'wrong-password':
+        errorMessage = "Invalid password.";
+        break;
+      default:
+        errorMessage = "Something went wrong. Please try again.";
+    }
+    emit(AuthState.errorState(errorMessage));
   } catch (e) {
-    log("Error registering user: $e");
+    emit(AuthState.errorState(e.toString()));
+  }
+});
+
   }
 }
-
-
-Future<void> signInUser(String email, String password)async{
-   try {
-     UserCredential userCredential =  await FirebaseAuth.instance.signInWithEmailAndPassword(email: email, password: password);
-  final currMail =  userCredential.user!.email;
-  log(currMail!);
-   } catch (e) {
-     log(e.toString());
-   }
-}
-

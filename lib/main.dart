@@ -1,20 +1,30 @@
+import 'dart:developer';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:docshpere/core/utils/screen_size/screen_size.dart';
 import 'package:docshpere/features/authentication/view%20model/bloc/auth/auth_bloc.dart';
-import 'package:docshpere/features/authentication/view/screens/login_and_register_screen.dart';
-import 'package:docshpere/features/authentication/view/screens/login_screen.dart';
-import 'package:docshpere/features/authentication/view/screens/register_screen.dart';
-import 'package:docshpere/features/home/view/screens/home_screen.dart';
+import 'package:docshpere/features/authentication/view%20model/provider/forgot_password.dart';
+import 'package:docshpere/features/authentication/view%20model/provider/password_toggle.dart';
 import 'package:docshpere/firebase_options.dart';
+import 'package:docshpere/routes/routes.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:go_router/go_router.dart';
+import 'package:provider/provider.dart';
 
-void main() async{
+void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  await Firebase.initializeApp(
-    options: DefaultFirebaseOptions.currentPlatform
-  );
+  await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
+  if (kDebugMode) {
+    try {
+   FirebaseFirestore.instance.useFirestoreEmulator('localhost', 8080);
+      await FirebaseAuth.instance.useAuthEmulator('localhost', 9099);
+      log('firebase emulator suit connected');
+    } catch (e) {
+      log('firebase emulator connection failed');
+    }
+  }
   runApp(const MyApp());
 }
 
@@ -24,39 +34,18 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     ScreenSize.initialize(context);
-    return MultiBlocProvider(
+    return  MultiProvider(
       providers: [
-        BlocProvider(create: (context) => AuthBloc())
+        ChangeNotifierProvider(create: (context) => PasswordToggle()),
+        ChangeNotifierProvider(create: (context) => ForgotPasswordProvider()),
       ],
-      child: MaterialApp.router(
-        debugShowCheckedModeBanner: false,
-        routerConfig: router,
+      child: MultiBlocProvider(
+        providers: [BlocProvider(create: (context) => AuthBloc())],
+        child: MaterialApp.router(
+          debugShowCheckedModeBanner: false,
+          routerConfig: router,
+        ),
       ),
     );
   }
 }
-
-final GoRouter router = GoRouter(
-  
-  initialLocation: '/singInUp', routes: [
-  GoRoute(
-    name: 'singInUp',
-    path: '/singInUp',
-    builder: (context, state) => LoginAndRegisterScreen(),
-  ),
-  GoRoute(
-    name: 'login',
-    path: '/login',
-    builder: (context, state) => LoginScreen(),
-  ),
-  GoRoute(
-    name: 'register',
-    path: '/register',
-    builder: (context, state) => RegisterScreen(),
-  ),
-  GoRoute(
-    name: 'home',
-    path: '/home',
-    builder: (context, state) => HomeScreen(),
-  ),
-],);

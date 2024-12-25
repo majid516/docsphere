@@ -15,7 +15,8 @@ class LoginScreen extends StatelessWidget {
           BackgroudStackWidget(),
           LoginComponentsWidgets(
               emailController: nameController,
-              passwordController: passwordController)
+              passwordController: passwordController,
+              )
         ],
       ),
     );

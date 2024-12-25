@@ -5,5 +5,5 @@ class AuthState with _$AuthState {
   const factory AuthState.initialState() = InitialState;
   const factory AuthState.loadingState() = LoadingState;
   const factory AuthState.loadedState() = LoadedState;
-  const factory AuthState.errorState() = ErrorState;
+  const factory AuthState.errorState(String error) = ErrorState;
 }

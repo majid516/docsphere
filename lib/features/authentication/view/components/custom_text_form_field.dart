@@ -5,11 +5,13 @@ import 'package:flutter/material.dart';
 
 class CustomTextFieldWidget extends StatelessWidget {
   final String hintText;
-  final Icon trailing;
+  final Widget trailing;
   final Icon leading;
   final bool obscureText;
   final String errorMessage;
   final TextEditingController controller;
+  final FormFieldValidator<String>? validator;
+
   const CustomTextFieldWidget({
     super.key,
     required this.controller,
@@ -18,6 +20,7 @@ class CustomTextFieldWidget extends StatelessWidget {
     required this.trailing,
     required this.obscureText,
     required this.errorMessage,
+    this.validator,
   });
 
   @override
@@ -26,8 +29,7 @@ class CustomTextFieldWidget extends StatelessWidget {
       padding: const EdgeInsets.symmetric(horizontal: 8.0, vertical: 4),
       child: TextFormField(
         obscureText: obscureText,
-        validator: (value) =>
-            FormValidators.commonValidator(value, massage: errorMessage),
+        validator: validator ?? (value) => FormValidators.commonValidator(value, massage: errorMessage), // Use custom validator if provided
         cursorColor: MyColors.darkGreyColor,
         controller: controller,
         decoration: InputDecoration(

@@ -10,5 +10,6 @@ class AuthenticationSyles {
   static const TextStyle buttonTextStyleBlue = TextStyle(fontSize: 24,color: MyColors.primaryColor,fontWeight: FontWeight.w700);
   static const TextStyle forgotPassStyle = TextStyle(fontSize: 18,color: MyColors.primaryColor,fontWeight: FontWeight.w600);
   static const TextStyle normalText = TextStyle(fontSize: 16,color: MyColors.blackColor,fontWeight: FontWeight.w500);
+  static const TextStyle normalText2 = TextStyle(fontSize: 19,color: MyColors.blackColor,fontWeight: FontWeight.w400);
   static const TextStyle signupOrRegisterTextButtonStyle = TextStyle(fontSize: 19,color: MyColors.primaryColor,fontWeight: FontWeight.w700);
 }
