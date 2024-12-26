@@ -4,7 +4,9 @@ import 'package:docshpere/core/constants/app_theme/app_theme.dart';
 import 'package:docshpere/core/constants/spaces/space.dart';
 import 'package:docshpere/core/constants/text_styles/common_styles.dart';
 import 'package:docshpere/core/utils/screen_size/screen_size.dart';
+import 'package:docshpere/routes/routes_name.dart';
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 
 class CustomAppBar extends StatelessWidget {
   final String title;
@@ -52,10 +54,13 @@ class CustomAppBar extends StatelessWidget {
           child: Row(
             children: [
               Space.wSpace20,
-              Icon(
-                Icons.arrow_back_ios,
-                color: MyColors.whiteColor,
-                size: 24,
+              InkWell(
+                onTap: ()=> context.go(MyRoutes.categorySearchScren),
+                child: Icon(
+                  Icons.arrow_back_ios,
+                  color: MyColors.whiteColor,
+                  size: 24,
+                ),
               ),
               Space.wSpace10,
               Text(title,

@@ -11,6 +11,7 @@ class CommonStyles {
     static const  TextStyle doctorDetailsStyle = TextStyle(fontSize: 20,color: MyColors.blackColor,fontWeight: FontWeight.w400);
     static const  TextStyle feeTextStyle = TextStyle(fontSize: 21,color: MyColors.blackColor,fontWeight: FontWeight.w700);
     static const  TextStyle doctorNameStyle = TextStyle(fontSize: 22,color: MyColors.blackColor,fontWeight: FontWeight.w700);
+    static const  TextStyle doctorWhiteNameStyle = TextStyle(fontSize: 22,color: MyColors.whiteColor,fontWeight: FontWeight.w700);
     static const  TextStyle appbarTitleStyle = TextStyle(fontSize: 27,color: MyColors.whiteColor,fontWeight: FontWeight.w700);
     static const  TextStyle dateTime = TextStyle(fontSize: 18, color: MyColors.darkGreyColor, fontWeight: FontWeight.w400);
 }

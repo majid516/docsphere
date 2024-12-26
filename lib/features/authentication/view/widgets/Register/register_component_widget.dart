@@ -31,10 +31,8 @@ class RegisterComponentsWidgets extends StatelessWidget {
     return BlocListener<AuthBloc, AuthState>(
       listener: (context, state) {
         if (state is ErrorState) {
-          // Show snackbar on error
           showCustomSnackBar(context, state.error, true);
         } else if (state is LoadedState) {
-          // Navigate to the sign-in page after successful registration
           context.go(MyRoutes.signIn);
         }
       },
@@ -49,8 +47,9 @@ class RegisterComponentsWidgets extends StatelessWidget {
                 height: ScreenSize.height * 0.43,
                 child: Center(
                   child: Text(
-                    'Access your Care ',
+                    'Connect With Your Doctors',
                     style: AuthenticationSyles.mainHeadingStyle,
+                    textAlign: TextAlign.center,
                   ),
                 ),
               ),

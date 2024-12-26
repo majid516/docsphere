@@ -1,3 +1,4 @@
+import 'package:docshpere/core/constants/app_theme/app_theme.dart';
 import 'package:docshpere/core/constants/spaces/space.dart';
 import 'package:docshpere/core/constants/text_styles/home_screen_styles.dart';
 import 'package:docshpere/core/utils/screen_size/screen_size.dart';
@@ -14,6 +15,7 @@ class HomeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: MyColors.whiteColor,
         body: CustomScrollView(
           slivers: [
             CustomAnimatedAppbar(),

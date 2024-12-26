@@ -16,7 +16,7 @@ class TopReviewedDoctorDetailsWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return SizedBox(
       width: ScreenSize.width,
-      height: ScreenSize.height * 0.37,
+      height: ScreenSize.height * 0.31,
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
@@ -54,7 +54,7 @@ class TopReviewedDoctorDetailsWidget extends StatelessWidget {
           Space.hSpace20,
           Container(
             width: ScreenSize.width * 0.96,
-            height: ScreenSize.height * 0.25,
+            height: ScreenSize.height * 0.22,
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(
                 12,
@@ -86,6 +86,7 @@ class TopReviewedDoctorDetailsWidget extends StatelessWidget {
                   height: ScreenSize.height * 0.22,
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
+                    mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       Text(
                         'Dr Robert Kalvin',

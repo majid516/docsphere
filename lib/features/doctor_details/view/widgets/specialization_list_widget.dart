@@ -27,6 +27,7 @@ class SpecializationWidget extends StatelessWidget {
               padding: const EdgeInsets.all(8.0),
               child: ListView.builder(
                 shrinkWrap: true,
+                  padding: EdgeInsets.zero,
                 physics: NeverScrollableScrollPhysics(),
                 itemCount: specializations
                     .length, // Replace with your specialization list

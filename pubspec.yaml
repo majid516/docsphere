@@ -38,6 +38,7 @@ dependencies:
   freezed_annotation: null
   go_router: null
   image_picker: ^1.1.2
+  intl: ^0.20.1
   provider: ^6.1.2
 dev_dependencies:
   build_runner: ^2.4.13

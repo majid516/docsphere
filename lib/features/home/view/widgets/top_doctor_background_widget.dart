@@ -15,7 +15,7 @@ class TopDoctorBackgroundwidget extends StatelessWidget {
       children: [
         Container(
           width: ScreenSize.width,
-          height: ScreenSize.height * 0.42,
+          height: ScreenSize.height * 0.4,
           color: MyColors.primaryColor,
         ),
         Positioned(

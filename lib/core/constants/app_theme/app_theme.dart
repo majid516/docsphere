@@ -13,6 +13,7 @@ class MyColors {
   static const Color appGreenColor = Color(0xFF279C85);
   static const Color blueIconsColor = Color.fromARGB(255, 10, 141, 188);
   static const Color lightGreyColor = Color(0xFFAFAFAF);
+  static const Color lightColor = Color.fromARGB(119, 175, 175, 175);
   static const Color darkGreyColor = Color(0xFF818181);
   static const Color errorRed = Color.fromARGB(255, 187, 7, 7);
   static const Gradient themeGradient = LinearGradient( transform: GradientRotation(90 * pi / 180), colors: [Color.fromARGB(222, 67, 189, 230), primaryColor]);

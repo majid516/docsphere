@@ -7,7 +7,7 @@ import 'package:flutter/material.dart';
 
 class DoctorsListsScreen extends StatelessWidget {
   final String title;
-
+  
   DoctorsListsScreen({super.key, required this.title});
 
   @override
@@ -27,10 +27,15 @@ class DoctorsListsScreen extends StatelessWidget {
               height: 45,
               width: ScreenSize.width * 0.93,
               child: SearchBar(
+               side: WidgetStatePropertyAll(
+               BorderSide(color: MyColors.primaryColor)
+               ),
+               leading: Icon(Icons.search,color: MyColors.lightGreyColor,),
+               backgroundColor: WidgetStatePropertyAll(MyColors.whiteColor),
                 padding: WidgetStatePropertyAll(
                     EdgeInsets.symmetric(horizontal: 15)),
                 elevation: WidgetStatePropertyAll(1),
-                hintText: 'seach your category',
+                hintText: 'seach your doctor',
                 hintStyle:
                     WidgetStatePropertyAll(AuthenticationSyles.hintTextStyle),
               ),
