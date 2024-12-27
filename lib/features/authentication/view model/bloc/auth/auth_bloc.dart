@@ -18,28 +18,28 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
         emit(AuthState.errorState(e.toString()));
       }
     });
-    on<SignIn>((event, emit) async {
-  emit(AuthState.loadingState());
-  try {
-    await signInUser(event.email, event.password);
-    emit(AuthState.loadedState());
-  } on FirebaseAuthException catch (e) {
-    String errorMessage;
-    switch (e.code) {
-      case 'user-not-found':
-        errorMessage = "No user found for that email.";
-        break;
-      case 'wrong-password':
-        errorMessage = "Invalid password.";
-        break;
-      default:
-        errorMessage = "Something went wrong. Please try again.";
-    }
-    emit(AuthState.errorState(errorMessage));
-  } catch (e) {
-    emit(AuthState.errorState(e.toString()));
-  }
-});
 
+    on<SignIn>((event, emit) async {
+      emit(AuthState.loadingState());
+      try {
+        await signInUser(event.email, event.password);
+        emit(AuthState.loadedState());
+      } on FirebaseAuthException catch (e) {
+        String errorMessage;
+        switch (e.code) {
+          case 'user-not-found':
+            errorMessage = "No user found for that email.";
+            break;
+          case 'wrong-password':
+            errorMessage = "Invalid password.";
+            break;
+          default:
+            errorMessage = "Something went wrong. Please try again.";
+        }
+        emit(AuthState.errorState(errorMessage));
+      } catch (e) {
+        emit(AuthState.errorState(e.toString()));
+      }
+    });
   }
 }

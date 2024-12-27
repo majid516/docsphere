@@ -3,7 +3,7 @@ import 'package:docshpere/core/components/doctor_basic_details_widget.dart';
 import 'package:docshpere/core/constants/spaces/space.dart';
 import 'package:docshpere/core/constants/text_styles/common_styles.dart';
 import 'package:docshpere/core/utils/screen_size/screen_size.dart';
-import 'package:docshpere/features/doctor_lists/view/widgets/view_doctor_profile_button.dart';
+import 'package:docshpere/features/doctor/view/widgets/view_doctor_profile_button.dart';
 import 'package:docshpere/routes/routes_name.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';

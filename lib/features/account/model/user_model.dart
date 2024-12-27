@@ -3,37 +3,37 @@ import 'dart:convert';
 
 import 'package:flutter/foundation.dart';
 
-class RegisterUserModel {
-  String uid;
+class UserModel {
+  String? uid;
   String name;
   String email;
-  String role;
+  String? role;
   String profileImage;
   String contactNumber;
   String dob;
   String bloodGroup;
   String gender;
-  List<String> medicalRecords;
-  List<String> appointments;
-  List<String> notifications;
-  String createdAt;
-  RegisterUserModel({
-    required this.uid,
+  List<String>? medicalRecords;
+  List<String>? appointments;
+  List<String>? notifications;
+  String? createdAt;
+  UserModel({
+     this.uid,
     required this.name,
     required this.email,
-    required this.role,
+     this.role,
     required this.profileImage,
     required this.contactNumber,
     required this.dob,
     required this.bloodGroup,
     required this.gender,
-    required this.medicalRecords,
-    required this.appointments,
-    required this.notifications,
-    required this.createdAt,
+     this.medicalRecords,
+     this.appointments,
+     this.notifications,
+     this.createdAt,
   });
 
-  RegisterUserModel copyWith({
+  UserModel copyWith({
     String? uid,
     String? name,
     String? email,
@@ -48,7 +48,7 @@ class RegisterUserModel {
     List<String>? notifications,
     String? createdAt,
   }) {
-    return RegisterUserModel(
+    return UserModel(
       uid: uid ?? this.uid,
       name: name ?? this.name,
       email: email ?? this.email,
@@ -83,8 +83,8 @@ class RegisterUserModel {
     };
   }
 
-  factory RegisterUserModel.fromMap(Map<String, dynamic> map) {
-    return RegisterUserModel(
+  factory UserModel.fromMap(Map<String, dynamic> map) {
+    return UserModel(
       uid: map['uid'] as String,
       name: map['name'] as String,
       email: map['email'] as String,
@@ -94,56 +94,62 @@ class RegisterUserModel {
       dob: map['dob'] as String,
       bloodGroup: map['bloodGroup'] as String,
       gender: map['gender'] as String,
-      medicalRecords: List<String>.from((map['medicalRecords'] as List<String>),),
-      appointments: List<String>.from((map['appointments'] as List<String>),),
-      notifications: List<String>.from((map['notifications'] as List<String>),),
+      medicalRecords: List<String>.from(
+        (map['medicalRecords'] as List<String>),
+      ),
+      appointments: List<String>.from(
+        (map['appointments'] as List<String>),
+      ),
+      notifications: List<String>.from(
+        (map['notifications'] as List<String>),
+      ),
       createdAt: map['createdAt'] as String,
     );
   }
 
   String toJson() => json.encode(toMap());
 
-  factory RegisterUserModel.fromJson(String source) => RegisterUserModel.fromMap(json.decode(source) as Map<String, dynamic>);
+  factory UserModel.fromJson(String source) =>
+      UserModel.fromMap(json.decode(source) as Map<String, dynamic>);
 
   @override
   String toString() {
-    return 'RegisterUserModel(uid: $uid, name: $name, email: $email, role: $role, profileImage: $profileImage, contactNumber: $contactNumber, dob: $dob, bloodGroup: $bloodGroup, gender: $gender, medicalRecords: $medicalRecords, appointments: $appointments, notifications: $notifications, createdAt: $createdAt)';
+    return 'UserModel(uid: $uid, name: $name, email: $email, role: $role, profileImage: $profileImage, contactNumber: $contactNumber, dob: $dob, bloodGroup: $bloodGroup, gender: $gender, medicalRecords: $medicalRecords, appointments: $appointments, notifications: $notifications, createdAt: $createdAt)';
   }
 
   @override
-  bool operator ==(covariant RegisterUserModel other) {
+  bool operator ==(covariant UserModel other) {
     if (identical(this, other)) return true;
-  
-    return 
-      other.uid == uid &&
-      other.name == name &&
-      other.email == email &&
-      other.role == role &&
-      other.profileImage == profileImage &&
-      other.contactNumber == contactNumber &&
-      other.dob == dob &&
-      other.bloodGroup == bloodGroup &&
-      other.gender == gender &&
-      listEquals(other.medicalRecords, medicalRecords) &&
-      listEquals(other.appointments, appointments) &&
-      listEquals(other.notifications, notifications) &&
-      other.createdAt == createdAt;
+
+    return other.uid == uid &&
+        other.name == name &&
+        other.email == email &&
+        other.role == role &&
+        other.profileImage == profileImage &&
+        other.contactNumber == contactNumber &&
+        other.dob == dob &&
+        other.bloodGroup == bloodGroup &&
+        other.gender == gender &&
+        listEquals(other.medicalRecords, medicalRecords) &&
+        listEquals(other.appointments, appointments) &&
+        listEquals(other.notifications, notifications) &&
+        other.createdAt == createdAt;
   }
 
   @override
   int get hashCode {
     return uid.hashCode ^
-      name.hashCode ^
-      email.hashCode ^
-      role.hashCode ^
-      profileImage.hashCode ^
-      contactNumber.hashCode ^
-      dob.hashCode ^
-      bloodGroup.hashCode ^
-      gender.hashCode ^
-      medicalRecords.hashCode ^
-      appointments.hashCode ^
-      notifications.hashCode ^
-      createdAt.hashCode;
+        name.hashCode ^
+        email.hashCode ^
+        role.hashCode ^
+        profileImage.hashCode ^
+        contactNumber.hashCode ^
+        dob.hashCode ^
+        bloodGroup.hashCode ^
+        gender.hashCode ^
+        medicalRecords.hashCode ^
+        appointments.hashCode ^
+        notifications.hashCode ^
+        createdAt.hashCode;
   }
 }

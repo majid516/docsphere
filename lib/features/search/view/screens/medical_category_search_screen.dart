@@ -3,10 +3,12 @@ import 'package:docshpere/core/constants/app_theme/app_theme.dart';
 import 'package:docshpere/core/constants/text_styles/authentication_syles.dart';
 import 'package:docshpere/core/components/custom_app_bar.dart';
 import 'package:docshpere/features/search/view/widgets/category_list_widget.dart';
+import 'package:docshpere/routes/routes_name.dart';
 import 'package:flutter/material.dart';
 import 'package:docshpere/core/utils/screen_size/screen_size.dart';
 import 'package:docshpere/features/search/view_model/bloc/category/category_bloc.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:go_router/go_router.dart';
 
 class MedicalCategorySearchScreen extends StatelessWidget {
   const MedicalCategorySearchScreen({super.key});
@@ -28,6 +30,7 @@ class MedicalCategorySearchScreen extends StatelessWidget {
       appBar: PreferredSize(
           preferredSize: Size(ScreenSize.width, 100),
           child: CustomAppBar(
+            action: () => context.go(MyRoutes.home),
             title: 'Find Your Doctor',
           )),
           backgroundColor: MyColors.whiteColor,

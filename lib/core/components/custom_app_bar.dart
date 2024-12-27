@@ -1,16 +1,14 @@
 import 'dart:math';
-
 import 'package:docshpere/core/constants/app_theme/app_theme.dart';
 import 'package:docshpere/core/constants/spaces/space.dart';
 import 'package:docshpere/core/constants/text_styles/common_styles.dart';
 import 'package:docshpere/core/utils/screen_size/screen_size.dart';
-import 'package:docshpere/routes/routes_name.dart';
 import 'package:flutter/material.dart';
-import 'package:go_router/go_router.dart';
 
 class CustomAppBar extends StatelessWidget {
   final String title;
-  const CustomAppBar({super.key, required this.title});
+  final VoidCallback action;
+  const CustomAppBar({super.key, required this.title, required this.action});
 
   @override
   Widget build(BuildContext context) {
@@ -50,21 +48,22 @@ class CustomAppBar extends StatelessWidget {
           ),
         ),
         Positioned(
-          bottom:20 ,
+          bottom: 20,
           child: Row(
             children: [
               Space.wSpace20,
               InkWell(
-                onTap: ()=> context.go(MyRoutes.categorySearchScren),
+                onTap: action,
                 child: Icon(
                   Icons.arrow_back_ios,
                   color: MyColors.whiteColor,
-                  size: 24,
+                  size: 20,
                 ),
               ),
-              Space.wSpace10,
-              Text(title,
-              style: CommonStyles.appbarTitleStyle,
+              Space.wSpace20,
+              Text(
+                title,
+                style: CommonStyles.appbarTitleStyle,
               ),
             ],
           ),

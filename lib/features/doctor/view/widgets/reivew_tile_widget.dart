@@ -1,7 +1,7 @@
 import 'package:docshpere/core/constants/app_theme/app_theme.dart';
 import 'package:docshpere/core/constants/text_styles/authentication_syles.dart';
 import 'package:docshpere/core/constants/text_styles/common_styles.dart';
-import 'package:docshpere/features/doctor_details/view/widgets/doctor_text_styles.dart';
+import 'package:docshpere/features/doctor/view/widgets/doctor_text_styles.dart';
 import 'package:flutter/material.dart';
 
 class ReviewTileWidget extends StatelessWidget {

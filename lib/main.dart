@@ -1,10 +1,11 @@
 import 'dart:developer';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:docshpere/core/utils/screen_size/screen_size.dart';
+import 'package:docshpere/features/account/view_model/bloc/profile_bloc.dart';
 import 'package:docshpere/features/authentication/view%20model/bloc/auth/auth_bloc.dart';
 import 'package:docshpere/features/authentication/view%20model/provider/forgot_password.dart';
 import 'package:docshpere/features/authentication/view%20model/provider/password_toggle.dart';
-import 'package:docshpere/features/doctor_details/view_model/provider/scorll_provider.dart';
+import 'package:docshpere/features/doctor/view_model/provider/scorll_provider.dart';
 import 'package:docshpere/features/search/view_model/bloc/category/category_bloc.dart';
 import 'package:docshpere/firebase_options.dart';
 import 'package:docshpere/routes/routes.dart';
@@ -45,6 +46,7 @@ class MyApp extends StatelessWidget {
         providers: [
           BlocProvider(create: (context) => AuthBloc()),
           BlocProvider(create: (context) => CategoryBloc()),
+          BlocProvider(create: (context) => ProfileBloc()),
         
         ],
         child: MaterialApp.router(

@@ -6,14 +6,14 @@ import 'package:go_router/go_router.dart';
 import 'package:provider/provider.dart';
 import 'package:docshpere/core/components/doctor_basic_details_widget.dart';
 import 'package:docshpere/core/constants/app_theme/app_theme.dart';
-import 'package:docshpere/features/doctor_details/view/widgets/book_appointment_button.dart';
-import 'package:docshpere/features/doctor_details/view/widgets/common_divider.dart';
-import 'package:docshpere/features/doctor_details/view/widgets/fee_tile_widget.dart';
-import 'package:docshpere/features/doctor_details/view/widgets/message_button.dart';
-import 'package:docshpere/features/doctor_details/view/widgets/qualification_list_widget.dart';
-import 'package:docshpere/features/doctor_details/view/widgets/reivew_tile_widget.dart';
-import 'package:docshpere/features/doctor_details/view/widgets/specialization_list_widget.dart';
-import 'package:docshpere/features/doctor_details/view_model/provider/scorll_provider.dart';
+import 'package:docshpere/features/doctor/view/widgets/book_appointment_button.dart';
+import 'package:docshpere/features/doctor/view/widgets/common_divider.dart';
+import 'package:docshpere/features/doctor/view/widgets/fee_tile_widget.dart';
+import 'package:docshpere/features/doctor/view/widgets/message_button.dart';
+import 'package:docshpere/features/doctor/view/widgets/qualification_list_widget.dart';
+import 'package:docshpere/features/doctor/view/widgets/reivew_tile_widget.dart';
+import 'package:docshpere/features/doctor/view/widgets/specialization_list_widget.dart';
+import 'package:docshpere/features/doctor/view_model/provider/scorll_provider.dart';
 
 class DoctorDetailsScreen extends StatelessWidget {
  
