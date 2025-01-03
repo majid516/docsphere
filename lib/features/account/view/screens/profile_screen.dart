@@ -4,6 +4,7 @@ import 'package:docshpere/core/constants/spaces/space.dart';
 import 'package:docshpere/core/constants/text_styles/common_styles.dart';
 import 'package:docshpere/core/utils/screen_size/screen_size.dart';
 import 'package:docshpere/features/account/model/user_model.dart';
+import 'package:docshpere/features/account/view/widgets/detail_card.dart';
 import 'package:docshpere/routes/routes_name.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
@@ -33,7 +34,7 @@ class ProfileScreen extends StatelessWidget {
       appBar: AppBar(
         leading: IconButton(
             onPressed: () {
-              context.go(MyRoutes.home);
+              context.pop(MyRoutes.home);
             },
             icon: Icon(
               Icons.arrow_back_ios_new,
@@ -46,7 +47,7 @@ class ProfileScreen extends StatelessWidget {
         actions: [
           TextButton(
               onPressed: () {
-                context.go(MyRoutes.editProfileScreen,
+                context.push(MyRoutes.editProfileScreen,
                     extra: UserModel(
                         name: name,
                         email: email,
@@ -101,28 +102,6 @@ class ProfileScreen extends StatelessWidget {
             detailCard("Date of Birth", dob),
             detailCard("Blood Group", bloodGroup),
             detailCard("Gender", gender),
-          ],
-        ),
-      ),
-    );
-  }
-
-  Widget detailCard(String title, String detail) {
-    return Card(
-      margin: EdgeInsets.symmetric(vertical: 8),
-      child: Padding(
-        padding: const EdgeInsets.all(16.0),
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            Text(
-              title,
-              style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
-            ),
-            Text(
-              detail == '' ? 'no data added' : detail,
-              style: TextStyle(fontSize: 16),
-            ),
           ],
         ),
       ),

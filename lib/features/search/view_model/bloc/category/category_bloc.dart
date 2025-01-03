@@ -1,4 +1,5 @@
 import 'package:bloc/bloc.dart';
+import 'package:docshpere/features/search/model/category_model.dart';
 import 'package:docshpere/features/search/services/get_all_medical_categories.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 

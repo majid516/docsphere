@@ -1,17 +1,16 @@
 import 'dart:convert';
 import 'dart:io';
-import 'package:docshpere/core/components/custom_snackbar.dart';
 import 'package:docshpere/core/constants/app_theme/app_theme.dart';
 import 'package:docshpere/core/constants/spaces/space.dart';
 import 'package:docshpere/core/constants/text_styles/common_styles.dart';
 import 'package:docshpere/features/account/model/user_model.dart';
+import 'package:docshpere/features/account/view/widgets/calendar_widget.dart';
 import 'package:docshpere/features/account/view/widgets/custom_dropdown_filed.dart';
 import 'package:docshpere/features/account/view/widgets/custom_text_field.dart';
+import 'package:docshpere/features/account/view/widgets/submit_button.dart';
 import 'package:docshpere/features/account/view_model/bloc/profile_bloc.dart';
-import 'package:docshpere/routes/routes_name.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:go_router/go_router.dart';
 
 class EditProfileScreen extends StatelessWidget {
   final UserModel? user;
@@ -32,18 +31,17 @@ class EditProfileScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     if (user != null) {
-       profile = user!.profileImage;
-    nameController.text = user!.name.isEmpty ? "" : user!.name;
-    emailController.text = user!.email.isEmpty ? "" : user!.email;
-    contactController.text =
-        user!.contactNumber.isEmpty ? "" : user!.contactNumber;
-    dobController.text = user!.dob.isEmpty ? "" : user!.dob;
-    bloodController.text = user!.bloodGroup.isEmpty ? "" : user!.bloodGroup;
-    genderController.text = user!.gender.isEmpty ? "" : user!.gender;
+      profile = user!.profileImage;
+      nameController.text = user!.name.isEmpty ? "" : user!.name;
+      emailController.text = user!.email.isEmpty ? "" : user!.email;
+      contactController.text =
+          user!.contactNumber.isEmpty ? "" : user!.contactNumber;
+      dobController.text = user!.dob.isEmpty ? "" : user!.dob;
+      bloodController.text = user!.bloodGroup.isEmpty ? "" : user!.bloodGroup;
+      genderController.text = user!.gender.isEmpty ? "" : user!.gender;
     }
     return Scaffold(
       appBar: AppBar(
-       
         title: Text(
           'Edit Profile',
           style: CommonStyles.appbarTitleBlackStyle,
@@ -135,20 +133,7 @@ class EditProfileScreen extends StatelessWidget {
                         return null;
                       },
                     ),
-                    CustomTextFormField(
-                      hintText: 'Enter date of birth',
-                      controller: dobController,
-                      title: 'Date of Birth',
-                      validator: (value) {
-                        if (value == null || value.isEmpty) {
-                          return 'Date of birth is required';
-                        }
-                        if (RegExp(r'^\d{2}/\d{2}/\d{4}$').hasMatch(value)) {
-                          return 'Enter a valid 10-digit number';
-                        }
-                        return null;
-                      },
-                    ),
+                    CalendarWidget(title: 'DOB', dobController: dobController),
                     CustomDropDownField(
                       items: [
                         "A Positive (A+)",
@@ -176,33 +161,15 @@ class EditProfileScreen extends StatelessWidget {
                       controller: genderController,
                       errorMessage: 'Select your gender',
                     ),
-                    ElevatedButton(
-                      onPressed: () {
-                        if (_formKey.currentState!.validate()) {
-                          final user = UserModel(
-                              name: nameController.text.trim(),
-                              email: emailController.text.trim(),
-                              profileImage: profile ?? '',
-                              contactNumber: contactController.text.trim(),
-                              dob: dobController.text.trim(),
-                              bloodGroup: bloodController.text.trim(),
-                              gender: genderController.text.trim());
-                          context
-                              .read<ProfileBloc>()
-                              .add(ProfileEvent.updateUserData(user));
-                          showCustomSnackBar(
-                              context, 'updated profile successfully', false);
-                          context.go(MyRoutes.profileScreen,extra: user);
-                        }
-                      },
-                      style: ElevatedButton.styleFrom(
-                        backgroundColor: MyColors.primaryColor,
-                      ),
-                      child: Text(
-                        'Submit',
-                        style: CommonStyles.commonButtonWhiteTextStyle,
-                      ),
-                    ),
+                    SubmitButton(
+                        formKey: _formKey,
+                        nameController: nameController,
+                        emailController: emailController,
+                        profile: profile,
+                        contactController: contactController,
+                        dobController: dobController,
+                        bloodController: bloodController,
+                        genderController: genderController),
                     Space.hSpace20,
                   ],
                 );

@@ -183,8 +183,7 @@ mixin _$CategoryState {
   TResult when<TResult extends Object?>({
     required TResult Function() initialState,
     required TResult Function() loadingState,
-    required TResult Function(List<Map<String, dynamic>> categories)
-        laodedState,
+    required TResult Function(List<CategoryModel> categories) laodedState,
     required TResult Function(String message) errorState,
   }) =>
       throw _privateConstructorUsedError;
@@ -192,7 +191,7 @@ mixin _$CategoryState {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initialState,
     TResult? Function()? loadingState,
-    TResult? Function(List<Map<String, dynamic>> categories)? laodedState,
+    TResult? Function(List<CategoryModel> categories)? laodedState,
     TResult? Function(String message)? errorState,
   }) =>
       throw _privateConstructorUsedError;
@@ -200,7 +199,7 @@ mixin _$CategoryState {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initialState,
     TResult Function()? loadingState,
-    TResult Function(List<Map<String, dynamic>> categories)? laodedState,
+    TResult Function(List<CategoryModel> categories)? laodedState,
     TResult Function(String message)? errorState,
     required TResult orElse(),
   }) =>
@@ -296,8 +295,7 @@ class _$InitialStateImpl implements _InitialState {
   TResult when<TResult extends Object?>({
     required TResult Function() initialState,
     required TResult Function() loadingState,
-    required TResult Function(List<Map<String, dynamic>> categories)
-        laodedState,
+    required TResult Function(List<CategoryModel> categories) laodedState,
     required TResult Function(String message) errorState,
   }) {
     return initialState();
@@ -308,7 +306,7 @@ class _$InitialStateImpl implements _InitialState {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initialState,
     TResult? Function()? loadingState,
-    TResult? Function(List<Map<String, dynamic>> categories)? laodedState,
+    TResult? Function(List<CategoryModel> categories)? laodedState,
     TResult? Function(String message)? errorState,
   }) {
     return initialState?.call();
@@ -319,7 +317,7 @@ class _$InitialStateImpl implements _InitialState {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initialState,
     TResult Function()? loadingState,
-    TResult Function(List<Map<String, dynamic>> categories)? laodedState,
+    TResult Function(List<CategoryModel> categories)? laodedState,
     TResult Function(String message)? errorState,
     required TResult orElse(),
   }) {
@@ -414,8 +412,7 @@ class _$LoadingStateImpl implements _LoadingState {
   TResult when<TResult extends Object?>({
     required TResult Function() initialState,
     required TResult Function() loadingState,
-    required TResult Function(List<Map<String, dynamic>> categories)
-        laodedState,
+    required TResult Function(List<CategoryModel> categories) laodedState,
     required TResult Function(String message) errorState,
   }) {
     return loadingState();
@@ -426,7 +423,7 @@ class _$LoadingStateImpl implements _LoadingState {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initialState,
     TResult? Function()? loadingState,
-    TResult? Function(List<Map<String, dynamic>> categories)? laodedState,
+    TResult? Function(List<CategoryModel> categories)? laodedState,
     TResult? Function(String message)? errorState,
   }) {
     return loadingState?.call();
@@ -437,7 +434,7 @@ class _$LoadingStateImpl implements _LoadingState {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initialState,
     TResult Function()? loadingState,
-    TResult Function(List<Map<String, dynamic>> categories)? laodedState,
+    TResult Function(List<CategoryModel> categories)? laodedState,
     TResult Function(String message)? errorState,
     required TResult orElse(),
   }) {
@@ -495,7 +492,7 @@ abstract class _$$LoadedStateImplCopyWith<$Res> {
           _$LoadedStateImpl value, $Res Function(_$LoadedStateImpl) then) =
       __$$LoadedStateImplCopyWithImpl<$Res>;
   @useResult
-  $Res call({List<Map<String, dynamic>> categories});
+  $Res call({List<CategoryModel> categories});
 }
 
 /// @nodoc
@@ -517,7 +514,7 @@ class __$$LoadedStateImplCopyWithImpl<$Res>
       null == categories
           ? _value._categories
           : categories // ignore: cast_nullable_to_non_nullable
-              as List<Map<String, dynamic>>,
+              as List<CategoryModel>,
     ));
   }
 }
@@ -525,12 +522,12 @@ class __$$LoadedStateImplCopyWithImpl<$Res>
 /// @nodoc
 
 class _$LoadedStateImpl implements _LoadedState {
-  const _$LoadedStateImpl(final List<Map<String, dynamic>> categories)
+  const _$LoadedStateImpl(final List<CategoryModel> categories)
       : _categories = categories;
 
-  final List<Map<String, dynamic>> _categories;
+  final List<CategoryModel> _categories;
   @override
-  List<Map<String, dynamic>> get categories {
+  List<CategoryModel> get categories {
     if (_categories is EqualUnmodifiableListView) return _categories;
     // ignore: implicit_dynamic_type
     return EqualUnmodifiableListView(_categories);
@@ -567,8 +564,7 @@ class _$LoadedStateImpl implements _LoadedState {
   TResult when<TResult extends Object?>({
     required TResult Function() initialState,
     required TResult Function() loadingState,
-    required TResult Function(List<Map<String, dynamic>> categories)
-        laodedState,
+    required TResult Function(List<CategoryModel> categories) laodedState,
     required TResult Function(String message) errorState,
   }) {
     return laodedState(categories);
@@ -579,7 +575,7 @@ class _$LoadedStateImpl implements _LoadedState {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initialState,
     TResult? Function()? loadingState,
-    TResult? Function(List<Map<String, dynamic>> categories)? laodedState,
+    TResult? Function(List<CategoryModel> categories)? laodedState,
     TResult? Function(String message)? errorState,
   }) {
     return laodedState?.call(categories);
@@ -590,7 +586,7 @@ class _$LoadedStateImpl implements _LoadedState {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initialState,
     TResult Function()? loadingState,
-    TResult Function(List<Map<String, dynamic>> categories)? laodedState,
+    TResult Function(List<CategoryModel> categories)? laodedState,
     TResult Function(String message)? errorState,
     required TResult orElse(),
   }) {
@@ -639,10 +635,10 @@ class _$LoadedStateImpl implements _LoadedState {
 }
 
 abstract class _LoadedState implements CategoryState {
-  const factory _LoadedState(final List<Map<String, dynamic>> categories) =
+  const factory _LoadedState(final List<CategoryModel> categories) =
       _$LoadedStateImpl;
 
-  List<Map<String, dynamic>> get categories;
+  List<CategoryModel> get categories;
 
   /// Create a copy of CategoryState
   /// with the given fields replaced by the non-null parameter values.
@@ -721,8 +717,7 @@ class _$ErrorStateImpl implements _ErrorState {
   TResult when<TResult extends Object?>({
     required TResult Function() initialState,
     required TResult Function() loadingState,
-    required TResult Function(List<Map<String, dynamic>> categories)
-        laodedState,
+    required TResult Function(List<CategoryModel> categories) laodedState,
     required TResult Function(String message) errorState,
   }) {
     return errorState(message);
@@ -733,7 +728,7 @@ class _$ErrorStateImpl implements _ErrorState {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initialState,
     TResult? Function()? loadingState,
-    TResult? Function(List<Map<String, dynamic>> categories)? laodedState,
+    TResult? Function(List<CategoryModel> categories)? laodedState,
     TResult? Function(String message)? errorState,
   }) {
     return errorState?.call(message);
@@ -744,7 +739,7 @@ class _$ErrorStateImpl implements _ErrorState {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initialState,
     TResult Function()? loadingState,
-    TResult Function(List<Map<String, dynamic>> categories)? laodedState,
+    TResult Function(List<CategoryModel> categories)? laodedState,
     TResult Function(String message)? errorState,
     required TResult orElse(),
   }) {

@@ -12,4 +12,8 @@ class MyRoutes {
   static const appointmentDetailsScreen = '/appointmentDetailsScreen';
   static const profileScreen = '/profileScreen';
   static const editProfileScreen = '/editProfileScreen';
+  static const bookAppointmentScreen = '/bookAppointmentScreen';
+  static const locationScreen = '/locationScreen';
+  static const medicalRecordsScreen = '/medicalRecordsScreen';
+  static const medicalRecordPerview = '/medicalRecordPerview';
 }

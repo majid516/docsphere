@@ -5,8 +5,9 @@ import 'package:docshpere/core/utils/screen_size/screen_size.dart';
 import 'package:flutter/material.dart';
 
 class FeeTileWidget extends StatelessWidget {
+  final String fee;
   const FeeTileWidget({
-    super.key,
+    super.key, required this.fee,
   });
 
   @override
@@ -22,7 +23,7 @@ class FeeTileWidget extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           Text(
-            '₹500',
+            '₹$fee',
             style: CommonStyles.feeTextStyle,
           ),
           Space.wSpace10,

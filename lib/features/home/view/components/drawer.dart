@@ -1,11 +1,10 @@
-import 'dart:convert';
-import 'dart:developer';
-
 import 'package:docshpere/core/constants/app_theme/app_theme.dart';
 import 'package:docshpere/core/constants/spaces/space.dart';
-import 'package:docshpere/core/constants/text_styles/common_styles.dart';
 import 'package:docshpere/core/utils/screen_size/screen_size.dart';
 import 'package:docshpere/features/account/view_model/bloc/profile_bloc.dart';
+import 'package:docshpere/features/home/services/signout.dart';
+import 'package:docshpere/features/home/view/widgets/drawer_dummy_header.dart';
+import 'package:docshpere/features/home/view/widgets/drawer_header_widget.dart';
 import 'package:docshpere/features/home/view/widgets/drawer_icon_widget.dart';
 import 'package:docshpere/routes/routes_name.dart';
 import 'package:flutter/material.dart';
@@ -33,75 +32,12 @@ class DrawerWidget extends StatelessWidget {
                 builder: (context, state) {
                   return state.maybeWhen(
                     userLoadedState: (user) {
-                      return ListTile(
-                        horizontalTitleGap: 0,
-                        contentPadding: EdgeInsets.all(0),
-                        leading: Padding(
-                          padding: const EdgeInsets.only(right: 5.0),
-                          child: CircleAvatar(
-                              radius: 32,
-                              backgroundColor: MyColors.lightColor,
-                              child: user.profileImage == ''
-                                  ? Icon(
-                                      Icons.person,
-                                      size: 45,
-                                      color: MyColors.primaryColor,
-                                    )
-                                  : CircleAvatar(
-                                      radius: 32,
-                                      backgroundImage: MemoryImage(
-                                          base64Decode(user.profileImage)),
-                                    )),
-                        ),
-                        title: Text(
-                          user.name,
-                          style: CommonStyles.doctorNameStyle,
-                        ),
-                        subtitle: InkWell(
-                          onTap: () {
-                            context.go(MyRoutes.profileScreen, extra: user);
-                          },
-                          child: Text(
-                            'view and edit profile',
-                            maxLines: 1,
-                            style: CommonStyles.viewProfileStyle,
-                          ),
-                        ),
-                        trailing: Icon(Icons.arrow_forward_ios),
+                      return DrawerHeaderWidget(
+                        user: user,
                       );
                     },
                     orElse: () {
-                      return ListTile(
-                        horizontalTitleGap: 0,
-                        contentPadding: EdgeInsets.all(0),
-                        leading: Padding(
-                          padding: const EdgeInsets.only(right: 5.0),
-                          child: CircleAvatar(
-                            radius: 32,
-                            backgroundColor: MyColors.lightColor,
-                            child: Icon(
-                              Icons.person,
-                              size: 45,
-                              color: MyColors.primaryColor,
-                            ),
-                          ),
-                        ),
-                        title: Text(
-                          'User Name',
-                          style: CommonStyles.doctorNameStyle,
-                        ),
-                        subtitle: InkWell(
-                          onTap: () {
-                            context.go(MyRoutes.profileScreen);
-                          },
-                          child: Text(
-                            'view and edit profile',
-                            maxLines: 1,
-                            style: CommonStyles.viewProfileStyle,
-                          ),
-                        ),
-                        trailing: Icon(Icons.arrow_forward_ios),
-                      );
+                      return DrawerDummyHeader();
                     },
                   );
                 },
@@ -111,7 +47,7 @@ class DrawerWidget extends StatelessWidget {
           DrawerItemsWidgets(
             title: 'Appointment',
             action: () {
-              context.go(MyRoutes.myAppointmentScreen);
+              context.push(MyRoutes.myAppointmentScreen);
             },
             image: 'asset/Drawer icons/appointment.png',
           ),
@@ -123,19 +59,21 @@ class DrawerWidget extends StatelessWidget {
           DrawerItemsWidgets(
             title: 'My Doctor',
             action: () {
-              context.go(MyRoutes.myDoctorsScreen);
+              context.push(MyRoutes.myDoctorsScreen);
             },
             image: 'asset/Drawer icons/doctor.png',
           ),
           DrawerItemsWidgets(
             title: 'Medical Records',
-            action: () {},
+            action: () {
+              context.push(MyRoutes.medicalRecordsScreen);
+            },
             image: 'asset/Drawer icons/medical_records.png',
           ),
           DrawerItemsWidgets(
             title: 'Upcoming Sessions',
             action: () {
-              context.go(MyRoutes.upcomingSessions);
+              context.push(MyRoutes.upcomingSessions);
             },
             image: 'asset/Drawer icons/appointment.png',
           ),
@@ -158,7 +96,9 @@ class DrawerWidget extends StatelessWidget {
           ),
           DrawerItemsWidgets(
             title: 'Location',
-            action: () {},
+            action: () {
+              context.push(MyRoutes.locationScreen);
+            },
             leadingIcon: Icon(
               Icons.location_on,
               size: 38,
@@ -199,6 +139,36 @@ class DrawerWidget extends StatelessWidget {
             color: MyColors.lightGreyColor.withValues(alpha: 0.4),
           ),
           ListTile(
+            onTap: () {
+              showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(15)
+          ),
+          title: Text('Sign Out'),
+          content: Text('Are you sure you want to sign out?'),
+          actions: [
+            TextButton(
+              onPressed: () {
+                Navigator.of(context).pop();
+              },
+              child: Text('Cancel'),
+            ),
+            TextButton(
+              onPressed: () async{
+                await signoutUser();
+               context.go(MyRoutes.signInOrRegister); 
+              
+              },
+              child: Text('Sign Out'),
+            ),
+          ],
+        );
+      },
+    );
+            },
             trailing: Row(
               mainAxisSize: MainAxisSize.min,
               mainAxisAlignment: MainAxisAlignment.end,

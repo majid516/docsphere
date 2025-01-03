@@ -1,8 +1,9 @@
 import 'dart:developer';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:docshpere/features/search/model/category_model.dart';
 
-Future<List<Map<String, dynamic>>> getAllMedicalCategories() async {
+Future<List<CategoryModel>> getAllMedicalCategories() async {
   try {
     final categoryList = await FirebaseFirestore.instance
       .collection('admin')
@@ -11,11 +12,12 @@ Future<List<Map<String, dynamic>>> getAllMedicalCategories() async {
       .get();
     
      return  categoryList.docs.map((category){
-        return category.data();
+        return CategoryModel.fromMap(category.data());
        }).toList();
     
-  } catch (e) {
+  } catch (e,stacktrace) {
+    log(stacktrace.toString());
         log(e.toString());
-       return [{}];
+       return [];
   }
 }

@@ -4,6 +4,6 @@ part of 'category_bloc.dart';
 class CategoryState with _$CategoryState {
   const factory CategoryState.initialState() = _InitialState;
   const factory CategoryState.loadingState() = _LoadingState;
-  const factory CategoryState.laodedState(List<Map<String, dynamic>> categories) = _LoadedState;
+  const factory CategoryState.laodedState(List<CategoryModel> categories) = _LoadedState;
   const factory CategoryState.errorState(String message) = _ErrorState;
 }

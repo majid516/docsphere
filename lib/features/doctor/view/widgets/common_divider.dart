@@ -8,7 +8,7 @@ class CommonDivider extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Divider(
-      height: 25,
+
       indent: 10,
       endIndent: 10,
     );
