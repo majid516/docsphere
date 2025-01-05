@@ -8,6 +8,7 @@ import 'package:docshpere/features/authentication/view/screens/login_and_registe
 import 'package:docshpere/features/authentication/view/screens/login_screen.dart';
 import 'package:docshpere/features/authentication/view/screens/register_screen.dart';
 import 'package:docshpere/features/booking_appointment/view/screens/book_appointment_screen.dart';
+import 'package:docshpere/features/chat/view/screens/chat_screen.dart';
 import 'package:docshpere/features/doctor/view/screens/doctor_details_screen.dart';
 import 'package:docshpere/features/doctor/view/screens/doctors_lists_screen.dart';
 import 'package:docshpere/features/location/view/screen/location_screen.dart';
@@ -19,9 +20,11 @@ import 'package:docshpere/features/search/view/screens/medical_category_search_s
 import 'package:docshpere/routes/routes_name.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:go_router/go_router.dart';
+
 final currentUser = FirebaseAuth.instance.currentUser;
 final GoRouter router = GoRouter(
-  initialLocation:currentUser == null ? MyRoutes.signInOrRegister : MyRoutes.home,
+  initialLocation:
+      currentUser == null ? MyRoutes.signInOrRegister : MyRoutes.home,
   routes: [
     GoRoute(
       name: 'singInUp',
@@ -53,23 +56,28 @@ final GoRouter router = GoRouter(
       path: MyRoutes.medicalRecordPerview,
       builder: (context, state) {
         final path = state.extra as String;
-        return  RecordViewScreen(image: path,);
+        return RecordViewScreen(
+          image: path,
+        );
       },
     ),
     GoRoute(
-      name: 'doctorsListScreen',
-      path: MyRoutes.doctorsListScreen,
-      builder: (context, state) {
-        final title = state.extra as String;
-       return DoctorsListsScreen(title: title,);
-      }
-    ),
+        name: 'doctorsListScreen',
+        path: MyRoutes.doctorsListScreen,
+        builder: (context, state) {
+          final title = state.extra as String;
+          return DoctorsListsScreen(
+            title: title,
+          );
+        }),
     GoRoute(
       name: 'doctorDetailsScreen',
       path: MyRoutes.doctorDetailsScreen,
       builder: (context, state) {
         final uid = state.extra as String;
-        return  DoctorDetailsScreen(uid: uid,);
+        return DoctorDetailsScreen(
+          uid: uid,
+        );
       },
     ),
     GoRoute(
@@ -98,12 +106,28 @@ final GoRouter router = GoRouter(
       builder: (context, state) => MedicalRecordsScreen(),
     ),
     GoRoute(
+        name: 'chatPage',
+        path: MyRoutes.chatPage,
+        builder: (context, state) {
+          final data = state.extra as Map<String, String>;
+          return ChatPage(
+            doctorId: data['doctorId']!,
+            roomId: data['roomId']!,
+            userId: data['userId']!,
+          );
+        }),
+    GoRoute(
       name: 'bookAppointmentScreen',
       path: MyRoutes.bookAppointmentScreen,
       builder: (context, state) {
-        final data = state.extra as Map<String,String>;
-        return  BookAppointmentScreen(uid: data['uid']!.toString(),name: data['name']!.toString(),category: data['cat']!.toString(),profile: data['profile']!,);
-      } ,
+        final data = state.extra as Map<String, String>;
+        return BookAppointmentScreen(
+          uid: data['uid']!.toString(),
+          name: data['name']!.toString(),
+          category: data['cat']!.toString(),
+          profile: data['profile']!,
+        );
+      },
     ),
     GoRoute(
       name: 'profileScreen',
@@ -116,8 +140,7 @@ final GoRouter router = GoRouter(
         final email = extraData.email;
         final dob = extraData.dob;
         final gender = extraData.gender;
-        final bloodGroup =
-            extraData.bloodGroup;
+        final bloodGroup = extraData.bloodGroup;
         final contact = extraData.contactNumber;
 
         return ProfileScreen(
@@ -131,13 +154,14 @@ final GoRouter router = GoRouter(
       },
     ),
     GoRoute(
-      name: 'editProfileScreen',
-      path: MyRoutes.editProfileScreen,
-      builder: (context, state) {
-        final data = state.extra as UserModel;
-        return  EditProfileScreen(user:  data,);
-      }
-    ),
+        name: 'editProfileScreen',
+        path: MyRoutes.editProfileScreen,
+        builder: (context, state) {
+          final data = state.extra as UserModel;
+          return EditProfileScreen(
+            user: data,
+          );
+        }),
     GoRoute(
       name: 'locationScreen',
       path: MyRoutes.locationScreen,

@@ -12,7 +12,6 @@ Future<List<BasicDoctorModel>> fechBasicDoctorDetails(String category) async {
       final doctors = filteredDoctor.docs.map((doctor){
         return BasicDoctorModel.fromMap(doctor.data());
       }).toList();
-      log("length ${filteredDoctor.docs.length}");
     return doctors;
  } catch (e, stackTrace) {
   log(stackTrace.toString());

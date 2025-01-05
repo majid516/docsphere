@@ -18,7 +18,7 @@ class ManageRecordsBloc extends Bloc<ManageRecordsEvent, ManageRecordsState> {
        final XFile? image = await ImagePicker().pickImage(source: ImageSource.gallery);
         final unit = await image!.readAsBytes();
         final base = base64Encode(unit);
-       emit(ManageRecordsState.imageLoadedState(image.path, base));
+       emit(ManageRecordsState.imageLoadedState(image.path, base,'Image'));
      } catch (e) {
       log(e.toString());
        emit(ManageRecordsState.errorState());
@@ -32,7 +32,7 @@ class ManageRecordsBloc extends Bloc<ManageRecordsEvent, ManageRecordsState> {
         final unit = await image!.readAsBytes();
         final base = base64Encode(unit);
         log(base);
-       emit(ManageRecordsState.imageLoadedState(image.path, base));
+       emit(ManageRecordsState.imageLoadedState(image.path, base,'Image'));
      } catch (e) {
       log(e.toString());
        emit(ManageRecordsState.errorState());
@@ -61,7 +61,7 @@ on<_PickFileFormDevice>((event, emit) async {
     final file = File(filePath);
     final unit = await file.readAsBytes();
     final base = base64Encode(unit);
-    emit(ManageRecordsState.imageLoadedState(filePath, base));
+    emit(ManageRecordsState.fileLoadedState(filePath, base,'File'));
   } catch (e, stackTrace) {
     log("Error picking file: $e");
     log(stackTrace.toString());

@@ -1,4 +1,3 @@
-import 'dart:developer';
 
 import 'package:bloc/bloc.dart';
 import 'package:docshpere/core/models/basic_doctor_details.dart';
@@ -17,7 +16,6 @@ class DoctorBasicDetailsBloc extends Bloc<DoctorBasicDetailsEvent, DoctorBasicDe
       final doctors = await fechBasicDoctorDetails(event.category);
      emit(DoctorBasicDetailsState.basicDetaisLoadedState(doctors));
      } catch (e) {
-      log(e.toString());
        emit(DoctorBasicDetailsState.errorState());
      }
     });

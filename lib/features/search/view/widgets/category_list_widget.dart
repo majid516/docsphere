@@ -2,7 +2,6 @@ import 'dart:convert';
 import 'package:docshpere/core/constants/app_theme/app_theme.dart';
 import 'package:docshpere/core/constants/text_styles/authentication_syles.dart';
 import 'package:docshpere/core/utils/screen_size/screen_size.dart';
-import 'package:docshpere/features/search/model/category_model.dart';
 import 'package:docshpere/features/search/model/category_search_model.dart';
 import 'package:docshpere/features/search/view/widgets/text_styles.dart';
 import 'package:docshpere/features/search/view_model/bloc/category/category_bloc.dart';
@@ -58,9 +57,19 @@ class CategoryListWidget extends StatelessWidget {
                     ),
                   ),
                   Expanded(
-                    child: BlocBuilder<SearchCategoryCubit,CategorySearchModel>(
+                    child:
+                        BlocBuilder<SearchCategoryCubit, CategorySearchModel>(
                       builder: (context, searchState) {
-                        final filteredCategories = searchState.filteredCategories;
+                        final filteredCategories =
+                            searchState.filteredCategories;
+                        if (filteredCategories.isEmpty) {
+                          return Center(
+                            child: Text(
+                              'No Categories Available',
+                              style: AuthenticationSyles.hintTextStyle,
+                            ),
+                          );
+                        }
                         return ListView.separated(
                           itemCount: filteredCategories.length,
                           itemBuilder: (context, index) {

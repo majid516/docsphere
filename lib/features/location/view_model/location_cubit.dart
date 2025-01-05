@@ -31,19 +31,16 @@ class LocationCubit extends Cubit<LocationState> {
 
   Future<void> getLocationUpdates(Completer<GoogleMapController> mapController) async {
     try {
-      // Check and request location service
       if (!(await locationController.serviceEnabled()) &&
           !(await locationController.requestService())) {
         return;
       }
 
-      // Check and request location permission
       if ((await locationController.hasPermission()) == PermissionStatus.denied &&
           (await locationController.requestPermission()) != PermissionStatus.granted) {
         return;
       }
 
-      // Listen to location changes
       locationController.onLocationChanged.listen((LocationData locationData) {
         if (locationData.latitude != null && locationData.longitude != null) {
           final LatLng currentPosition = LatLng(locationData.latitude!, locationData.longitude!);

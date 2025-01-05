@@ -11,8 +11,8 @@ import 'package:docshpere/features/location/view_model/location_cubit.dart';
 class LocationScreen extends StatelessWidget {
   LocationScreen({super.key});
 
-  final LatLng initialPosition = LatLng(20.5937, 78.9629); // India
-  final LatLng hospitalPosition = LatLng(11.2588, 75.7804); // Kerala
+  final LatLng initialPosition = LatLng(20.5937, 78.9629); 
+  final LatLng hospitalPosition = LatLng(11.2588, 75.7804); 
   final Completer<GoogleMapController> mapController = Completer();
 
   @override

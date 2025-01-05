@@ -424,8 +424,10 @@ mixin _$ManageRecordsState {
   TResult when<TResult extends Object?>({
     required TResult Function() initialState,
     required TResult Function() loadingState,
-    required TResult Function(String path, String base) imageLoadedState,
-    required TResult Function(String path, String base) fileLoadedState,
+    required TResult Function(String path, String base, String type)
+        imageLoadedState,
+    required TResult Function(String path, String base, String type)
+        fileLoadedState,
     required TResult Function() errorState,
   }) =>
       throw _privateConstructorUsedError;
@@ -433,8 +435,8 @@ mixin _$ManageRecordsState {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initialState,
     TResult? Function()? loadingState,
-    TResult? Function(String path, String base)? imageLoadedState,
-    TResult? Function(String path, String base)? fileLoadedState,
+    TResult? Function(String path, String base, String type)? imageLoadedState,
+    TResult? Function(String path, String base, String type)? fileLoadedState,
     TResult? Function()? errorState,
   }) =>
       throw _privateConstructorUsedError;
@@ -442,8 +444,8 @@ mixin _$ManageRecordsState {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initialState,
     TResult Function()? loadingState,
-    TResult Function(String path, String base)? imageLoadedState,
-    TResult Function(String path, String base)? fileLoadedState,
+    TResult Function(String path, String base, String type)? imageLoadedState,
+    TResult Function(String path, String base, String type)? fileLoadedState,
     TResult Function()? errorState,
     required TResult orElse(),
   }) =>
@@ -542,8 +544,10 @@ class _$InitialStateImpl implements _InitialState {
   TResult when<TResult extends Object?>({
     required TResult Function() initialState,
     required TResult Function() loadingState,
-    required TResult Function(String path, String base) imageLoadedState,
-    required TResult Function(String path, String base) fileLoadedState,
+    required TResult Function(String path, String base, String type)
+        imageLoadedState,
+    required TResult Function(String path, String base, String type)
+        fileLoadedState,
     required TResult Function() errorState,
   }) {
     return initialState();
@@ -554,8 +558,8 @@ class _$InitialStateImpl implements _InitialState {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initialState,
     TResult? Function()? loadingState,
-    TResult? Function(String path, String base)? imageLoadedState,
-    TResult? Function(String path, String base)? fileLoadedState,
+    TResult? Function(String path, String base, String type)? imageLoadedState,
+    TResult? Function(String path, String base, String type)? fileLoadedState,
     TResult? Function()? errorState,
   }) {
     return initialState?.call();
@@ -566,8 +570,8 @@ class _$InitialStateImpl implements _InitialState {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initialState,
     TResult Function()? loadingState,
-    TResult Function(String path, String base)? imageLoadedState,
-    TResult Function(String path, String base)? fileLoadedState,
+    TResult Function(String path, String base, String type)? imageLoadedState,
+    TResult Function(String path, String base, String type)? fileLoadedState,
     TResult Function()? errorState,
     required TResult orElse(),
   }) {
@@ -665,8 +669,10 @@ class _$LoadingStateImpl implements _LoadingState {
   TResult when<TResult extends Object?>({
     required TResult Function() initialState,
     required TResult Function() loadingState,
-    required TResult Function(String path, String base) imageLoadedState,
-    required TResult Function(String path, String base) fileLoadedState,
+    required TResult Function(String path, String base, String type)
+        imageLoadedState,
+    required TResult Function(String path, String base, String type)
+        fileLoadedState,
     required TResult Function() errorState,
   }) {
     return loadingState();
@@ -677,8 +683,8 @@ class _$LoadingStateImpl implements _LoadingState {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initialState,
     TResult? Function()? loadingState,
-    TResult? Function(String path, String base)? imageLoadedState,
-    TResult? Function(String path, String base)? fileLoadedState,
+    TResult? Function(String path, String base, String type)? imageLoadedState,
+    TResult? Function(String path, String base, String type)? fileLoadedState,
     TResult? Function()? errorState,
   }) {
     return loadingState?.call();
@@ -689,8 +695,8 @@ class _$LoadingStateImpl implements _LoadingState {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initialState,
     TResult Function()? loadingState,
-    TResult Function(String path, String base)? imageLoadedState,
-    TResult Function(String path, String base)? fileLoadedState,
+    TResult Function(String path, String base, String type)? imageLoadedState,
+    TResult Function(String path, String base, String type)? fileLoadedState,
     TResult Function()? errorState,
     required TResult orElse(),
   }) {
@@ -751,7 +757,7 @@ abstract class _$$ImageLoadedStateImplCopyWith<$Res> {
           $Res Function(_$ImageLoadedStateImpl) then) =
       __$$ImageLoadedStateImplCopyWithImpl<$Res>;
   @useResult
-  $Res call({String path, String base});
+  $Res call({String path, String base, String type});
 }
 
 /// @nodoc
@@ -769,6 +775,7 @@ class __$$ImageLoadedStateImplCopyWithImpl<$Res>
   $Res call({
     Object? path = null,
     Object? base = null,
+    Object? type = null,
   }) {
     return _then(_$ImageLoadedStateImpl(
       null == path
@@ -779,6 +786,10 @@ class __$$ImageLoadedStateImplCopyWithImpl<$Res>
           ? _value.base
           : base // ignore: cast_nullable_to_non_nullable
               as String,
+      null == type
+          ? _value.type
+          : type // ignore: cast_nullable_to_non_nullable
+              as String,
     ));
   }
 }
@@ -786,16 +797,18 @@ class __$$ImageLoadedStateImplCopyWithImpl<$Res>
 /// @nodoc
 
 class _$ImageLoadedStateImpl implements _ImageLoadedState {
-  const _$ImageLoadedStateImpl(this.path, this.base);
+  const _$ImageLoadedStateImpl(this.path, this.base, this.type);
 
   @override
   final String path;
   @override
   final String base;
+  @override
+  final String type;
 
   @override
   String toString() {
-    return 'ManageRecordsState.imageLoadedState(path: $path, base: $base)';
+    return 'ManageRecordsState.imageLoadedState(path: $path, base: $base, type: $type)';
   }
 
   @override
@@ -804,11 +817,12 @@ class _$ImageLoadedStateImpl implements _ImageLoadedState {
         (other.runtimeType == runtimeType &&
             other is _$ImageLoadedStateImpl &&
             (identical(other.path, path) || other.path == path) &&
-            (identical(other.base, base) || other.base == base));
+            (identical(other.base, base) || other.base == base) &&
+            (identical(other.type, type) || other.type == type));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, path, base);
+  int get hashCode => Object.hash(runtimeType, path, base, type);
 
   /// Create a copy of ManageRecordsState
   /// with the given fields replaced by the non-null parameter values.
@@ -824,11 +838,13 @@ class _$ImageLoadedStateImpl implements _ImageLoadedState {
   TResult when<TResult extends Object?>({
     required TResult Function() initialState,
     required TResult Function() loadingState,
-    required TResult Function(String path, String base) imageLoadedState,
-    required TResult Function(String path, String base) fileLoadedState,
+    required TResult Function(String path, String base, String type)
+        imageLoadedState,
+    required TResult Function(String path, String base, String type)
+        fileLoadedState,
     required TResult Function() errorState,
   }) {
-    return imageLoadedState(path, base);
+    return imageLoadedState(path, base, type);
   }
 
   @override
@@ -836,11 +852,11 @@ class _$ImageLoadedStateImpl implements _ImageLoadedState {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initialState,
     TResult? Function()? loadingState,
-    TResult? Function(String path, String base)? imageLoadedState,
-    TResult? Function(String path, String base)? fileLoadedState,
+    TResult? Function(String path, String base, String type)? imageLoadedState,
+    TResult? Function(String path, String base, String type)? fileLoadedState,
     TResult? Function()? errorState,
   }) {
-    return imageLoadedState?.call(path, base);
+    return imageLoadedState?.call(path, base, type);
   }
 
   @override
@@ -848,13 +864,13 @@ class _$ImageLoadedStateImpl implements _ImageLoadedState {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initialState,
     TResult Function()? loadingState,
-    TResult Function(String path, String base)? imageLoadedState,
-    TResult Function(String path, String base)? fileLoadedState,
+    TResult Function(String path, String base, String type)? imageLoadedState,
+    TResult Function(String path, String base, String type)? fileLoadedState,
     TResult Function()? errorState,
     required TResult orElse(),
   }) {
     if (imageLoadedState != null) {
-      return imageLoadedState(path, base);
+      return imageLoadedState(path, base, type);
     }
     return orElse();
   }
@@ -901,11 +917,13 @@ class _$ImageLoadedStateImpl implements _ImageLoadedState {
 }
 
 abstract class _ImageLoadedState implements ManageRecordsState {
-  const factory _ImageLoadedState(final String path, final String base) =
+  const factory _ImageLoadedState(
+          final String path, final String base, final String type) =
       _$ImageLoadedStateImpl;
 
   String get path;
   String get base;
+  String get type;
 
   /// Create a copy of ManageRecordsState
   /// with the given fields replaced by the non-null parameter values.
@@ -920,7 +938,7 @@ abstract class _$$LileLoadedStateImplCopyWith<$Res> {
           $Res Function(_$LileLoadedStateImpl) then) =
       __$$LileLoadedStateImplCopyWithImpl<$Res>;
   @useResult
-  $Res call({String path, String base});
+  $Res call({String path, String base, String type});
 }
 
 /// @nodoc
@@ -938,6 +956,7 @@ class __$$LileLoadedStateImplCopyWithImpl<$Res>
   $Res call({
     Object? path = null,
     Object? base = null,
+    Object? type = null,
   }) {
     return _then(_$LileLoadedStateImpl(
       null == path
@@ -948,6 +967,10 @@ class __$$LileLoadedStateImplCopyWithImpl<$Res>
           ? _value.base
           : base // ignore: cast_nullable_to_non_nullable
               as String,
+      null == type
+          ? _value.type
+          : type // ignore: cast_nullable_to_non_nullable
+              as String,
     ));
   }
 }
@@ -955,16 +978,18 @@ class __$$LileLoadedStateImplCopyWithImpl<$Res>
 /// @nodoc
 
 class _$LileLoadedStateImpl implements _LileLoadedState {
-  const _$LileLoadedStateImpl(this.path, this.base);
+  const _$LileLoadedStateImpl(this.path, this.base, this.type);
 
   @override
   final String path;
   @override
   final String base;
+  @override
+  final String type;
 
   @override
   String toString() {
-    return 'ManageRecordsState.fileLoadedState(path: $path, base: $base)';
+    return 'ManageRecordsState.fileLoadedState(path: $path, base: $base, type: $type)';
   }
 
   @override
@@ -973,11 +998,12 @@ class _$LileLoadedStateImpl implements _LileLoadedState {
         (other.runtimeType == runtimeType &&
             other is _$LileLoadedStateImpl &&
             (identical(other.path, path) || other.path == path) &&
-            (identical(other.base, base) || other.base == base));
+            (identical(other.base, base) || other.base == base) &&
+            (identical(other.type, type) || other.type == type));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, path, base);
+  int get hashCode => Object.hash(runtimeType, path, base, type);
 
   /// Create a copy of ManageRecordsState
   /// with the given fields replaced by the non-null parameter values.
@@ -993,11 +1019,13 @@ class _$LileLoadedStateImpl implements _LileLoadedState {
   TResult when<TResult extends Object?>({
     required TResult Function() initialState,
     required TResult Function() loadingState,
-    required TResult Function(String path, String base) imageLoadedState,
-    required TResult Function(String path, String base) fileLoadedState,
+    required TResult Function(String path, String base, String type)
+        imageLoadedState,
+    required TResult Function(String path, String base, String type)
+        fileLoadedState,
     required TResult Function() errorState,
   }) {
-    return fileLoadedState(path, base);
+    return fileLoadedState(path, base, type);
   }
 
   @override
@@ -1005,11 +1033,11 @@ class _$LileLoadedStateImpl implements _LileLoadedState {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initialState,
     TResult? Function()? loadingState,
-    TResult? Function(String path, String base)? imageLoadedState,
-    TResult? Function(String path, String base)? fileLoadedState,
+    TResult? Function(String path, String base, String type)? imageLoadedState,
+    TResult? Function(String path, String base, String type)? fileLoadedState,
     TResult? Function()? errorState,
   }) {
-    return fileLoadedState?.call(path, base);
+    return fileLoadedState?.call(path, base, type);
   }
 
   @override
@@ -1017,13 +1045,13 @@ class _$LileLoadedStateImpl implements _LileLoadedState {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initialState,
     TResult Function()? loadingState,
-    TResult Function(String path, String base)? imageLoadedState,
-    TResult Function(String path, String base)? fileLoadedState,
+    TResult Function(String path, String base, String type)? imageLoadedState,
+    TResult Function(String path, String base, String type)? fileLoadedState,
     TResult Function()? errorState,
     required TResult orElse(),
   }) {
     if (fileLoadedState != null) {
-      return fileLoadedState(path, base);
+      return fileLoadedState(path, base, type);
     }
     return orElse();
   }
@@ -1070,11 +1098,13 @@ class _$LileLoadedStateImpl implements _LileLoadedState {
 }
 
 abstract class _LileLoadedState implements ManageRecordsState {
-  const factory _LileLoadedState(final String path, final String base) =
+  const factory _LileLoadedState(
+          final String path, final String base, final String type) =
       _$LileLoadedStateImpl;
 
   String get path;
   String get base;
+  String get type;
 
   /// Create a copy of ManageRecordsState
   /// with the given fields replaced by the non-null parameter values.
@@ -1126,8 +1156,10 @@ class _$ErrorStateImpl implements _ErrorState {
   TResult when<TResult extends Object?>({
     required TResult Function() initialState,
     required TResult Function() loadingState,
-    required TResult Function(String path, String base) imageLoadedState,
-    required TResult Function(String path, String base) fileLoadedState,
+    required TResult Function(String path, String base, String type)
+        imageLoadedState,
+    required TResult Function(String path, String base, String type)
+        fileLoadedState,
     required TResult Function() errorState,
   }) {
     return errorState();
@@ -1138,8 +1170,8 @@ class _$ErrorStateImpl implements _ErrorState {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initialState,
     TResult? Function()? loadingState,
-    TResult? Function(String path, String base)? imageLoadedState,
-    TResult? Function(String path, String base)? fileLoadedState,
+    TResult? Function(String path, String base, String type)? imageLoadedState,
+    TResult? Function(String path, String base, String type)? fileLoadedState,
     TResult? Function()? errorState,
   }) {
     return errorState?.call();
@@ -1150,8 +1182,8 @@ class _$ErrorStateImpl implements _ErrorState {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initialState,
     TResult Function()? loadingState,
-    TResult Function(String path, String base)? imageLoadedState,
-    TResult Function(String path, String base)? fileLoadedState,
+    TResult Function(String path, String base, String type)? imageLoadedState,
+    TResult Function(String path, String base, String type)? fileLoadedState,
     TResult Function()? errorState,
     required TResult orElse(),
   }) {

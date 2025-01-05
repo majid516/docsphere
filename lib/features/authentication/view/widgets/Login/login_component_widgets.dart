@@ -1,4 +1,8 @@
-import 'package:docshpere/features/authentication/view%20model/provider/password_toggle.dart';
+import 'dart:math';
+
+import 'package:docshpere/core/constants/app_theme/app_theme.dart';
+import 'package:docshpere/features/authentication/services/sigin_user.dart';
+import 'package:docshpere/features/authentication/view%20model/cubit/password_toggle.dart';
 import 'package:docshpere/features/authentication/view/screens/forgot_password.dart';
 import 'package:docshpere/routes/routes_name.dart';
 import 'package:flutter/material.dart';
@@ -43,7 +47,7 @@ class LoginComponentsWidgets extends StatelessWidget {
             children: [
               SizedBox(
                 width: ScreenSize.width,
-                height: ScreenSize.height * 0.44,
+                height: ScreenSize.height * 0.42,
                 child: Center(
                   child: Text(
                     'Access your Care',
@@ -54,7 +58,7 @@ class LoginComponentsWidgets extends StatelessWidget {
               Space.hSpace20,
               SizedBox(
                 width: ScreenSize.width,
-                height: ScreenSize.height * 0.5,
+                height: ScreenSize.height * 0.53,
                 child: Column(
                   children: [
                     CustomTextFieldWidget(
@@ -66,31 +70,34 @@ class LoginComponentsWidgets extends StatelessWidget {
                       obscureText: false,
                     ),
                     Space.hSpace15,
-                    CustomTextFieldWidget(
-                      controller: passwordController,
-                      hintText: 'Password',
-                      errorMessage: 'Enter password',
-                      leading: const Icon(Icons.lock_open_outlined),
-                      trailing: InkWell(
-                        onTap: () => context
-                            .read<PasswordToggle>()
-                            .changePasswordObscure(),
-                        child: Icon(
-                          context.watch<PasswordToggle>().passwordObscure
-                              ? Icons.visibility_off
-                              : Icons.visibility,
-                        ),
-                      ),
-                      obscureText:
-                          context.watch<PasswordToggle>().passwordObscure,
+                    BlocBuilder<PasswordToggleCubit, Map<String,bool>>(
+                      builder: (context, state) {
+                        return CustomTextFieldWidget(
+                          controller: passwordController,
+                          hintText: 'Password',
+                          errorMessage: 'Enter password',
+                          leading: const Icon(Icons.lock_open_outlined),
+                          trailing: InkWell(
+                            onTap: () => context
+                                .read<PasswordToggleCubit>()
+                                .togglePasswordVisibility(),
+                            child: Icon(
+                              state["passwordObscure"]!
+                                  ? Icons.visibility_off
+                                  : Icons.visibility,
+                            ),
+                          ),
+                          obscureText: state["passwordObscure"]!,
+                        );
+                      },
                     ),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.end,
                       children: [
                         TextButton(
                           onPressed: () {
-                            Navigator.of(context).push(
-                                MaterialPageRoute(builder: (ctx) => ForgotPasswordPage()));
+                            Navigator.of(context).push(MaterialPageRoute(
+                                builder: (ctx) => ForgotPasswordPage()));
                           },
                           child: Text(
                             'Forgot password?',
@@ -99,7 +106,73 @@ class LoginComponentsWidgets extends StatelessWidget {
                         ),
                       ],
                     ),
-                    const Spacer(),
+                    Space.hSpace15,
+                    Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: Row(
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        children: [
+                          Expanded(
+                            child: Divider(
+                              color: MyColors.lightGreyColor,
+                              thickness: 1,
+                              indent: ScreenSize.width * 0.07,
+                              endIndent: 10,
+                            ),
+                          ),
+                          const Text(
+                            'or',
+                            style: TextStyle(
+                                fontSize: 22,
+                                color: MyColors.lightGreyColor,
+                                fontWeight: FontWeight.w700),
+                          ),
+                          Expanded(
+                            child: Divider(
+                              color: MyColors.lightGreyColor,
+                              thickness: 1,
+                              endIndent: ScreenSize.width * 0.07,
+                              indent: 10,
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                    InkWell(
+                      onTap: () {
+                        signInWithGoogle(context);
+                      },
+                      child: Stack(
+                        alignment: Alignment.center,
+                        children: [
+                          Transform.rotate(
+                            angle: 90 * pi / 180,
+                            child: Stack(
+                              alignment: Alignment.center,
+                              children: [
+                                Icon(
+                                  Icons.hexagon_rounded,
+                                  size: 75,
+                                  color: MyColors.darkGreyColor,
+                                ),
+                                Icon(
+                                  Icons.hexagon_rounded,
+                                  size: 72,
+                                  color: MyColors.whiteColor,
+                                ),
+                              ],
+                            ),
+                          ),
+                          SizedBox(
+                            width: 35,
+                            height: 35,
+                            child: Image.asset(
+                                'asset/Drawer icons/google_img.png'),
+                          ),
+                        ],
+                      ),
+                    ),
+                    Spacer(),
                     CustomSignInButton(
                       buttonText: 'SIGN IN',
                       action: () {
@@ -124,11 +197,13 @@ class LoginComponentsWidgets extends StatelessWidget {
                           },
                           child: Text(
                             'Sign up',
-                            style: AuthenticationSyles.signupOrRegisterTextButtonStyle,
+                            style: AuthenticationSyles
+                                .signupOrRegisterTextButtonStyle,
                           ),
                         ),
                       ],
                     ),
+                    Space.hSpace5,
                   ],
                 ),
               ),

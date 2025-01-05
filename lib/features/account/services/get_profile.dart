@@ -27,7 +27,6 @@ Future<UserModel?> getUser() async {
       dob: user['dob'] ?? '',
       bloodGroup: user['bloodGroup'] ?? '',
       gender: user['gender'] ?? '',
-      medicalRecords: List<String>.from(user['medicalRecords'] ?? []),
       appointments: List<String>.from(user['appointments'] ?? []),
       notifications: List<String>.from(user['notifications'] ?? []),
       createdAt: user['createdAt'] ?? '',

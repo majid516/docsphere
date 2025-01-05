@@ -16,4 +16,5 @@ class MyRoutes {
   static const locationScreen = '/locationScreen';
   static const medicalRecordsScreen = '/medicalRecordsScreen';
   static const medicalRecordPerview = '/medicalRecordPerview';
+  static const chatPage = '/chatPage';
 }

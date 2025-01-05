@@ -30,7 +30,7 @@ class SpecializationWidget extends StatelessWidget {
                   padding: EdgeInsets.zero,
                 physics: NeverScrollableScrollPhysics(),
                 itemCount: specializations
-                    .length, // Replace with your specialization list
+                    .length, 
                 itemBuilder: (context, index) {
                   return Padding(
                     padding:

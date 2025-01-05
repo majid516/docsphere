@@ -14,7 +14,6 @@ Future<List<CategoryModel>> getAllMedicalCategories() async {
      return  categoryList.docs.map((category){
         return CategoryModel.fromMap(category.data());
        }).toList();
-    
   } catch (e,stacktrace) {
     log(stacktrace.toString());
         log(e.toString());

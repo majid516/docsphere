@@ -71,6 +71,7 @@ class RecordTileWidget extends StatelessWidget {
                                     children: [
                                       IconButton(
                                           onPressed: () async {
+                                             deleteSwipe.isSwipeClosed();
                                            context.read<MedicalRecordsBloc>().add(MedicalRecordsEvent.deleteMedicalRecord(record.id!),);
                                           },
                                           icon: const Icon(

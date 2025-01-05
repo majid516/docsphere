@@ -37,10 +37,13 @@ dependencies:
   flutter:
     sdk: flutter
   flutter_bloc: ^8.1.6
+  flutter_chat_types: ^3.6.2
+  flutter_chat_ui: ^1.6.15
   flutter_polyline_points: ^2.1.0
   freezed_annotation: null
   go_router: null
   google_maps_flutter: null
+  google_sign_in: ^6.2.2
   image_picker: ^1.1.2
   intl: ^0.20.1
   location: ^7.0.1

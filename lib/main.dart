@@ -2,9 +2,10 @@ import 'package:docshpere/core/utils/screen_size/screen_size.dart';
 import 'package:docshpere/features/account/view_model/bloc/profile_bloc.dart';
 import 'package:docshpere/features/account/view_model/cubit/cubit/calendar_cubit.dart';
 import 'package:docshpere/features/authentication/view%20model/bloc/auth/auth_bloc.dart';
-import 'package:docshpere/features/authentication/view%20model/provider/forgot_password.dart';
-import 'package:docshpere/features/authentication/view%20model/provider/password_toggle.dart';
+import 'package:docshpere/features/authentication/view%20model/cubit/forgot_password.dart';
+import 'package:docshpere/features/authentication/view%20model/cubit/password_toggle.dart';
 import 'package:docshpere/features/booking_appointment/view_model/bloc/appointment_booking_bloc.dart';
+import 'package:docshpere/features/chat/view_model/bloc/bloc/chat_bloc.dart';
 import 'package:docshpere/features/doctor/view_model/bloc/doctor_baic_details_bloc/doctor_basic_details_bloc.dart';
 import 'package:docshpere/features/doctor/view_model/bloc/doctor_full_details_bloc/doctor_full_details_bloc.dart';
 import 'package:docshpere/features/doctor/view_model/cubit/search_cubit/search_cubit_cubit.dart';
@@ -19,7 +20,6 @@ import 'package:docshpere/routes/routes.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:provider/provider.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -34,31 +34,28 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     ScreenSize.initialize(context);
-    return MultiProvider(
+    return MultiBlocProvider(
       providers: [
-        ChangeNotifierProvider(create: (context) => PasswordToggle()),
-        ChangeNotifierProvider(create: (context) => ForgotPasswordProvider()),
+        BlocProvider(create: (context) => AuthBloc()),
+        BlocProvider(create: (context) => CategoryBloc()),
+        BlocProvider(create: (context) => ProfileBloc()),
+        BlocProvider(create: (context) => ForgotPasswordCubit()),
+        BlocProvider(create: (context) => PasswordToggleCubit()),
+        BlocProvider(create: (context) => DoctorBasicDetailsBloc()),
+        BlocProvider(create: (context) => DoctorFullDetailsBloc()),
+        BlocProvider(create: (context) => AppointmentBookingBloc()),
+        BlocProvider(create: (context) => SearchCubitCubit()),
+        BlocProvider(create: (context) => CalendarCubit()),
+        BlocProvider(create: (context) => SearchCategoryCubit()),
+        BlocProvider(create: (context) => LocationCubit()),
+        BlocProvider(create: (context) => MedicalRecordsBloc()),
+        BlocProvider(create: (context) => ManageRecordsBloc()),
+        BlocProvider(create: (context) => DeleteSwipeCubit()),
+        BlocProvider(create: (context) => ChatBloc()),
       ],
-      child: MultiBlocProvider(
-        providers: [
-          BlocProvider(create: (context) => AuthBloc()),
-          BlocProvider(create: (context) => CategoryBloc()),
-          BlocProvider(create: (context) => ProfileBloc()),
-          BlocProvider(create: (context) => DoctorBasicDetailsBloc()),
-          BlocProvider(create: (context) => DoctorFullDetailsBloc()),
-          BlocProvider(create: (context) => AppointmentBookingBloc()),
-          BlocProvider(create: (context) => SearchCubitCubit()),
-          BlocProvider(create: (context) => CalendarCubit()),
-          BlocProvider(create: (context) => SearchCategoryCubit()),
-          BlocProvider(create: (context) => LocationCubit()),
-          BlocProvider(create: (context) => MedicalRecordsBloc()),
-          BlocProvider(create: (context) => ManageRecordsBloc()),
-          BlocProvider(create: (context) => DeleteSwipeCubit()),
-        ],
-        child: MaterialApp.router(
-          debugShowCheckedModeBanner: false,
-          routerConfig: router,
-        ),
+      child: MaterialApp.router(
+        debugShowCheckedModeBanner: false,
+        routerConfig: router,
       ),
     );
   }

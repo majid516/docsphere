@@ -501,7 +501,6 @@ mixin _$MedicalRecordsState {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() initialState,
-    required TResult Function() loadingState,
     required TResult Function() recordloadingState,
     required TResult Function() errorState,
     required TResult Function(List<RecordModel> records) recordsloadedState,
@@ -510,7 +509,6 @@ mixin _$MedicalRecordsState {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initialState,
-    TResult? Function()? loadingState,
     TResult? Function()? recordloadingState,
     TResult? Function()? errorState,
     TResult? Function(List<RecordModel> records)? recordsloadedState,
@@ -519,7 +517,6 @@ mixin _$MedicalRecordsState {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initialState,
-    TResult Function()? loadingState,
     TResult Function()? recordloadingState,
     TResult Function()? errorState,
     TResult Function(List<RecordModel> records)? recordsloadedState,
@@ -529,7 +526,6 @@ mixin _$MedicalRecordsState {
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(_InitialState value) initialState,
-    required TResult Function(_LoadingState value) loadingState,
     required TResult Function(_RecordLoadingState value) recordloadingState,
     required TResult Function(_ErrorState value) errorState,
     required TResult Function(_RecordsLoadedState value) recordsloadedState,
@@ -538,7 +534,6 @@ mixin _$MedicalRecordsState {
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_InitialState value)? initialState,
-    TResult? Function(_LoadingState value)? loadingState,
     TResult? Function(_RecordLoadingState value)? recordloadingState,
     TResult? Function(_ErrorState value)? errorState,
     TResult? Function(_RecordsLoadedState value)? recordsloadedState,
@@ -547,7 +542,6 @@ mixin _$MedicalRecordsState {
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_InitialState value)? initialState,
-    TResult Function(_LoadingState value)? loadingState,
     TResult Function(_RecordLoadingState value)? recordloadingState,
     TResult Function(_ErrorState value)? errorState,
     TResult Function(_RecordsLoadedState value)? recordsloadedState,
@@ -619,7 +613,6 @@ class _$InitialStateImpl implements _InitialState {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() initialState,
-    required TResult Function() loadingState,
     required TResult Function() recordloadingState,
     required TResult Function() errorState,
     required TResult Function(List<RecordModel> records) recordsloadedState,
@@ -631,7 +624,6 @@ class _$InitialStateImpl implements _InitialState {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initialState,
-    TResult? Function()? loadingState,
     TResult? Function()? recordloadingState,
     TResult? Function()? errorState,
     TResult? Function(List<RecordModel> records)? recordsloadedState,
@@ -643,7 +635,6 @@ class _$InitialStateImpl implements _InitialState {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initialState,
-    TResult Function()? loadingState,
     TResult Function()? recordloadingState,
     TResult Function()? errorState,
     TResult Function(List<RecordModel> records)? recordsloadedState,
@@ -659,7 +650,6 @@ class _$InitialStateImpl implements _InitialState {
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(_InitialState value) initialState,
-    required TResult Function(_LoadingState value) loadingState,
     required TResult Function(_RecordLoadingState value) recordloadingState,
     required TResult Function(_ErrorState value) errorState,
     required TResult Function(_RecordsLoadedState value) recordsloadedState,
@@ -671,7 +661,6 @@ class _$InitialStateImpl implements _InitialState {
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_InitialState value)? initialState,
-    TResult? Function(_LoadingState value)? loadingState,
     TResult? Function(_RecordLoadingState value)? recordloadingState,
     TResult? Function(_ErrorState value)? errorState,
     TResult? Function(_RecordsLoadedState value)? recordsloadedState,
@@ -683,7 +672,6 @@ class _$InitialStateImpl implements _InitialState {
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_InitialState value)? initialState,
-    TResult Function(_LoadingState value)? loadingState,
     TResult Function(_RecordLoadingState value)? recordloadingState,
     TResult Function(_ErrorState value)? errorState,
     TResult Function(_RecordsLoadedState value)? recordsloadedState,
@@ -698,129 +686,6 @@ class _$InitialStateImpl implements _InitialState {
 
 abstract class _InitialState implements MedicalRecordsState {
   const factory _InitialState() = _$InitialStateImpl;
-}
-
-/// @nodoc
-abstract class _$$LoadingStateImplCopyWith<$Res> {
-  factory _$$LoadingStateImplCopyWith(
-          _$LoadingStateImpl value, $Res Function(_$LoadingStateImpl) then) =
-      __$$LoadingStateImplCopyWithImpl<$Res>;
-}
-
-/// @nodoc
-class __$$LoadingStateImplCopyWithImpl<$Res>
-    extends _$MedicalRecordsStateCopyWithImpl<$Res, _$LoadingStateImpl>
-    implements _$$LoadingStateImplCopyWith<$Res> {
-  __$$LoadingStateImplCopyWithImpl(
-      _$LoadingStateImpl _value, $Res Function(_$LoadingStateImpl) _then)
-      : super(_value, _then);
-
-  /// Create a copy of MedicalRecordsState
-  /// with the given fields replaced by the non-null parameter values.
-}
-
-/// @nodoc
-
-class _$LoadingStateImpl implements _LoadingState {
-  const _$LoadingStateImpl();
-
-  @override
-  String toString() {
-    return 'MedicalRecordsState.loadingState()';
-  }
-
-  @override
-  bool operator ==(Object other) {
-    return identical(this, other) ||
-        (other.runtimeType == runtimeType && other is _$LoadingStateImpl);
-  }
-
-  @override
-  int get hashCode => runtimeType.hashCode;
-
-  @override
-  @optionalTypeArgs
-  TResult when<TResult extends Object?>({
-    required TResult Function() initialState,
-    required TResult Function() loadingState,
-    required TResult Function() recordloadingState,
-    required TResult Function() errorState,
-    required TResult Function(List<RecordModel> records) recordsloadedState,
-  }) {
-    return loadingState();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function()? initialState,
-    TResult? Function()? loadingState,
-    TResult? Function()? recordloadingState,
-    TResult? Function()? errorState,
-    TResult? Function(List<RecordModel> records)? recordsloadedState,
-  }) {
-    return loadingState?.call();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? initialState,
-    TResult Function()? loadingState,
-    TResult Function()? recordloadingState,
-    TResult Function()? errorState,
-    TResult Function(List<RecordModel> records)? recordsloadedState,
-    required TResult orElse(),
-  }) {
-    if (loadingState != null) {
-      return loadingState();
-    }
-    return orElse();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult map<TResult extends Object?>({
-    required TResult Function(_InitialState value) initialState,
-    required TResult Function(_LoadingState value) loadingState,
-    required TResult Function(_RecordLoadingState value) recordloadingState,
-    required TResult Function(_ErrorState value) errorState,
-    required TResult Function(_RecordsLoadedState value) recordsloadedState,
-  }) {
-    return loadingState(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(_InitialState value)? initialState,
-    TResult? Function(_LoadingState value)? loadingState,
-    TResult? Function(_RecordLoadingState value)? recordloadingState,
-    TResult? Function(_ErrorState value)? errorState,
-    TResult? Function(_RecordsLoadedState value)? recordsloadedState,
-  }) {
-    return loadingState?.call(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeMap<TResult extends Object?>({
-    TResult Function(_InitialState value)? initialState,
-    TResult Function(_LoadingState value)? loadingState,
-    TResult Function(_RecordLoadingState value)? recordloadingState,
-    TResult Function(_ErrorState value)? errorState,
-    TResult Function(_RecordsLoadedState value)? recordsloadedState,
-    required TResult orElse(),
-  }) {
-    if (loadingState != null) {
-      return loadingState(this);
-    }
-    return orElse();
-  }
-}
-
-abstract class _LoadingState implements MedicalRecordsState {
-  const factory _LoadingState() = _$LoadingStateImpl;
 }
 
 /// @nodoc
@@ -865,7 +730,6 @@ class _$RecordLoadingStateImpl implements _RecordLoadingState {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() initialState,
-    required TResult Function() loadingState,
     required TResult Function() recordloadingState,
     required TResult Function() errorState,
     required TResult Function(List<RecordModel> records) recordsloadedState,
@@ -877,7 +741,6 @@ class _$RecordLoadingStateImpl implements _RecordLoadingState {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initialState,
-    TResult? Function()? loadingState,
     TResult? Function()? recordloadingState,
     TResult? Function()? errorState,
     TResult? Function(List<RecordModel> records)? recordsloadedState,
@@ -889,7 +752,6 @@ class _$RecordLoadingStateImpl implements _RecordLoadingState {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initialState,
-    TResult Function()? loadingState,
     TResult Function()? recordloadingState,
     TResult Function()? errorState,
     TResult Function(List<RecordModel> records)? recordsloadedState,
@@ -905,7 +767,6 @@ class _$RecordLoadingStateImpl implements _RecordLoadingState {
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(_InitialState value) initialState,
-    required TResult Function(_LoadingState value) loadingState,
     required TResult Function(_RecordLoadingState value) recordloadingState,
     required TResult Function(_ErrorState value) errorState,
     required TResult Function(_RecordsLoadedState value) recordsloadedState,
@@ -917,7 +778,6 @@ class _$RecordLoadingStateImpl implements _RecordLoadingState {
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_InitialState value)? initialState,
-    TResult? Function(_LoadingState value)? loadingState,
     TResult? Function(_RecordLoadingState value)? recordloadingState,
     TResult? Function(_ErrorState value)? errorState,
     TResult? Function(_RecordsLoadedState value)? recordsloadedState,
@@ -929,7 +789,6 @@ class _$RecordLoadingStateImpl implements _RecordLoadingState {
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_InitialState value)? initialState,
-    TResult Function(_LoadingState value)? loadingState,
     TResult Function(_RecordLoadingState value)? recordloadingState,
     TResult Function(_ErrorState value)? errorState,
     TResult Function(_RecordsLoadedState value)? recordsloadedState,
@@ -988,7 +847,6 @@ class _$ErrorStateImpl implements _ErrorState {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() initialState,
-    required TResult Function() loadingState,
     required TResult Function() recordloadingState,
     required TResult Function() errorState,
     required TResult Function(List<RecordModel> records) recordsloadedState,
@@ -1000,7 +858,6 @@ class _$ErrorStateImpl implements _ErrorState {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initialState,
-    TResult? Function()? loadingState,
     TResult? Function()? recordloadingState,
     TResult? Function()? errorState,
     TResult? Function(List<RecordModel> records)? recordsloadedState,
@@ -1012,7 +869,6 @@ class _$ErrorStateImpl implements _ErrorState {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initialState,
-    TResult Function()? loadingState,
     TResult Function()? recordloadingState,
     TResult Function()? errorState,
     TResult Function(List<RecordModel> records)? recordsloadedState,
@@ -1028,7 +884,6 @@ class _$ErrorStateImpl implements _ErrorState {
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(_InitialState value) initialState,
-    required TResult Function(_LoadingState value) loadingState,
     required TResult Function(_RecordLoadingState value) recordloadingState,
     required TResult Function(_ErrorState value) errorState,
     required TResult Function(_RecordsLoadedState value) recordsloadedState,
@@ -1040,7 +895,6 @@ class _$ErrorStateImpl implements _ErrorState {
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_InitialState value)? initialState,
-    TResult? Function(_LoadingState value)? loadingState,
     TResult? Function(_RecordLoadingState value)? recordloadingState,
     TResult? Function(_ErrorState value)? errorState,
     TResult? Function(_RecordsLoadedState value)? recordsloadedState,
@@ -1052,7 +906,6 @@ class _$ErrorStateImpl implements _ErrorState {
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_InitialState value)? initialState,
-    TResult Function(_LoadingState value)? loadingState,
     TResult Function(_RecordLoadingState value)? recordloadingState,
     TResult Function(_ErrorState value)? errorState,
     TResult Function(_RecordsLoadedState value)? recordsloadedState,
@@ -1146,7 +999,6 @@ class _$RecordsLoadedStateImpl implements _RecordsLoadedState {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() initialState,
-    required TResult Function() loadingState,
     required TResult Function() recordloadingState,
     required TResult Function() errorState,
     required TResult Function(List<RecordModel> records) recordsloadedState,
@@ -1158,7 +1010,6 @@ class _$RecordsLoadedStateImpl implements _RecordsLoadedState {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initialState,
-    TResult? Function()? loadingState,
     TResult? Function()? recordloadingState,
     TResult? Function()? errorState,
     TResult? Function(List<RecordModel> records)? recordsloadedState,
@@ -1170,7 +1021,6 @@ class _$RecordsLoadedStateImpl implements _RecordsLoadedState {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initialState,
-    TResult Function()? loadingState,
     TResult Function()? recordloadingState,
     TResult Function()? errorState,
     TResult Function(List<RecordModel> records)? recordsloadedState,
@@ -1186,7 +1036,6 @@ class _$RecordsLoadedStateImpl implements _RecordsLoadedState {
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(_InitialState value) initialState,
-    required TResult Function(_LoadingState value) loadingState,
     required TResult Function(_RecordLoadingState value) recordloadingState,
     required TResult Function(_ErrorState value) errorState,
     required TResult Function(_RecordsLoadedState value) recordsloadedState,
@@ -1198,7 +1047,6 @@ class _$RecordsLoadedStateImpl implements _RecordsLoadedState {
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_InitialState value)? initialState,
-    TResult? Function(_LoadingState value)? loadingState,
     TResult? Function(_RecordLoadingState value)? recordloadingState,
     TResult? Function(_ErrorState value)? errorState,
     TResult? Function(_RecordsLoadedState value)? recordsloadedState,
@@ -1210,7 +1058,6 @@ class _$RecordsLoadedStateImpl implements _RecordsLoadedState {
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_InitialState value)? initialState,
-    TResult Function(_LoadingState value)? loadingState,
     TResult Function(_RecordLoadingState value)? recordloadingState,
     TResult Function(_ErrorState value)? errorState,
     TResult Function(_RecordsLoadedState value)? recordsloadedState,

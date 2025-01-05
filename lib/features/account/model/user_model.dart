@@ -13,7 +13,6 @@ class UserModel {
   String dob;
   String bloodGroup;
   String gender;
-  List<String>? medicalRecords;
   List<String>? appointments;
   List<String>? notifications;
   String? createdAt;
@@ -27,7 +26,6 @@ class UserModel {
     required this.dob,
     required this.bloodGroup,
     required this.gender,
-     this.medicalRecords,
      this.appointments,
      this.notifications,
      this.createdAt,
@@ -43,7 +41,6 @@ class UserModel {
     String? dob,
     String? bloodGroup,
     String? gender,
-    List<String>? medicalRecords,
     List<String>? appointments,
     List<String>? notifications,
     String? createdAt,
@@ -58,7 +55,6 @@ class UserModel {
       dob: dob ?? this.dob,
       bloodGroup: bloodGroup ?? this.bloodGroup,
       gender: gender ?? this.gender,
-      medicalRecords: medicalRecords ?? this.medicalRecords,
       appointments: appointments ?? this.appointments,
       notifications: notifications ?? this.notifications,
       createdAt: createdAt ?? this.createdAt,
@@ -76,7 +72,6 @@ class UserModel {
       'dob': dob,
       'bloodGroup': bloodGroup,
       'gender': gender,
-      'medicalRecords': medicalRecords,
       'appointments': appointments,
       'notifications': notifications,
       'createdAt': createdAt,
@@ -94,9 +89,6 @@ class UserModel {
       dob: map['dob'] as String,
       bloodGroup: map['bloodGroup'] as String,
       gender: map['gender'] as String,
-      medicalRecords: List<String>.from(
-        (map['medicalRecords'] as List<String>),
-      ),
       appointments: List<String>.from(
         (map['appointments'] as List<String>),
       ),
@@ -114,7 +106,7 @@ class UserModel {
 
   @override
   String toString() {
-    return 'UserModel(uid: $uid, name: $name, email: $email, role: $role, profileImage: $profileImage, contactNumber: $contactNumber, dob: $dob, bloodGroup: $bloodGroup, gender: $gender, medicalRecords: $medicalRecords, appointments: $appointments, notifications: $notifications, createdAt: $createdAt)';
+    return 'UserModel(uid: $uid, name: $name, email: $email, role: $role, profileImage: $profileImage, contactNumber: $contactNumber, dob: $dob, bloodGroup: $bloodGroup, gender: $gender, appointments: $appointments, notifications: $notifications, createdAt: $createdAt)';
   }
 
   @override
@@ -130,7 +122,6 @@ class UserModel {
         other.dob == dob &&
         other.bloodGroup == bloodGroup &&
         other.gender == gender &&
-        listEquals(other.medicalRecords, medicalRecords) &&
         listEquals(other.appointments, appointments) &&
         listEquals(other.notifications, notifications) &&
         other.createdAt == createdAt;
@@ -147,7 +138,6 @@ class UserModel {
         dob.hashCode ^
         bloodGroup.hashCode ^
         gender.hashCode ^
-        medicalRecords.hashCode ^
         appointments.hashCode ^
         notifications.hashCode ^
         createdAt.hashCode;

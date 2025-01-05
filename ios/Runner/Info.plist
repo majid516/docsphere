@@ -47,25 +47,42 @@
 	<true/>
 
 	<!-- Permissions for accessing photos and files -->
-    <key>NSPhotoLibraryUsageDescription</key>
-    <string>We need access to your photo library to select images.</string>
-    <key>NSCameraUsageDescription</key>
-    <string>We need access to your camera to take photos.</string>
+	<key>NSPhotoLibraryUsageDescription</key>
+	<string>We need access to your photo library to select images.</string>
+	<key>NSCameraUsageDescription</key>
+	<string>We need access to your camera to take photos.</string>
 
-    <!-- Permissions for file access -->
-    <key>NSFileProviderUsageDescription</key>
-    <string>We need access to files on your device.</string>
-    <key>NSMicrophoneUsageDescription</key>
-    <string>We need access to your microphone for audio recording.</string>
-    <key>NSDocumentsFolderUsageDescription</key>
-    <string>We need access to your documents to open files from your device.</string>
-	<key>NSLocationWhenInUseUsageDescription</key>
-    <string>We need access to location on your device and track it.</string>
-	<key>NSLocationAlwaysUsageDescription</key>
-    <string>We need access to location on your device and track it.</string>
-	<key>NSLocationAlwaysAndWhenInUseUsageDescription</key>
-    <string>We need access to location on your device and track it.</string>
+	<!-- Permissions for file access -->
+	<key>NSFileProviderUsageDescription</key>
+	<string>We need access to files on your device.</string>
+	<key>NSMicrophoneUsageDescription</key>
+	<string>We need access to your microphone for audio recording.</string>
 	<key>NSDocumentsFolderUsageDescription</key>
-    <string>We need access to your documents folder to save files.</string>
+	<string>We need access to your documents to open files from your device.</string>
+	<key>NSLocationWhenInUseUsageDescription</key>
+	<string>We need access to location on your device and track it.</string>
+	<key>NSLocationAlwaysUsageDescription</key>
+	<string>We need access to location on your device and track it.</string>
+	<key>NSLocationAlwaysAndWhenInUseUsageDescription</key>
+	<string>We need access to location on your device and track it.</string>
+	<key>NSDocumentsFolderUsageDescription</key>
+	<string>We need access to your documents folder to save files.</string>
+
+	<!-- Google Sign-In Configuration -->
+	<key>GIDClientID</key>
+	<string>312686783403-jhpkul0cou53f8fkk2ppustugn8qkqnv.apps.googleusercontent.com</string>
+
+	<key>CFBundleURLTypes</key>
+	<array>
+		<dict>
+			<key>CFBundleTypeRole</key>
+			<string>Editor</string>
+			<key>CFBundleURLSchemes</key>
+			<array>
+				<string>com.googleusercontent.apps.312686783403-jhpkul0cou53f8fkk2ppustugn8qkqnv</string>
+			</array>
+		</dict>
+	</array>
+
 </dict>
 </plist>

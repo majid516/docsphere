@@ -14,7 +14,7 @@ class MedicalRecordsBloc
     on<_FechAllMedicalRecords>((event, emit) async {
       try {
         emit(MedicalRecordsState.recordloadingState());
-        final records = await RecordsServices().fechAllMedicalRecords();
+        final records = await RecordsServices().fetchAllMedicalRecords();
         emit(MedicalRecordsState.recordsloadedState(records));
       } catch (e) {
         log(e.toString());
@@ -23,7 +23,6 @@ class MedicalRecordsBloc
     });
     on<_AddMedicalRecords>((event, emit) async {
       try {
-        emit(MedicalRecordsState.loadingState());
         await RecordsServices().addMedicalRecord(event.record);
         
       } catch (e) {
@@ -33,8 +32,9 @@ class MedicalRecordsBloc
     });
     on<_DeleteMedicalRecord>((event, emit) async {
       try {
-        emit(MedicalRecordsState.loadingState());
        await RecordsServices().deleteMedicalRecord(event.id);
+       final records = await RecordsServices().fetchAllMedicalRecords();
+        emit(MedicalRecordsState.recordsloadedState(records));
         
       } catch (e) {
         log(e.toString());

@@ -38,7 +38,7 @@ class QualificationListWidget extends StatelessWidget {
                     padding: const EdgeInsets.symmetric(vertical: 4.0),
                     child: Row(
                       crossAxisAlignment: CrossAxisAlignment
-                          .start, // Align text properly if it wraps
+                          .start, 
                       children: [
                         Icon(Icons.school, color: MyColors.darkGreyColor),
                         Space.wSpace10,

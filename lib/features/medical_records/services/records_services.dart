@@ -3,53 +3,80 @@ import 'dart:developer';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:docshpere/features/medical_records/model/record_model.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:intl/intl.dart';
 
 class RecordsServices {
-    final currentUser = FirebaseAuth.instance.currentUser;
- Future<void> addMedicalRecord(RecordModel record) async {
-  try {
-    final now = DateFormat('yyyy-MM-dd_HH-mm-ss').format(DateTime.now());
-    await FirebaseFirestore.instance
-        .collection('user')
-        .doc(currentUser!.uid)
-        .collection('medicalRecords')
-        .doc(now)
-        .set(record.toMap());
-  } catch (e, stackTrace) {
-    log(e.toString());
-    log(stackTrace.toString());
-  }
-}
-
-  Future<List<RecordModel>> fechAllMedicalRecords() async {
+  final currentUser = FirebaseAuth.instance.currentUser;
+  Future<void> addMedicalRecord(RecordModel record) async {
     try {
+      final userId = currentUser?.uid;
+      if (userId == null) {
+        throw Exception('User is not authenticated');
+      }
+
+      final recordId = record.id;
+      final recordWithId = record.copyWith(id: recordId);
+
+      await FirebaseFirestore.instance
+          .collection('user')
+          .doc(userId)
+          .collection('medicalRecords')
+          .doc(recordId)
+          .set(recordWithId.toMap());
+
+    } catch (e, stackTrace) {
+      log('Error adding medical record: $e');
+      log(stackTrace.toString());
+    }
+  }
+
+  Future<List<RecordModel>> fetchAllMedicalRecords() async {
+    try {
+      final userId = currentUser?.uid;
+      if (userId == null) {
+        return [];
+      }
+
       final recordsList = await FirebaseFirestore.instance
           .collection('user')
-          .doc(currentUser!.uid)
+          .doc(userId)
           .collection('medicalRecords')
           .get();
+
       if (recordsList.docs.isNotEmpty) {
-      return   recordsList.docs.map((record){
+        return recordsList.docs.map((record) {
           return RecordModel.fromMap(record.data());
         }).toList();
       }
-      log('list is empty while feching medical records');
+
       return [];
-    } catch (e) {
+    } catch (e, stackTrace) {
+      log('Error fetching medical records: $e');
+      log(stackTrace.toString());
       return [];
     }
   }
+
   Future<void> deleteMedicalRecord(String id) async {
     try {
+      final userId = currentUser?.uid;
+      if (userId == null) {
+        throw Exception('User is not authenticated');
+      }
+      if (id.isEmpty) {
+        throw Exception('Invalid record ID');
+      }
+
       await FirebaseFirestore.instance
           .collection('user')
-          .doc(currentUser!.uid)
+          .doc(userId)
           .collection('medicalRecords')
-          .doc(id).delete();
-     
-    } catch (e) {
-      log(e.toString());
+          .doc(id)
+          .delete();
+
+      log('Medical record deleted successfully.');
+    } catch (e, stackTrace) {
+      log('Error deleting medical record: $e');
+      log(stackTrace.toString());
     }
   }
 }
