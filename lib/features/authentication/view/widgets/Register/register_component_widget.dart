@@ -76,9 +76,7 @@ class RegisterComponentsWidgets extends StatelessWidget {
                       obscureText: false,
                     ),
                     Space.hSpace15,
-                    
-                    // Password Field
-                    BlocBuilder<PasswordToggleCubit, Map<String, bool>>(
+                                        BlocBuilder<PasswordToggleCubit, Map<String, bool>>(
                       builder: (context, state) {
                         return CustomTextFieldWidget(
                           controller: passwordController,
@@ -96,8 +94,6 @@ class RegisterComponentsWidgets extends StatelessWidget {
                       },
                     ),
                     Space.hSpace15,
-
-                    // Confirm Password Field
                     BlocBuilder<PasswordToggleCubit, Map<String, bool>>(
                       builder: (context, state) {
                         return CustomTextFieldWidget(

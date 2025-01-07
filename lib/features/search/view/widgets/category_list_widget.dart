@@ -100,7 +100,7 @@ class CategoryListWidget extends StatelessWidget {
                                 style: SearchTextStyles.categoryStyle,
                               ),
                               onTap: () {
-                                context.go(MyRoutes.doctorsListScreen,
+                                context.push(MyRoutes.doctorsListScreen,
                                     extra: filteredCategories[index].title);
                               },
                             );

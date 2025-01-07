@@ -9,7 +9,6 @@ import 'package:docshpere/features/doctor/view/widgets/doctor_list_tile.dart';
 import 'package:docshpere/features/doctor/view/widgets/sorting_button.dart';
 import 'package:docshpere/features/doctor/view_model/bloc/doctor_baic_details_bloc/doctor_basic_details_bloc.dart';
 import 'package:docshpere/features/doctor/view_model/cubit/search_cubit/search_cubit_cubit.dart';
-import 'package:docshpere/routes/routes_name.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
@@ -29,7 +28,7 @@ class DoctorsListsScreen extends StatelessWidget {
       appBar: PreferredSize(
         preferredSize: Size(ScreenSize.width, 100),
         child: CustomAppBar(
-          action: () => context.go(MyRoutes.categorySearchScren),
+          action: () => context.pop(),
           title: title,
         ),
       ),

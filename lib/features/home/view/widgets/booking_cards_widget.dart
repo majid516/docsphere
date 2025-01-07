@@ -17,7 +17,7 @@ class BookingCardsWidget extends StatelessWidget {
       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
       children: [
         InkWell(
-          onTap: () => context.go(MyRoutes.categorySearchScren),
+          onTap: () => context.push(MyRoutes.categorySearchScren),
           child: SizedBox(
             width: ScreenSize.width * 0.45,
             height: ScreenSize.width * 0.5,

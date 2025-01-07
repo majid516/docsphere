@@ -10,26 +10,35 @@ class SearchCategoryCubit extends Cubit<CategorySearchModel> {
           searchQuery: '',
         ));
   void initializeCategories(List<CategoryModel> categories) {
+    final sortedCategories = List<CategoryModel>.from(categories)
+      ..sort((a, b) => a.title.toLowerCase().compareTo(b.title.toLowerCase()));
+
     emit(state.copyWith(
-        allCategories: categories, filteredCategories: categories));
+      allCategories: sortedCategories,
+      filteredCategories: sortedCategories,
+    ));
   }
 
   void searchCategory(String searchQuery) {
     _filterCategories(searchQuery: searchQuery);
   }
 
-  void _filterCategories({
-    String? searchQuery,
-  }) {
+  void _filterCategories({String? searchQuery}) {
     final updatedSearchQuery = searchQuery ?? state.searchQuery;
 
-    final filteredCategoriesList = state.allCategories.where((category) {
-      final matchesQuery = category.title
-          .toLowerCase()
-          .startsWith(updatedSearchQuery.toLowerCase());
+    List<CategoryModel> filteredCategoriesList;
 
-      return matchesQuery;
-    }).toList();
+    if (updatedSearchQuery.isEmpty) {
+      filteredCategoriesList = List.from(state.allCategories)
+        ..sort(
+            (a, b) => a.title.toLowerCase().compareTo(b.title.toLowerCase()));
+    } else {
+      filteredCategoriesList = state.allCategories.where((category) {
+        return category.title
+            .toLowerCase()
+            .startsWith(updatedSearchQuery.toLowerCase());
+      }).toList();
+    }
 
     emit(state.copyWith(
       filteredCategories: filteredCategoriesList,

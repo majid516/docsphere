@@ -1,10 +1,10 @@
 import 'dart:convert';
+import 'package:docshpere/features/booking_appointment/model/slot_time_model.dart';
 import 'package:flutter/foundation.dart';
 
 class SlotModel {
   String date;
-  List<String> timeSlots;
-
+  List<TimeSlotModel> timeSlots;
   SlotModel({
     required this.date,
     required this.timeSlots,
@@ -12,7 +12,7 @@ class SlotModel {
 
   SlotModel copyWith({
     String? date,
-    List<String>? timeSlots,
+    List<TimeSlotModel>? timeSlots,
   }) {
     return SlotModel(
       date: date ?? this.date,
@@ -23,25 +23,27 @@ class SlotModel {
   Map<String, dynamic> toMap() {
     return <String, dynamic>{
       'date': date,
-      'timeSlots': timeSlots,
+      'timeSlots': timeSlots.map((x) => x.toMap()).toList(),
     };
   }
 
   factory SlotModel.fromMap(Map<String, dynamic> map) {
-    List<String> timeSlots = (map['timeSlots'] as List)
-        .map((e) => e.toString()) 
-        .toList();
+  return SlotModel(
+    date: map['date'] as String,
+    timeSlots: (map['timeSlots'] as Map<String, dynamic>).entries.map((entry) {
+      return TimeSlotModel(
+        time: entry.key, 
+        isBooked: entry.value['isBooked'],
+        user: entry.value['user'] 
+      );
+    }).toList(),
+  );
+}
 
-    return SlotModel(
-      date: map['date'] as String,
-      timeSlots: timeSlots,
-    );
-  }
 
   String toJson() => json.encode(toMap());
 
-  factory SlotModel.fromJson(String source) =>
-      SlotModel.fromMap(json.decode(source) as Map<String, dynamic>);
+  factory SlotModel.fromJson(String source) => SlotModel.fromMap(json.decode(source) as Map<String, dynamic>);
 
   @override
   String toString() => 'SlotModel(date: $date, timeSlots: $timeSlots)';
@@ -49,8 +51,10 @@ class SlotModel {
   @override
   bool operator ==(covariant SlotModel other) {
     if (identical(this, other)) return true;
-
-    return other.date == date && listEquals(other.timeSlots, timeSlots);
+  
+    return 
+      other.date == date &&
+      listEquals(other.timeSlots, timeSlots);
   }
 
   @override

@@ -114,9 +114,7 @@ class DoctorDetailsScreen extends StatelessWidget {
                             child: IconButton(
                               icon: Icon(Icons.arrow_back_ios,
                                   color: MyColors.whiteColor),
-                              onPressed: () => context.go(
-                                  MyRoutes.doctorsListScreen,
-                                  extra: doctor.category),
+                              onPressed: () => context.pop(),
                             ),
                           ),
                         ),

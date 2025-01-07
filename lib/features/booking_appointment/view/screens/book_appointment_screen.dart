@@ -1,10 +1,16 @@
+import 'dart:developer';
+
 import 'package:docshpere/core/components/custom_app_bar.dart';
 import 'package:docshpere/core/components/custom_snackbar.dart';
 import 'package:docshpere/core/constants/app_theme/app_theme.dart';
 import 'package:docshpere/core/constants/spaces/space.dart';
 import 'package:docshpere/core/constants/text_styles/common_styles.dart';
 import 'package:docshpere/core/utils/screen_size/screen_size.dart';
+import 'package:docshpere/features/account/view_model/bloc/profile_bloc.dart';
 import 'package:docshpere/features/booking_appointment/model/slot_model.dart';
+import 'package:docshpere/features/booking_appointment/model/slot_time_model.dart';
+import 'package:docshpere/features/booking_appointment/model/slot_user_model.dart';
+import 'package:docshpere/features/booking_appointment/services/slot_book_services.dart';
 import 'package:docshpere/features/booking_appointment/view/widgets/doctor_card_widget.dart';
 import 'package:docshpere/features/booking_appointment/view/widgets/heading_widget.dart';
 import 'package:docshpere/features/booking_appointment/view/widgets/loading_widget.dart';
@@ -20,14 +26,16 @@ class BookAppointmentScreen extends StatefulWidget {
   final String name;
   final String category;
   final String profile;
-  const BookAppointmentScreen(
-      {super.key,
-      required this.uid,
-      required this.name,
-      required this.category,
-      required this.profile});
+
+  const BookAppointmentScreen({
+    super.key,
+    required this.uid,
+    required this.name,
+    required this.category,
+    required this.profile,
+  });
+
   @override
-  // ignore: library_private_types_in_public_api
   _BookAppointmentScreenState createState() => _BookAppointmentScreenState();
 }
 
@@ -51,23 +59,16 @@ class _BookAppointmentScreenState extends State<BookAppointmentScreen> {
 
   @override
   void initState() {
+    super.initState();
     context
         .read<AppointmentBookingBloc>()
         .add(AppointmentBookingEvent.fetchAllTimeSlots(widget.uid));
-    super.initState();
-  }
-
-  void _bookAppointment() {
-    if (selectedTimeSlot.isEmpty) {
-      showCustomSnackBar(context, 'Please select a slot', true);
-      return;
-    }
-     showCustomSnackBar(context, 'successfully slot booked', false);
-      return;
   }
 
   @override
   Widget build(BuildContext context) {
+    context.read<ProfileBloc>().add(ProfileEvent.getUserData());
+
     return Scaffold(
       appBar: PreferredSize(
         preferredSize: Size(ScreenSize.width, 110),
@@ -83,7 +84,7 @@ class _BookAppointmentScreenState extends State<BookAppointmentScreen> {
         builder: (context, state) {
           return state.maybeWhen(
             loadedState: (slots) {
-              final currentDateSlots = slots
+              final currentDateSlot = slots
                   .firstWhere(
                     (slot) =>
                         slot.date ==
@@ -93,6 +94,9 @@ class _BookAppointmentScreenState extends State<BookAppointmentScreen> {
                         timeSlots: []),
                   )
                   .timeSlots;
+                  final nonBookedSlot = currentDateSlot
+  .where((slot) => slot.isBooked == 'false')  
+  .toList();
 
               return Padding(
                 padding: const EdgeInsets.all(6.0),
@@ -135,24 +139,28 @@ class _BookAppointmentScreenState extends State<BookAppointmentScreen> {
                       heading: 'Select Time Slot',
                     ),
                     SizedBox(height: 10),
-                    currentDateSlots.isNotEmpty
+                    nonBookedSlot.isNotEmpty
                         ? Wrap(
                             spacing: 5,
                             runSpacing: 2,
-                            children: currentDateSlots.map((slot) {
+                            children:   nonBookedSlot.map((entry) {
+                              print('isBooked : ${entry.isBooked}');
                               return ChoiceChip(
                                 checkmarkColor: MyColors.blackColor,
-                                label: Text(slot),
-                                selected: selectedTimeSlot == slot,
+                                label: Text(
+                                    entry.time),
+                                selected: selectedTimeSlot == entry.time,
                                 onSelected: (selected) {
                                   setState(() {
-                                    selectedTimeSlot = selected ? slot : "";
+                                    selectedTimeSlot =
+                                        selected ? entry.time : "";
                                   });
                                 },
-                                backgroundColor: MyColors.whiteColor,
+                                backgroundColor:  MyColors.whiteColor,
+
                                 selectedColor: MyColors.primaryColor,
                                 labelStyle: TextStyle(
-                                  color: selectedTimeSlot == slot
+                                  color: selectedTimeSlot == entry.time
                                       ? Colors.white
                                       : Colors.black,
                                 ),
@@ -163,7 +171,17 @@ class _BookAppointmentScreenState extends State<BookAppointmentScreen> {
                     Spacer(),
                     Center(
                       child: ElevatedButton(
-                        onPressed: _bookAppointment,
+                        onPressed: () {
+                          final user = getSlotBookedUserData(context);
+                          SlotBookServices().bookAppointment(
+                            date: DateFormat('yyyy-MM-dd').format(selectedDate),
+                            context: context,
+                            uid: widget.uid,
+                            selectedTime: selectedTimeSlot,
+                            isBooked: 'true',
+                            user: user,
+                          );
+                        },
                         style: ElevatedButton.styleFrom(
                           padding: EdgeInsets.symmetric(horizontal: 40),
                           backgroundColor: MyColors.primaryColor,
@@ -177,13 +195,13 @@ class _BookAppointmentScreenState extends State<BookAppointmentScreen> {
                         ),
                       ),
                     ),
-                    Space.hSpace20
+                    Space.hSpace20,
                   ],
                 ),
               );
             },
             orElse: () {
-              return Text('data');
+              return const Center(child: CircularProgressIndicator());
             },
             errorState: (message) {
               return Text(message);
@@ -194,4 +212,29 @@ class _BookAppointmentScreenState extends State<BookAppointmentScreen> {
       ),
     );
   }
+}
+
+SlotUserModel getSlotBookedUserData(BuildContext context) {
+  late SlotUserModel currUser;
+
+  final state = context.read<ProfileBloc>().state;
+  state.maybeWhen(
+    userLoadedState: (user) {
+      currUser = SlotUserModel(
+        uid: user.uid!,
+        name: user.name,
+        email: user.email,
+        profileImage: user.profileImage,
+        contactNumber: user.contactNumber,
+        dob: user.dob,
+        bloodGroup: user.bloodGroup,
+        gender: user.gender,
+      );
+    },
+    orElse: () {
+      throw Exception('User data not loaded.');
+    },
+  );
+
+  return currUser;
 }

@@ -1,4 +1,3 @@
-
 import 'package:docshpere/core/constants/app_theme/app_theme.dart';
 import 'package:docshpere/core/constants/spaces/space.dart';
 import 'package:docshpere/core/constants/text_styles/common_styles.dart';
@@ -30,10 +29,13 @@ class CustomAnimatedAppbar extends StatelessWidget {
             Row(
               mainAxisSize: MainAxisSize.min,
               children: [
-               IconButton(onPressed: (){
-                Scaffold.of(context).openDrawer();
-               }, icon:  Icon(Icons.menu_sharp,
-                    weight: 4, size: 28, color: MyColors.whiteColor),),
+                IconButton(
+                  onPressed: () {
+                    Scaffold.of(context).openDrawer();
+                  },
+                  icon: Icon(Icons.menu_sharp,
+                      weight: 4, size: 28, color: MyColors.whiteColor),
+                ),
                 Space.wSpace15,
                 Text(
                   'DocSphere',
