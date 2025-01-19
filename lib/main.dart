@@ -16,6 +16,7 @@ import 'package:docshpere/features/medical_records/view_model/manage_record_bloc
 import 'package:docshpere/features/medical_records/view_model/medical_records/medical_records_bloc.dart';
 import 'package:docshpere/features/my_doctors/view_model/bloc/my_doctors_bloc/my_doctor_bloc.dart';
 import 'package:docshpere/features/notifications/services/notification_services.dart';
+import 'package:docshpere/features/patient_stories/view_model/patient_stories/patient_stories_bloc.dart';
 import 'package:docshpere/features/payment/view_model/bloc/payment_bloc.dart';
 import 'package:docshpere/features/search/view_model/bloc/category/category_bloc.dart';
 import 'package:docshpere/features/search/view_model/cubit/cubit/search_category_cubit.dart';
@@ -62,6 +63,7 @@ class MyApp extends StatelessWidget {
         BlocProvider(create: (context) => ConsultationBloc()),
         BlocProvider(create: (context) => PaymentBloc()),
         BlocProvider(create: (context) => ChatPartnersBloc()),
+        BlocProvider(create: (context) => PatientStoriesBloc()),
       ],
       child: MaterialApp.router(
         debugShowCheckedModeBanner: false,

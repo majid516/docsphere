@@ -1,7 +1,10 @@
+import 'dart:convert';
+
 import 'package:docshpere/core/constants/app_theme/app_theme.dart';
 import 'package:docshpere/core/constants/text_styles/authentication_syles.dart';
 import 'package:docshpere/core/constants/text_styles/common_styles.dart';
 import 'package:docshpere/features/doctor/view/widgets/doctor_text_styles.dart';
+import 'package:docshpere/features/patient_stories/model/patient_stories_model.dart';
 import 'package:flutter/material.dart';
 
 class ReviewTileWidget extends StatelessWidget {
@@ -10,7 +13,7 @@ class ReviewTileWidget extends StatelessWidget {
     required this.patientStories,
   });
 
-  final List<Map<String, String>> patientStories;
+  final List<PatientStoriesModel> patientStories;
 
   @override
   Widget build(BuildContext context) {
@@ -22,11 +25,14 @@ class ReviewTileWidget extends StatelessWidget {
         physics: const NeverScrollableScrollPhysics(),
         itemCount: patientStories.length,
         itemBuilder: (context, index) {
+          final story =  patientStories[index];
           return ListTile(
             isThreeLine: true,
-            leading: CircleAvatar(
+            leading: story.userProfile == '' || story.userProfile.isEmpty ? CircleAvatar(
               backgroundColor: MyColors.primaryColor.withAlpha(80),
               child: Icon(Icons.person, color: Colors.white),
+            ): CircleAvatar(
+              backgroundImage: MemoryImage(base64Decode(story.userProfile)),
             ),
             title: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
@@ -34,8 +40,7 @@ class ReviewTileWidget extends StatelessWidget {
                 Row(
                   children: [
                     Expanded(
-                      child: Text(
-                        patientStories[index]['name']!,
+                      child: Text(story.userName,
                         style: DoctorScreenStyles.storiesTitle,
                         overflow: TextOverflow.ellipsis,
                       ),
@@ -50,8 +55,8 @@ class ReviewTileWidget extends StatelessWidget {
               ],
             ),
             subtitle: Text(
-              patientStories[index]['story']!,
-              style: AuthenticationSyles.normalText2,
+              story.story,
+              style: DoctorScreenStyles.storiesStyle,
             ),
           );
         },

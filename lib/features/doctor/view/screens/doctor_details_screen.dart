@@ -6,6 +6,7 @@ import 'package:docshpere/core/models/basic_doctor_details.dart';
 import 'package:docshpere/features/chat/model/chat_partner_model.dart';
 import 'package:docshpere/features/doctor/view/widgets/details_loading_widget.dart';
 import 'package:docshpere/features/doctor/view_model/bloc/doctor_full_details_bloc/doctor_full_details_bloc.dart';
+import 'package:docshpere/features/patient_stories/view_model/patient_stories/patient_stories_bloc.dart';
 import 'package:docshpere/routes/routes_name.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
@@ -19,7 +20,7 @@ import 'package:docshpere/features/doctor/view/widgets/common_divider.dart';
 import 'package:docshpere/features/doctor/view/widgets/fee_tile_widget.dart';
 import 'package:docshpere/features/doctor/view/widgets/message_button.dart';
 import 'package:docshpere/features/doctor/view/widgets/qualification_list_widget.dart';
-import 'package:docshpere/features/doctor/view/widgets/reivew_tile_widget.dart';
+import 'package:docshpere/features/doctor/view/widgets/patient_stories_tile_widget.dart';
 import 'package:docshpere/features/doctor/view/widgets/specialization_list_widget.dart';
 import 'package:docshpere/features/doctor/view_model/provider/scorll_provider.dart';
 
@@ -86,6 +87,7 @@ class DoctorDetailsScreen extends StatelessWidget {
     context
         .read<DoctorFullDetailsBloc>()
         .add(DoctorFullDetailsEvent.fechDoctorFullDetails(uid));
+    context.read<PatientStoriesBloc>().add(PatientStoriesEvent.fetchAllPatientStories(doctorId: uid),);
     return ChangeNotifierProvider(
       create: (context) => ScorllProvider('Dr Robert Kalvin'),
       child: Consumer<ScorllProvider>(
@@ -166,8 +168,8 @@ class DoctorDetailsScreen extends StatelessWidget {
                                         clientId: user!.uid.toString(),
                                         lastMessage: '',
                                         lastMessageTime: '');
-                                    context
-                                        .push(MyRoutes.chatingScreen, extra: chatPartnerModel);
+                                    context.push(MyRoutes.chatingScreen,
+                                        extra: chatPartnerModel);
                                   }),
                                   BookAppointmentButton(action: () {
                                     context.push(MyRoutes.bookAppointmentScreen,
@@ -184,7 +186,18 @@ class DoctorDetailsScreen extends StatelessWidget {
                                 ],
                               ),
                               Space.hSpace10,
-                              ReviewTileWidget(patientStories: patientStories),
+                              BlocBuilder<PatientStoriesBloc, PatientStoriesState>(
+                                builder: (context, state) {
+                                 return state.maybeWhen(
+                                    storiesLoadedState: (patientStories) {
+                                       return ReviewTileWidget(
+                                      patientStories: patientStories);
+                                    },
+                                    orElse: () => Space.hSpace10,
+                                  );
+                                 
+                                },
+                              ),
                             ],
                           ),
                         ),
