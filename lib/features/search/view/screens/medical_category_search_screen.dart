@@ -9,7 +9,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 
 class MedicalCategorySearchScreen extends StatelessWidget {
-  const MedicalCategorySearchScreen({super.key});
+  final String type;
+  const MedicalCategorySearchScreen({super.key, required this.type});
   
   @override
   Widget build(BuildContext context) {
@@ -34,7 +35,7 @@ class MedicalCategorySearchScreen extends StatelessWidget {
       backgroundColor: MyColors.whiteColor,
       body: Column(
         children: [
-          CategoryListWidget(),
+          CategoryListWidget(type: type,),
         ],
       ),
     );

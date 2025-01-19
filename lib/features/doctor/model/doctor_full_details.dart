@@ -9,6 +9,8 @@ class DoctorFullDetailsModel {
   String profile;
   String fees;
   String experience;
+  String workType;
+  String gender;
   List<String> specializations;
   List<String> qualifications;
   DoctorFullDetailsModel({
@@ -17,6 +19,8 @@ class DoctorFullDetailsModel {
     required this.profile,
     required this.fees,
     required this.experience,
+    required this.gender,
+    required this.workType,
     required this.specializations,
     required this.qualifications,
   });
@@ -27,6 +31,8 @@ class DoctorFullDetailsModel {
     String? profile,
     String? fees,
     String? experience,
+    String? workType,
+    String? gender,
     List<String>? specializations,
     List<String>? qualifications,
   }) {
@@ -36,6 +42,8 @@ class DoctorFullDetailsModel {
       profile: profile ?? this.profile,
       fees: fees ?? this.fees,
       experience: experience ?? this.experience,
+      workType: workType ?? this.workType,
+      gender: gender ?? this.gender,
       specializations: specializations ?? this.specializations,
       qualifications: qualifications ?? this.qualifications,
     );
@@ -48,6 +56,8 @@ class DoctorFullDetailsModel {
       'profile': profile,
       'fees': fees,
       'experience': experience,
+      'workType': workType,
+      'gender': gender,
       'specializations': specializations,
       'qualifications': qualifications,
     };
@@ -60,6 +70,8 @@ class DoctorFullDetailsModel {
       profile: map['profile'] as String,
       fees: map['fees'] as String,
       experience: map['experience'] as String,
+      workType: map['workType'] as String,
+      gender: map['gender'] as String,
       specializations: List<String>.from((map['specializations'] as List<dynamic>),),
       qualifications: List<String>.from((map['qualifications'] as List<dynamic>),),
     );
@@ -71,7 +83,7 @@ class DoctorFullDetailsModel {
 
   @override
   String toString() {
-    return 'DoctorFullDetailsModel(name: $name, category: $category, profile: $profile, fees: $fees, experience: $experience, specializations: $specializations, qualifications: $qualifications)';
+    return 'DoctorFullDetailsModel(name: $name, category: $category, profile: $profile, fees: $fees, experience: $experience, gender: $gender, workType: $workType, specializations: $specializations, qualifications: $qualifications)';
   }
 
   @override
@@ -84,6 +96,8 @@ class DoctorFullDetailsModel {
       other.profile == profile &&
       other.fees == fees &&
       other.experience == experience &&
+      other.workType == workType &&
+      other.gender == gender &&
       listEquals(other.specializations, specializations) &&
       listEquals(other.qualifications, qualifications);
   }
@@ -95,6 +109,8 @@ class DoctorFullDetailsModel {
       profile.hashCode ^
       fees.hashCode ^
       experience.hashCode ^
+      workType.hashCode ^
+      gender.hashCode ^
       specializations.hashCode ^
       qualifications.hashCode;
   }

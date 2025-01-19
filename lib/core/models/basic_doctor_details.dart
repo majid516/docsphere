@@ -6,15 +6,18 @@ class BasicDoctorModel {
   String experience;
   String uid;
   String fees;
-  String profile;  // Added profile field
-
+  String profile;  
+  String workType;  
+  String gender;  
   BasicDoctorModel({
     required this.name,
     required this.category,
     required this.experience,
     required this.uid,
     required this.fees,
-    required this.profile,  // Include in constructor
+    required this.profile,
+    required this.workType,
+    required this.gender,
   });
 
   BasicDoctorModel copyWith({
@@ -23,7 +26,9 @@ class BasicDoctorModel {
     String? experience,
     String? uid,
     String? fees,
-    String? profile,  // Include in copyWith
+    String? profile,
+    String? workType,
+    String? gender,
   }) {
     return BasicDoctorModel(
       name: name ?? this.name,
@@ -31,7 +36,9 @@ class BasicDoctorModel {
       experience: experience ?? this.experience,
       uid: uid ?? this.uid,
       fees: fees ?? this.fees,
-      profile: profile ?? this.profile,  // Include in copyWith
+      profile: profile ?? this.profile,
+      workType: workType ?? this.workType,
+      gender: gender ?? this.gender,
     );
   }
 
@@ -42,18 +49,22 @@ class BasicDoctorModel {
       'experience': experience,
       'uid': uid,
       'fees': fees,
-      'profile': profile,  // Include in toMap
+      'profile': profile,
+      'workType': workType,
+      'gender': gender,
     };
   }
 
   factory BasicDoctorModel.fromMap(Map<String, dynamic> map) {
     return BasicDoctorModel(
-      name: map['name'] ?? 'Unknown',
-      category: map['category'] ?? 'Not Provided',
-      experience: map['experience'] ?? 'Not Available',
-      uid: map['uid'] ?? 'No uid',
-      fees: map['fees'] ?? 'Not Set',
-      profile: map['profile'] ?? '',  // Handle null profile with default value
+      name: map['name'] as String,
+      category: map['category'] as String,
+      experience: map['experience'] as String,
+      uid: map['uid'] as String,
+      fees: map['fees'] as String,
+      profile: map['profile'] as String,
+      workType: map['workType'] as String,
+      gender: map['gender'] as String,
     );
   }
 
@@ -63,20 +74,22 @@ class BasicDoctorModel {
 
   @override
   String toString() {
-    return 'BasicDoctorModel(name: $name, category: $category, experience: $experience, uid: $uid, fees: $fees, profile: $profile)';
+    return 'BasicDoctorModel(name: $name, category: $category, experience: $experience, uid: $uid, fees: $fees, profile: $profile, workType: $workType, gender: $gender)';
   }
 
   @override
   bool operator ==(covariant BasicDoctorModel other) {
     if (identical(this, other)) return true;
-
+  
     return 
       other.name == name &&
       other.category == category &&
       other.experience == experience &&
       other.uid == uid &&
       other.fees == fees &&
-      other.profile == profile;  // Include profile in equality check
+      other.profile == profile &&
+      other.workType == workType &&
+      other.gender == gender;
   }
 
   @override
@@ -86,6 +99,8 @@ class BasicDoctorModel {
       experience.hashCode ^
       uid.hashCode ^
       fees.hashCode ^
-      profile.hashCode;  // Include profile in hashCode
+      profile.hashCode ^
+      workType.hashCode ^
+      gender.hashCode;
   }
 }

@@ -25,7 +25,7 @@ void showRecordPicker(BuildContext context) {
                   Navigator.pop(context);
                   context
                       .read<ManageRecordsBloc>()
-                      .add(ManageRecordsEvent.pickFileformDevice());
+                      .add(ManageRecordsEvent.pickFileFormDevice());
                 },
               ),
               CommonDivider(),

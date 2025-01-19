@@ -16,7 +16,8 @@ import '../../../booking_appointment/view/widgets/loading_widget.dart';
 
 class DoctorsListsScreen extends StatelessWidget {
   final String title;
-  const DoctorsListsScreen({super.key, required this.title});
+  final String type;
+  const DoctorsListsScreen({super.key, required this.title, required this.type});
 
   @override
   Widget build(BuildContext context) {
@@ -37,7 +38,8 @@ class DoctorsListsScreen extends StatelessWidget {
         builder: (context, state) {
           return state.maybeWhen(
             basicDetaisLoadedState: (doctors) {
-              context.read<SearchCubitCubit>().initializeDoctors(doctors);
+              final doctorFilteredByType =  doctors.where((doctor) => doctor.workType == 'Both' || doctor.workType == type).toList();
+              context.read<SearchCubitCubit>().initializeDoctors(doctorFilteredByType);
               return Column(
                 children: [
                   Padding(
@@ -92,7 +94,7 @@ class DoctorsListsScreen extends StatelessWidget {
                           itemCount: filteredDoctors.length,
                           itemBuilder: (context, index) {
                             final doctor = filteredDoctors[index];
-                            return DoctorListTile(doctor: doctor);
+                            return DoctorListTile(doctor: doctor,consultationType: type,);
                           },
                           separatorBuilder: (context, index) {
                             return Padding(

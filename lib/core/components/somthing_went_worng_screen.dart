@@ -1,7 +1,9 @@
 
 import 'package:docshpere/core/constants/app_theme/app_theme.dart';
 import 'package:docshpere/core/constants/text_styles/common_styles.dart';
+import 'package:docshpere/routes/routes_name.dart';
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 
 class SomethingWentWrongScreen extends StatelessWidget {
   const SomethingWentWrongScreen({super.key});
@@ -14,7 +16,6 @@ class SomethingWentWrongScreen extends StatelessWidget {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            // Error Image
             SizedBox(
               width: 150,
               height: 250,
@@ -25,7 +26,6 @@ class SomethingWentWrongScreen extends StatelessWidget {
             ),
             const SizedBox(height: 20),
             
-            // Error Title
             Text(
               'OOPS! Something Went Wrong',
               style: CommonStyles.doctorNameStyle.copyWith(
@@ -36,9 +36,7 @@ class SomethingWentWrongScreen extends StatelessWidget {
               textAlign: TextAlign.center,
             ),
             const SizedBox(height: 10),
-            
-            // Error Subtitle
-            Padding(
+                        Padding(
               padding: const EdgeInsets.symmetric(horizontal: 20),
               child: Text(
                 'We couldn’t load the page you’re looking for. Please check your connection or try again later.',
@@ -49,37 +47,10 @@ class SomethingWentWrongScreen extends StatelessWidget {
                 textAlign: TextAlign.center,
               ),
             ),
-            const SizedBox(height: 30),
-            
-            // Retry Button
-            ElevatedButton(
-              onPressed: () {
-                // Logic to retry or reload
-                Navigator.pop(context);
-              },
-              style: ElevatedButton.styleFrom(
-                backgroundColor: MyColors.primaryColor,
-                padding: const EdgeInsets.symmetric(horizontal: 40, vertical: 15),
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(8),
-                ),
-              ),
-              child: const Text(
-                'Retry',
-                style: TextStyle(
-                  fontSize: 16,
-                  fontWeight: FontWeight.bold,
-                  color: Colors.white,
-                ),
-              ),
-            ),
-            const SizedBox(height: 20),
-
-            // Back to Home Button
+            const SizedBox(height: 30),            
             TextButton(
               onPressed: () {
-                // Navigate to home screen
-              //  Navigator.pushNamed(context, MyRoutes.home);
+                context.push( MyRoutes.home);
               },
               child: Text(
                 'Go Back to Home',

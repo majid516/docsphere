@@ -1,66 +1,124 @@
+import 'dart:developer';
+
 import 'package:docshpere/core/components/custom_app_bar.dart';
+import 'package:docshpere/core/components/general_error_screen.dart';
+import 'package:docshpere/core/components/somthing_went_worng_screen.dart';
 import 'package:docshpere/core/constants/app_theme/app_theme.dart';
+import 'package:docshpere/core/constants/text_styles/authentication_syles.dart';
 import 'package:docshpere/core/utils/screen_size/screen_size.dart';
-import 'package:docshpere/routes/routes_name.dart';
+import 'package:docshpere/features/appointment/view/widgets/under_confirmation_list_tile.dart';
+import 'package:docshpere/features/appointment/view/widgets/upcoming_session_tile.dart';
+import 'package:docshpere/features/appointment/view_model/bloc/upcoming_session_bloc.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
+import 'package:intl/intl.dart';
 
 class UpcomingSessionsScreen extends StatelessWidget {
-  const UpcomingSessionsScreen({super.key});
+  final String userName;
+  const UpcomingSessionsScreen({super.key, required this.userName});
 
   @override
   Widget build(BuildContext context) {
+    context
+        .read<UpcomingSessionBloc>()
+        .add(UpcomingSessionEvent.fetchAllUpcomingSessions());
     return Scaffold(
       appBar: PreferredSize(
           preferredSize: Size(ScreenSize.width, 100),
           child: CustomAppBar(
-            action: () => context.go(MyRoutes.home),
-            title: 'UpComing Sessions',
+            action: () => context.pop(),
+            title: 'Upcoming Sessions',
           )),
       backgroundColor: MyColors.whiteColor,
       body: Padding(
-        padding: const EdgeInsets.symmetric(vertical: 10.0),
-        child: ListView.builder(
-          itemBuilder: (context, index) => Padding(
-            padding: const EdgeInsets.symmetric(vertical: 3,horizontal: 8),
-            child: Container(
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(8),
-                color: MyColors.lightColor.withValues(alpha: 0.25)
-              ),
-              child: ListTile(
-                onTap:() => context.go(MyRoutes.appointmentDetailsScreen),
-                leading: Container(
-                  width: 60,
-                  height: 60,
-                  decoration: BoxDecoration(
-                    boxShadow: [
-                      BoxShadow(
-                        color: MyColors.lightColor,
-                        spreadRadius: 2,
-                        blurRadius: 1
-                      )
-                    ],
-                      shape: BoxShape.circle,
-                      image: DecorationImage(
-                    image: NetworkImage(
-                      'https://familydoctor.org/wp-content/uploads/2018/02/41808433_l.jpg',
+        padding: const EdgeInsets.symmetric(vertical: 5.0),
+        child: BlocBuilder<UpcomingSessionBloc, UpcomingSessionState>(
+          builder: (context, state) {
+            return state.maybeWhen(
+              bookingDataFetchingLoaded: (bookings) {
+                final activeList = bookings.where((element) {
+                  return element.status == 'Active';
+                }).toList();
+                final DateFormat dateFormat = DateFormat("yyyy-MM-dd hh:mm a");
+
+                activeList.sort((a, b) {
+                  return dateFormat
+                      .parse("${a.slotDate} ${a.slotTime}")
+                      .compareTo(
+                          dateFormat.parse("${b.slotDate} ${b.slotTime}"));
+                });
+                final underComfirmationList = bookings.where((element) {
+                  return element.status == 'confirmation';
+                }).toList();
+                underComfirmationList.sort((a, b) {
+                  return dateFormat
+                      .parse("${a.slotDate} ${a.slotTime}")
+                      .compareTo(
+                          dateFormat.parse("${b.slotDate} ${b.slotTime}"));
+                });
+                log(underComfirmationList.length.toString());
+                if (activeList.isEmpty && underComfirmationList.isEmpty) {
+                  return Center(
+                    child: Text(
+                      'No Sessions',
+                      style: AuthenticationSyles.hintTextStyle,
                     ),
-                    fit: BoxFit.cover
-                  )),
-                ),
-                title: Text('For Physical Consultaion',
-                style: TextStyle(fontSize: 19,color: MyColors.appGreenColor),
-                ),
-                subtitle: Text('Dr Lauren Hump', style: TextStyle(fontSize: 18,fontWeight: FontWeight.w700),),
-              ),
-            ),
-          ),
-          itemCount: 5,
+                  );
+                }
+                return Column(
+                  children: [
+                    Padding(
+                      padding: const EdgeInsets.symmetric(vertical: 2, horizontal:  8.0),
+                      child: ListView.builder(
+                        shrinkWrap: true,
+                        padding: EdgeInsets.zero,
+                        itemCount: underComfirmationList.length,
+                        itemBuilder: (context, index) {
+                          final booking = underComfirmationList[index];
+                          return UnderConfirmationListTile(session: booking);
+                        },
+                      ),
+                    ),
+                    
+                    Padding(
+                      padding: const EdgeInsets.symmetric(vertical: 2, horizontal:  8.0),
+                      child: ListView.builder(
+                        shrinkWrap: true,
+                        padding: EdgeInsets.zero,
+                        itemCount: activeList.length,
+                        itemBuilder: (context, index) {
+                          final booking = activeList[index];
+                          return SessionTile(session: booking);
+                        },
+                      ),
+                    ),
+                  ],
+                );
+              },
+              loadingState: () {
+                return ListView.builder(
+                  itemBuilder: (context, index) => Padding(
+                    padding: EdgeInsets.all(10),
+                    child: Container(
+                      width: ScreenSize.width,
+                      height: 120,
+                      color: MyColors.lightColor.withValues(alpha: 0.3),
+                    ),
+                  ),
+                  itemCount: 5,
+                );
+              },
+              errorState: (message) {
+                return GeneralErrorScreen();
+              },
+              orElse: () {
+                return SomethingWentWrongScreen();
+              },
+            );
+          },
         ),
       ),
     );
   }
 }
-
-

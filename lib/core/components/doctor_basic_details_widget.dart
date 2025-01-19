@@ -1,5 +1,4 @@
 import 'dart:convert';
-
 import 'package:docshpere/core/constants/app_theme/app_theme.dart';
 import 'package:docshpere/core/constants/text_styles/common_styles.dart';
 import 'package:docshpere/core/models/basic_doctor_details.dart';
@@ -46,7 +45,7 @@ class DoctorBasicDetailsCard extends StatelessWidget {
                     style: CommonStyles.doctorNameStyle,
                   ),
                   Text(
-                    doctor.category,
+                    doctor.gender,
                     style: CommonStyles.doctorDetailsStyle,
                   ),
                   Text(

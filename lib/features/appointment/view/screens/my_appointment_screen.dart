@@ -3,9 +3,11 @@ import 'package:docshpere/core/constants/app_theme/app_theme.dart';
 import 'package:docshpere/core/constants/spaces/space.dart';
 import 'package:docshpere/core/utils/screen_size/screen_size.dart';
 import 'package:docshpere/features/appointment/view/widgets/cacelled_appointments.dart';
-import 'package:docshpere/features/appointment/view/widgets/upcoming_appointment.dart';
+import 'package:docshpere/features/appointment/view/widgets/pending_appointment.dart';
+import 'package:docshpere/features/appointment/view_model/bloc/upcoming_session_bloc.dart';
 import 'package:docshpere/routes/routes_name.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 
 class MyAppointmentScreen extends StatelessWidget {
@@ -13,6 +15,7 @@ class MyAppointmentScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    context.read<UpcomingSessionBloc>().add(UpcomingSessionEvent.fetchAllUpcomingSessions());
     return Scaffold(
       appBar: PreferredSize(
           preferredSize: Size(ScreenSize.width, 100),
@@ -47,10 +50,10 @@ class MyAppointmentScreen extends StatelessWidget {
                 ),
                 tabs: [
                   Tab(
-                    text: 'upcoming',
+                    text: 'Pending',
                   ),
                   Tab(
-                    text: 'cancelled',
+                    text: 'Cancelled',
                   )
                 ],
               ),
@@ -59,7 +62,7 @@ class MyAppointmentScreen extends StatelessWidget {
             Expanded(
               child: TabBarView(
                 children: [
-                  UpcomingAppointments(),
+                  PendingAppointment(),
                   CancelledAppointments(),
                 ],
               ),

@@ -12,8 +12,9 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 
 class CategoryListWidget extends StatelessWidget {
+  final String type;
   const CategoryListWidget({
-    super.key,
+    super.key, required this.type,
   });
 
   @override
@@ -101,7 +102,7 @@ class CategoryListWidget extends StatelessWidget {
                               ),
                               onTap: () {
                                 context.push(MyRoutes.doctorsListScreen,
-                                    extra: filteredCategories[index].title);
+                                    extra: {'title' :filteredCategories[index].title, 'type': type});
                               },
                             );
                           },

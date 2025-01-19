@@ -6,7 +6,6 @@ class MyRoutes {
   static const categorySearchScren = '/categorySearchScren';
   static const doctorsListScreen = '/doctorsListScreen';
   static const doctorDetailsScreen = '/doctorDetailsScreen';
-  static const myDoctorsScreen ='/myDoctorsScreen';
   static const myAppointmentScreen ='/myAppointmentScreen';
   static const upcomingSessions = '/upcomingSessions';
   static const appointmentDetailsScreen = '/appointmentDetailsScreen';
@@ -16,5 +15,13 @@ class MyRoutes {
   static const locationScreen = '/locationScreen';
   static const medicalRecordsScreen = '/medicalRecordsScreen';
   static const medicalRecordPerview = '/medicalRecordPerview';
-  static const chatPage = '/chatPage';
+  static const chatingScreen = '/chatingScreen';
+  static const myDoctorScreen = '/myDoctorScreen';
+  static const paymentScreen = '/paymentScreen';
+  static const myChatsScreen = '/myChatsScreen';
+  static const bookingDetailsScreen = '/bookingDetailsScreen';
+  static const notificationScreen = '/notificationScreen';
+  static const previousConsultationsPage = '/previousConsultationsPage';
+  static const consultationDetailsScreen = '/consultationDetailsScreen';
+  static const paymentHistoryScreen = '/paymentHistoryScreen';
 }

@@ -10,9 +10,10 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
 class DoctorListTile extends StatelessWidget {
+  final String consultationType;
   final BasicDoctorModel doctor;
   const DoctorListTile({
-    super.key, required this.doctor,
+    super.key, required this.doctor, required this.consultationType,
   });
 
   @override
@@ -37,7 +38,7 @@ class DoctorListTile extends StatelessWidget {
             Text('consultation fee',style: CommonStyles.commonButtonBlackTextStyle,),
             Spacer(),
             ViewDoctorProfileButton(action: (){
-              context.push(MyRoutes.doctorDetailsScreen, extra: doctor.uid);
+              context.push(MyRoutes.doctorDetailsScreen, extra:{'uid': doctor.uid, 'consultationType': consultationType});
             },)
               ],
             ),

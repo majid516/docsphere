@@ -16,44 +16,49 @@ final _privateConstructorUsedError = UnsupportedError(
 
 /// @nodoc
 mixin _$AppointmentBookingEvent {
-  String get uid => throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function(String uid) fetchAllTimeSlots,
+    required TResult Function(BookingModel booking) confirmSlotBooking,
+    required TResult Function() fetchAllBookings,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function(String uid)? fetchAllTimeSlots,
+    TResult? Function(BookingModel booking)? confirmSlotBooking,
+    TResult? Function()? fetchAllBookings,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(String uid)? fetchAllTimeSlots,
+    TResult Function(BookingModel booking)? confirmSlotBooking,
+    TResult Function()? fetchAllBookings,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(_FetchAllTimeSlots value) fetchAllTimeSlots,
+    required TResult Function(_ConfirmSlotBooking value) confirmSlotBooking,
+    required TResult Function(_FetchAllBookings value) fetchAllBookings,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_FetchAllTimeSlots value)? fetchAllTimeSlots,
+    TResult? Function(_ConfirmSlotBooking value)? confirmSlotBooking,
+    TResult? Function(_FetchAllBookings value)? fetchAllBookings,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_FetchAllTimeSlots value)? fetchAllTimeSlots,
+    TResult Function(_ConfirmSlotBooking value)? confirmSlotBooking,
+    TResult Function(_FetchAllBookings value)? fetchAllBookings,
     required TResult orElse(),
   }) =>
-      throw _privateConstructorUsedError;
-
-  /// Create a copy of AppointmentBookingEvent
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
-  $AppointmentBookingEventCopyWith<AppointmentBookingEvent> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
@@ -62,8 +67,6 @@ abstract class $AppointmentBookingEventCopyWith<$Res> {
   factory $AppointmentBookingEventCopyWith(AppointmentBookingEvent value,
           $Res Function(AppointmentBookingEvent) then) =
       _$AppointmentBookingEventCopyWithImpl<$Res, AppointmentBookingEvent>;
-  @useResult
-  $Res call({String uid});
 }
 
 /// @nodoc
@@ -79,27 +82,13 @@ class _$AppointmentBookingEventCopyWithImpl<$Res,
 
   /// Create a copy of AppointmentBookingEvent
   /// with the given fields replaced by the non-null parameter values.
-  @pragma('vm:prefer-inline')
-  @override
-  $Res call({
-    Object? uid = null,
-  }) {
-    return _then(_value.copyWith(
-      uid: null == uid
-          ? _value.uid
-          : uid // ignore: cast_nullable_to_non_nullable
-              as String,
-    ) as $Val);
-  }
 }
 
 /// @nodoc
-abstract class _$$FetchAllTimeSlotsImplCopyWith<$Res>
-    implements $AppointmentBookingEventCopyWith<$Res> {
+abstract class _$$FetchAllTimeSlotsImplCopyWith<$Res> {
   factory _$$FetchAllTimeSlotsImplCopyWith(_$FetchAllTimeSlotsImpl value,
           $Res Function(_$FetchAllTimeSlotsImpl) then) =
       __$$FetchAllTimeSlotsImplCopyWithImpl<$Res>;
-  @override
   @useResult
   $Res call({String uid});
 }
@@ -165,6 +154,8 @@ class _$FetchAllTimeSlotsImpl implements _FetchAllTimeSlots {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function(String uid) fetchAllTimeSlots,
+    required TResult Function(BookingModel booking) confirmSlotBooking,
+    required TResult Function() fetchAllBookings,
   }) {
     return fetchAllTimeSlots(uid);
   }
@@ -173,6 +164,8 @@ class _$FetchAllTimeSlotsImpl implements _FetchAllTimeSlots {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function(String uid)? fetchAllTimeSlots,
+    TResult? Function(BookingModel booking)? confirmSlotBooking,
+    TResult? Function()? fetchAllBookings,
   }) {
     return fetchAllTimeSlots?.call(uid);
   }
@@ -181,6 +174,8 @@ class _$FetchAllTimeSlotsImpl implements _FetchAllTimeSlots {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(String uid)? fetchAllTimeSlots,
+    TResult Function(BookingModel booking)? confirmSlotBooking,
+    TResult Function()? fetchAllBookings,
     required TResult orElse(),
   }) {
     if (fetchAllTimeSlots != null) {
@@ -193,6 +188,8 @@ class _$FetchAllTimeSlotsImpl implements _FetchAllTimeSlots {
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(_FetchAllTimeSlots value) fetchAllTimeSlots,
+    required TResult Function(_ConfirmSlotBooking value) confirmSlotBooking,
+    required TResult Function(_FetchAllBookings value) fetchAllBookings,
   }) {
     return fetchAllTimeSlots(this);
   }
@@ -201,6 +198,8 @@ class _$FetchAllTimeSlotsImpl implements _FetchAllTimeSlots {
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_FetchAllTimeSlots value)? fetchAllTimeSlots,
+    TResult? Function(_ConfirmSlotBooking value)? confirmSlotBooking,
+    TResult? Function(_FetchAllBookings value)? fetchAllBookings,
   }) {
     return fetchAllTimeSlots?.call(this);
   }
@@ -209,6 +208,8 @@ class _$FetchAllTimeSlotsImpl implements _FetchAllTimeSlots {
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_FetchAllTimeSlots value)? fetchAllTimeSlots,
+    TResult Function(_ConfirmSlotBooking value)? confirmSlotBooking,
+    TResult Function(_FetchAllBookings value)? fetchAllBookings,
     required TResult orElse(),
   }) {
     if (fetchAllTimeSlots != null) {
@@ -221,15 +222,273 @@ class _$FetchAllTimeSlotsImpl implements _FetchAllTimeSlots {
 abstract class _FetchAllTimeSlots implements AppointmentBookingEvent {
   const factory _FetchAllTimeSlots(final String uid) = _$FetchAllTimeSlotsImpl;
 
-  @override
   String get uid;
 
   /// Create a copy of AppointmentBookingEvent
   /// with the given fields replaced by the non-null parameter values.
-  @override
   @JsonKey(includeFromJson: false, includeToJson: false)
   _$$FetchAllTimeSlotsImplCopyWith<_$FetchAllTimeSlotsImpl> get copyWith =>
       throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class _$$ConfirmSlotBookingImplCopyWith<$Res> {
+  factory _$$ConfirmSlotBookingImplCopyWith(_$ConfirmSlotBookingImpl value,
+          $Res Function(_$ConfirmSlotBookingImpl) then) =
+      __$$ConfirmSlotBookingImplCopyWithImpl<$Res>;
+  @useResult
+  $Res call({BookingModel booking});
+}
+
+/// @nodoc
+class __$$ConfirmSlotBookingImplCopyWithImpl<$Res>
+    extends _$AppointmentBookingEventCopyWithImpl<$Res,
+        _$ConfirmSlotBookingImpl>
+    implements _$$ConfirmSlotBookingImplCopyWith<$Res> {
+  __$$ConfirmSlotBookingImplCopyWithImpl(_$ConfirmSlotBookingImpl _value,
+      $Res Function(_$ConfirmSlotBookingImpl) _then)
+      : super(_value, _then);
+
+  /// Create a copy of AppointmentBookingEvent
+  /// with the given fields replaced by the non-null parameter values.
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? booking = null,
+  }) {
+    return _then(_$ConfirmSlotBookingImpl(
+      null == booking
+          ? _value.booking
+          : booking // ignore: cast_nullable_to_non_nullable
+              as BookingModel,
+    ));
+  }
+}
+
+/// @nodoc
+
+class _$ConfirmSlotBookingImpl implements _ConfirmSlotBooking {
+  const _$ConfirmSlotBookingImpl(this.booking);
+
+  @override
+  final BookingModel booking;
+
+  @override
+  String toString() {
+    return 'AppointmentBookingEvent.confirmSlotBooking(booking: $booking)';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$ConfirmSlotBookingImpl &&
+            (identical(other.booking, booking) || other.booking == booking));
+  }
+
+  @override
+  int get hashCode => Object.hash(runtimeType, booking);
+
+  /// Create a copy of AppointmentBookingEvent
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$ConfirmSlotBookingImplCopyWith<_$ConfirmSlotBookingImpl> get copyWith =>
+      __$$ConfirmSlotBookingImplCopyWithImpl<_$ConfirmSlotBookingImpl>(
+          this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function(String uid) fetchAllTimeSlots,
+    required TResult Function(BookingModel booking) confirmSlotBooking,
+    required TResult Function() fetchAllBookings,
+  }) {
+    return confirmSlotBooking(booking);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function(String uid)? fetchAllTimeSlots,
+    TResult? Function(BookingModel booking)? confirmSlotBooking,
+    TResult? Function()? fetchAllBookings,
+  }) {
+    return confirmSlotBooking?.call(booking);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function(String uid)? fetchAllTimeSlots,
+    TResult Function(BookingModel booking)? confirmSlotBooking,
+    TResult Function()? fetchAllBookings,
+    required TResult orElse(),
+  }) {
+    if (confirmSlotBooking != null) {
+      return confirmSlotBooking(booking);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_FetchAllTimeSlots value) fetchAllTimeSlots,
+    required TResult Function(_ConfirmSlotBooking value) confirmSlotBooking,
+    required TResult Function(_FetchAllBookings value) fetchAllBookings,
+  }) {
+    return confirmSlotBooking(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_FetchAllTimeSlots value)? fetchAllTimeSlots,
+    TResult? Function(_ConfirmSlotBooking value)? confirmSlotBooking,
+    TResult? Function(_FetchAllBookings value)? fetchAllBookings,
+  }) {
+    return confirmSlotBooking?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_FetchAllTimeSlots value)? fetchAllTimeSlots,
+    TResult Function(_ConfirmSlotBooking value)? confirmSlotBooking,
+    TResult Function(_FetchAllBookings value)? fetchAllBookings,
+    required TResult orElse(),
+  }) {
+    if (confirmSlotBooking != null) {
+      return confirmSlotBooking(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _ConfirmSlotBooking implements AppointmentBookingEvent {
+  const factory _ConfirmSlotBooking(final BookingModel booking) =
+      _$ConfirmSlotBookingImpl;
+
+  BookingModel get booking;
+
+  /// Create a copy of AppointmentBookingEvent
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  _$$ConfirmSlotBookingImplCopyWith<_$ConfirmSlotBookingImpl> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class _$$FetchAllBookingsImplCopyWith<$Res> {
+  factory _$$FetchAllBookingsImplCopyWith(_$FetchAllBookingsImpl value,
+          $Res Function(_$FetchAllBookingsImpl) then) =
+      __$$FetchAllBookingsImplCopyWithImpl<$Res>;
+}
+
+/// @nodoc
+class __$$FetchAllBookingsImplCopyWithImpl<$Res>
+    extends _$AppointmentBookingEventCopyWithImpl<$Res, _$FetchAllBookingsImpl>
+    implements _$$FetchAllBookingsImplCopyWith<$Res> {
+  __$$FetchAllBookingsImplCopyWithImpl(_$FetchAllBookingsImpl _value,
+      $Res Function(_$FetchAllBookingsImpl) _then)
+      : super(_value, _then);
+
+  /// Create a copy of AppointmentBookingEvent
+  /// with the given fields replaced by the non-null parameter values.
+}
+
+/// @nodoc
+
+class _$FetchAllBookingsImpl implements _FetchAllBookings {
+  const _$FetchAllBookingsImpl();
+
+  @override
+  String toString() {
+    return 'AppointmentBookingEvent.fetchAllBookings()';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType && other is _$FetchAllBookingsImpl);
+  }
+
+  @override
+  int get hashCode => runtimeType.hashCode;
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function(String uid) fetchAllTimeSlots,
+    required TResult Function(BookingModel booking) confirmSlotBooking,
+    required TResult Function() fetchAllBookings,
+  }) {
+    return fetchAllBookings();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function(String uid)? fetchAllTimeSlots,
+    TResult? Function(BookingModel booking)? confirmSlotBooking,
+    TResult? Function()? fetchAllBookings,
+  }) {
+    return fetchAllBookings?.call();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function(String uid)? fetchAllTimeSlots,
+    TResult Function(BookingModel booking)? confirmSlotBooking,
+    TResult Function()? fetchAllBookings,
+    required TResult orElse(),
+  }) {
+    if (fetchAllBookings != null) {
+      return fetchAllBookings();
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_FetchAllTimeSlots value) fetchAllTimeSlots,
+    required TResult Function(_ConfirmSlotBooking value) confirmSlotBooking,
+    required TResult Function(_FetchAllBookings value) fetchAllBookings,
+  }) {
+    return fetchAllBookings(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_FetchAllTimeSlots value)? fetchAllTimeSlots,
+    TResult? Function(_ConfirmSlotBooking value)? confirmSlotBooking,
+    TResult? Function(_FetchAllBookings value)? fetchAllBookings,
+  }) {
+    return fetchAllBookings?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_FetchAllTimeSlots value)? fetchAllTimeSlots,
+    TResult Function(_ConfirmSlotBooking value)? confirmSlotBooking,
+    TResult Function(_FetchAllBookings value)? fetchAllBookings,
+    required TResult orElse(),
+  }) {
+    if (fetchAllBookings != null) {
+      return fetchAllBookings(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _FetchAllBookings implements AppointmentBookingEvent {
+  const factory _FetchAllBookings() = _$FetchAllBookingsImpl;
 }
 
 /// @nodoc
@@ -238,7 +497,10 @@ mixin _$AppointmentBookingState {
   TResult when<TResult extends Object?>({
     required TResult Function() initialState,
     required TResult Function() loadingState,
+    required TResult Function() bookingConfirmationLoaded,
     required TResult Function(List<SlotModel> slots) loadedState,
+    required TResult Function(List<BookingModel> booking)
+        bookingDataFetchingLoaded,
     required TResult Function(String message) errorState,
   }) =>
       throw _privateConstructorUsedError;
@@ -246,7 +508,9 @@ mixin _$AppointmentBookingState {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initialState,
     TResult? Function()? loadingState,
+    TResult? Function()? bookingConfirmationLoaded,
     TResult? Function(List<SlotModel> slots)? loadedState,
+    TResult? Function(List<BookingModel> booking)? bookingDataFetchingLoaded,
     TResult? Function(String message)? errorState,
   }) =>
       throw _privateConstructorUsedError;
@@ -254,7 +518,9 @@ mixin _$AppointmentBookingState {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initialState,
     TResult Function()? loadingState,
+    TResult Function()? bookingConfirmationLoaded,
     TResult Function(List<SlotModel> slots)? loadedState,
+    TResult Function(List<BookingModel> booking)? bookingDataFetchingLoaded,
     TResult Function(String message)? errorState,
     required TResult orElse(),
   }) =>
@@ -263,7 +529,11 @@ mixin _$AppointmentBookingState {
   TResult map<TResult extends Object?>({
     required TResult Function(_InitialState value) initialState,
     required TResult Function(_LoadingState value) loadingState,
+    required TResult Function(_BookingConfirmationLoaded value)
+        bookingConfirmationLoaded,
     required TResult Function(_LoadedState value) loadedState,
+    required TResult Function(_BookingDataFetchingLoaded value)
+        bookingDataFetchingLoaded,
     required TResult Function(_ErrorState value) errorState,
   }) =>
       throw _privateConstructorUsedError;
@@ -271,7 +541,11 @@ mixin _$AppointmentBookingState {
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_InitialState value)? initialState,
     TResult? Function(_LoadingState value)? loadingState,
+    TResult? Function(_BookingConfirmationLoaded value)?
+        bookingConfirmationLoaded,
     TResult? Function(_LoadedState value)? loadedState,
+    TResult? Function(_BookingDataFetchingLoaded value)?
+        bookingDataFetchingLoaded,
     TResult? Function(_ErrorState value)? errorState,
   }) =>
       throw _privateConstructorUsedError;
@@ -279,7 +553,11 @@ mixin _$AppointmentBookingState {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_InitialState value)? initialState,
     TResult Function(_LoadingState value)? loadingState,
+    TResult Function(_BookingConfirmationLoaded value)?
+        bookingConfirmationLoaded,
     TResult Function(_LoadedState value)? loadedState,
+    TResult Function(_BookingDataFetchingLoaded value)?
+        bookingDataFetchingLoaded,
     TResult Function(_ErrorState value)? errorState,
     required TResult orElse(),
   }) =>
@@ -351,7 +629,10 @@ class _$InitialStateImpl implements _InitialState {
   TResult when<TResult extends Object?>({
     required TResult Function() initialState,
     required TResult Function() loadingState,
+    required TResult Function() bookingConfirmationLoaded,
     required TResult Function(List<SlotModel> slots) loadedState,
+    required TResult Function(List<BookingModel> booking)
+        bookingDataFetchingLoaded,
     required TResult Function(String message) errorState,
   }) {
     return initialState();
@@ -362,7 +643,9 @@ class _$InitialStateImpl implements _InitialState {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initialState,
     TResult? Function()? loadingState,
+    TResult? Function()? bookingConfirmationLoaded,
     TResult? Function(List<SlotModel> slots)? loadedState,
+    TResult? Function(List<BookingModel> booking)? bookingDataFetchingLoaded,
     TResult? Function(String message)? errorState,
   }) {
     return initialState?.call();
@@ -373,7 +656,9 @@ class _$InitialStateImpl implements _InitialState {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initialState,
     TResult Function()? loadingState,
+    TResult Function()? bookingConfirmationLoaded,
     TResult Function(List<SlotModel> slots)? loadedState,
+    TResult Function(List<BookingModel> booking)? bookingDataFetchingLoaded,
     TResult Function(String message)? errorState,
     required TResult orElse(),
   }) {
@@ -388,7 +673,11 @@ class _$InitialStateImpl implements _InitialState {
   TResult map<TResult extends Object?>({
     required TResult Function(_InitialState value) initialState,
     required TResult Function(_LoadingState value) loadingState,
+    required TResult Function(_BookingConfirmationLoaded value)
+        bookingConfirmationLoaded,
     required TResult Function(_LoadedState value) loadedState,
+    required TResult Function(_BookingDataFetchingLoaded value)
+        bookingDataFetchingLoaded,
     required TResult Function(_ErrorState value) errorState,
   }) {
     return initialState(this);
@@ -399,7 +688,11 @@ class _$InitialStateImpl implements _InitialState {
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_InitialState value)? initialState,
     TResult? Function(_LoadingState value)? loadingState,
+    TResult? Function(_BookingConfirmationLoaded value)?
+        bookingConfirmationLoaded,
     TResult? Function(_LoadedState value)? loadedState,
+    TResult? Function(_BookingDataFetchingLoaded value)?
+        bookingDataFetchingLoaded,
     TResult? Function(_ErrorState value)? errorState,
   }) {
     return initialState?.call(this);
@@ -410,7 +703,11 @@ class _$InitialStateImpl implements _InitialState {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_InitialState value)? initialState,
     TResult Function(_LoadingState value)? loadingState,
+    TResult Function(_BookingConfirmationLoaded value)?
+        bookingConfirmationLoaded,
     TResult Function(_LoadedState value)? loadedState,
+    TResult Function(_BookingDataFetchingLoaded value)?
+        bookingDataFetchingLoaded,
     TResult Function(_ErrorState value)? errorState,
     required TResult orElse(),
   }) {
@@ -468,7 +765,10 @@ class _$LoadingStateImpl implements _LoadingState {
   TResult when<TResult extends Object?>({
     required TResult Function() initialState,
     required TResult Function() loadingState,
+    required TResult Function() bookingConfirmationLoaded,
     required TResult Function(List<SlotModel> slots) loadedState,
+    required TResult Function(List<BookingModel> booking)
+        bookingDataFetchingLoaded,
     required TResult Function(String message) errorState,
   }) {
     return loadingState();
@@ -479,7 +779,9 @@ class _$LoadingStateImpl implements _LoadingState {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initialState,
     TResult? Function()? loadingState,
+    TResult? Function()? bookingConfirmationLoaded,
     TResult? Function(List<SlotModel> slots)? loadedState,
+    TResult? Function(List<BookingModel> booking)? bookingDataFetchingLoaded,
     TResult? Function(String message)? errorState,
   }) {
     return loadingState?.call();
@@ -490,7 +792,9 @@ class _$LoadingStateImpl implements _LoadingState {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initialState,
     TResult Function()? loadingState,
+    TResult Function()? bookingConfirmationLoaded,
     TResult Function(List<SlotModel> slots)? loadedState,
+    TResult Function(List<BookingModel> booking)? bookingDataFetchingLoaded,
     TResult Function(String message)? errorState,
     required TResult orElse(),
   }) {
@@ -505,7 +809,11 @@ class _$LoadingStateImpl implements _LoadingState {
   TResult map<TResult extends Object?>({
     required TResult Function(_InitialState value) initialState,
     required TResult Function(_LoadingState value) loadingState,
+    required TResult Function(_BookingConfirmationLoaded value)
+        bookingConfirmationLoaded,
     required TResult Function(_LoadedState value) loadedState,
+    required TResult Function(_BookingDataFetchingLoaded value)
+        bookingDataFetchingLoaded,
     required TResult Function(_ErrorState value) errorState,
   }) {
     return loadingState(this);
@@ -516,7 +824,11 @@ class _$LoadingStateImpl implements _LoadingState {
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_InitialState value)? initialState,
     TResult? Function(_LoadingState value)? loadingState,
+    TResult? Function(_BookingConfirmationLoaded value)?
+        bookingConfirmationLoaded,
     TResult? Function(_LoadedState value)? loadedState,
+    TResult? Function(_BookingDataFetchingLoaded value)?
+        bookingDataFetchingLoaded,
     TResult? Function(_ErrorState value)? errorState,
   }) {
     return loadingState?.call(this);
@@ -527,7 +839,11 @@ class _$LoadingStateImpl implements _LoadingState {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_InitialState value)? initialState,
     TResult Function(_LoadingState value)? loadingState,
+    TResult Function(_BookingConfirmationLoaded value)?
+        bookingConfirmationLoaded,
     TResult Function(_LoadedState value)? loadedState,
+    TResult Function(_BookingDataFetchingLoaded value)?
+        bookingDataFetchingLoaded,
     TResult Function(_ErrorState value)? errorState,
     required TResult orElse(),
   }) {
@@ -540,6 +856,146 @@ class _$LoadingStateImpl implements _LoadingState {
 
 abstract class _LoadingState implements AppointmentBookingState {
   const factory _LoadingState() = _$LoadingStateImpl;
+}
+
+/// @nodoc
+abstract class _$$BookingConfirmationLoadedImplCopyWith<$Res> {
+  factory _$$BookingConfirmationLoadedImplCopyWith(
+          _$BookingConfirmationLoadedImpl value,
+          $Res Function(_$BookingConfirmationLoadedImpl) then) =
+      __$$BookingConfirmationLoadedImplCopyWithImpl<$Res>;
+}
+
+/// @nodoc
+class __$$BookingConfirmationLoadedImplCopyWithImpl<$Res>
+    extends _$AppointmentBookingStateCopyWithImpl<$Res,
+        _$BookingConfirmationLoadedImpl>
+    implements _$$BookingConfirmationLoadedImplCopyWith<$Res> {
+  __$$BookingConfirmationLoadedImplCopyWithImpl(
+      _$BookingConfirmationLoadedImpl _value,
+      $Res Function(_$BookingConfirmationLoadedImpl) _then)
+      : super(_value, _then);
+
+  /// Create a copy of AppointmentBookingState
+  /// with the given fields replaced by the non-null parameter values.
+}
+
+/// @nodoc
+
+class _$BookingConfirmationLoadedImpl implements _BookingConfirmationLoaded {
+  const _$BookingConfirmationLoadedImpl();
+
+  @override
+  String toString() {
+    return 'AppointmentBookingState.bookingConfirmationLoaded()';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$BookingConfirmationLoadedImpl);
+  }
+
+  @override
+  int get hashCode => runtimeType.hashCode;
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() initialState,
+    required TResult Function() loadingState,
+    required TResult Function() bookingConfirmationLoaded,
+    required TResult Function(List<SlotModel> slots) loadedState,
+    required TResult Function(List<BookingModel> booking)
+        bookingDataFetchingLoaded,
+    required TResult Function(String message) errorState,
+  }) {
+    return bookingConfirmationLoaded();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function()? initialState,
+    TResult? Function()? loadingState,
+    TResult? Function()? bookingConfirmationLoaded,
+    TResult? Function(List<SlotModel> slots)? loadedState,
+    TResult? Function(List<BookingModel> booking)? bookingDataFetchingLoaded,
+    TResult? Function(String message)? errorState,
+  }) {
+    return bookingConfirmationLoaded?.call();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? initialState,
+    TResult Function()? loadingState,
+    TResult Function()? bookingConfirmationLoaded,
+    TResult Function(List<SlotModel> slots)? loadedState,
+    TResult Function(List<BookingModel> booking)? bookingDataFetchingLoaded,
+    TResult Function(String message)? errorState,
+    required TResult orElse(),
+  }) {
+    if (bookingConfirmationLoaded != null) {
+      return bookingConfirmationLoaded();
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_InitialState value) initialState,
+    required TResult Function(_LoadingState value) loadingState,
+    required TResult Function(_BookingConfirmationLoaded value)
+        bookingConfirmationLoaded,
+    required TResult Function(_LoadedState value) loadedState,
+    required TResult Function(_BookingDataFetchingLoaded value)
+        bookingDataFetchingLoaded,
+    required TResult Function(_ErrorState value) errorState,
+  }) {
+    return bookingConfirmationLoaded(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_InitialState value)? initialState,
+    TResult? Function(_LoadingState value)? loadingState,
+    TResult? Function(_BookingConfirmationLoaded value)?
+        bookingConfirmationLoaded,
+    TResult? Function(_LoadedState value)? loadedState,
+    TResult? Function(_BookingDataFetchingLoaded value)?
+        bookingDataFetchingLoaded,
+    TResult? Function(_ErrorState value)? errorState,
+  }) {
+    return bookingConfirmationLoaded?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_InitialState value)? initialState,
+    TResult Function(_LoadingState value)? loadingState,
+    TResult Function(_BookingConfirmationLoaded value)?
+        bookingConfirmationLoaded,
+    TResult Function(_LoadedState value)? loadedState,
+    TResult Function(_BookingDataFetchingLoaded value)?
+        bookingDataFetchingLoaded,
+    TResult Function(_ErrorState value)? errorState,
+    required TResult orElse(),
+  }) {
+    if (bookingConfirmationLoaded != null) {
+      return bookingConfirmationLoaded(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _BookingConfirmationLoaded implements AppointmentBookingState {
+  const factory _BookingConfirmationLoaded() = _$BookingConfirmationLoadedImpl;
 }
 
 /// @nodoc
@@ -618,7 +1074,10 @@ class _$LoadedStateImpl implements _LoadedState {
   TResult when<TResult extends Object?>({
     required TResult Function() initialState,
     required TResult Function() loadingState,
+    required TResult Function() bookingConfirmationLoaded,
     required TResult Function(List<SlotModel> slots) loadedState,
+    required TResult Function(List<BookingModel> booking)
+        bookingDataFetchingLoaded,
     required TResult Function(String message) errorState,
   }) {
     return loadedState(slots);
@@ -629,7 +1088,9 @@ class _$LoadedStateImpl implements _LoadedState {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initialState,
     TResult? Function()? loadingState,
+    TResult? Function()? bookingConfirmationLoaded,
     TResult? Function(List<SlotModel> slots)? loadedState,
+    TResult? Function(List<BookingModel> booking)? bookingDataFetchingLoaded,
     TResult? Function(String message)? errorState,
   }) {
     return loadedState?.call(slots);
@@ -640,7 +1101,9 @@ class _$LoadedStateImpl implements _LoadedState {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initialState,
     TResult Function()? loadingState,
+    TResult Function()? bookingConfirmationLoaded,
     TResult Function(List<SlotModel> slots)? loadedState,
+    TResult Function(List<BookingModel> booking)? bookingDataFetchingLoaded,
     TResult Function(String message)? errorState,
     required TResult orElse(),
   }) {
@@ -655,7 +1118,11 @@ class _$LoadedStateImpl implements _LoadedState {
   TResult map<TResult extends Object?>({
     required TResult Function(_InitialState value) initialState,
     required TResult Function(_LoadingState value) loadingState,
+    required TResult Function(_BookingConfirmationLoaded value)
+        bookingConfirmationLoaded,
     required TResult Function(_LoadedState value) loadedState,
+    required TResult Function(_BookingDataFetchingLoaded value)
+        bookingDataFetchingLoaded,
     required TResult Function(_ErrorState value) errorState,
   }) {
     return loadedState(this);
@@ -666,7 +1133,11 @@ class _$LoadedStateImpl implements _LoadedState {
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_InitialState value)? initialState,
     TResult? Function(_LoadingState value)? loadingState,
+    TResult? Function(_BookingConfirmationLoaded value)?
+        bookingConfirmationLoaded,
     TResult? Function(_LoadedState value)? loadedState,
+    TResult? Function(_BookingDataFetchingLoaded value)?
+        bookingDataFetchingLoaded,
     TResult? Function(_ErrorState value)? errorState,
   }) {
     return loadedState?.call(this);
@@ -677,7 +1148,11 @@ class _$LoadedStateImpl implements _LoadedState {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_InitialState value)? initialState,
     TResult Function(_LoadingState value)? loadingState,
+    TResult Function(_BookingConfirmationLoaded value)?
+        bookingConfirmationLoaded,
     TResult Function(_LoadedState value)? loadedState,
+    TResult Function(_BookingDataFetchingLoaded value)?
+        bookingDataFetchingLoaded,
     TResult Function(_ErrorState value)? errorState,
     required TResult orElse(),
   }) {
@@ -698,6 +1173,189 @@ abstract class _LoadedState implements AppointmentBookingState {
   @JsonKey(includeFromJson: false, includeToJson: false)
   _$$LoadedStateImplCopyWith<_$LoadedStateImpl> get copyWith =>
       throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class _$$BookingDataFetchingLoadedImplCopyWith<$Res> {
+  factory _$$BookingDataFetchingLoadedImplCopyWith(
+          _$BookingDataFetchingLoadedImpl value,
+          $Res Function(_$BookingDataFetchingLoadedImpl) then) =
+      __$$BookingDataFetchingLoadedImplCopyWithImpl<$Res>;
+  @useResult
+  $Res call({List<BookingModel> booking});
+}
+
+/// @nodoc
+class __$$BookingDataFetchingLoadedImplCopyWithImpl<$Res>
+    extends _$AppointmentBookingStateCopyWithImpl<$Res,
+        _$BookingDataFetchingLoadedImpl>
+    implements _$$BookingDataFetchingLoadedImplCopyWith<$Res> {
+  __$$BookingDataFetchingLoadedImplCopyWithImpl(
+      _$BookingDataFetchingLoadedImpl _value,
+      $Res Function(_$BookingDataFetchingLoadedImpl) _then)
+      : super(_value, _then);
+
+  /// Create a copy of AppointmentBookingState
+  /// with the given fields replaced by the non-null parameter values.
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? booking = null,
+  }) {
+    return _then(_$BookingDataFetchingLoadedImpl(
+      null == booking
+          ? _value._booking
+          : booking // ignore: cast_nullable_to_non_nullable
+              as List<BookingModel>,
+    ));
+  }
+}
+
+/// @nodoc
+
+class _$BookingDataFetchingLoadedImpl implements _BookingDataFetchingLoaded {
+  const _$BookingDataFetchingLoadedImpl(final List<BookingModel> booking)
+      : _booking = booking;
+
+  final List<BookingModel> _booking;
+  @override
+  List<BookingModel> get booking {
+    if (_booking is EqualUnmodifiableListView) return _booking;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_booking);
+  }
+
+  @override
+  String toString() {
+    return 'AppointmentBookingState.bookingDataFetchingLoaded(booking: $booking)';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$BookingDataFetchingLoadedImpl &&
+            const DeepCollectionEquality().equals(other._booking, _booking));
+  }
+
+  @override
+  int get hashCode =>
+      Object.hash(runtimeType, const DeepCollectionEquality().hash(_booking));
+
+  /// Create a copy of AppointmentBookingState
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$BookingDataFetchingLoadedImplCopyWith<_$BookingDataFetchingLoadedImpl>
+      get copyWith => __$$BookingDataFetchingLoadedImplCopyWithImpl<
+          _$BookingDataFetchingLoadedImpl>(this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() initialState,
+    required TResult Function() loadingState,
+    required TResult Function() bookingConfirmationLoaded,
+    required TResult Function(List<SlotModel> slots) loadedState,
+    required TResult Function(List<BookingModel> booking)
+        bookingDataFetchingLoaded,
+    required TResult Function(String message) errorState,
+  }) {
+    return bookingDataFetchingLoaded(booking);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function()? initialState,
+    TResult? Function()? loadingState,
+    TResult? Function()? bookingConfirmationLoaded,
+    TResult? Function(List<SlotModel> slots)? loadedState,
+    TResult? Function(List<BookingModel> booking)? bookingDataFetchingLoaded,
+    TResult? Function(String message)? errorState,
+  }) {
+    return bookingDataFetchingLoaded?.call(booking);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? initialState,
+    TResult Function()? loadingState,
+    TResult Function()? bookingConfirmationLoaded,
+    TResult Function(List<SlotModel> slots)? loadedState,
+    TResult Function(List<BookingModel> booking)? bookingDataFetchingLoaded,
+    TResult Function(String message)? errorState,
+    required TResult orElse(),
+  }) {
+    if (bookingDataFetchingLoaded != null) {
+      return bookingDataFetchingLoaded(booking);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_InitialState value) initialState,
+    required TResult Function(_LoadingState value) loadingState,
+    required TResult Function(_BookingConfirmationLoaded value)
+        bookingConfirmationLoaded,
+    required TResult Function(_LoadedState value) loadedState,
+    required TResult Function(_BookingDataFetchingLoaded value)
+        bookingDataFetchingLoaded,
+    required TResult Function(_ErrorState value) errorState,
+  }) {
+    return bookingDataFetchingLoaded(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_InitialState value)? initialState,
+    TResult? Function(_LoadingState value)? loadingState,
+    TResult? Function(_BookingConfirmationLoaded value)?
+        bookingConfirmationLoaded,
+    TResult? Function(_LoadedState value)? loadedState,
+    TResult? Function(_BookingDataFetchingLoaded value)?
+        bookingDataFetchingLoaded,
+    TResult? Function(_ErrorState value)? errorState,
+  }) {
+    return bookingDataFetchingLoaded?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_InitialState value)? initialState,
+    TResult Function(_LoadingState value)? loadingState,
+    TResult Function(_BookingConfirmationLoaded value)?
+        bookingConfirmationLoaded,
+    TResult Function(_LoadedState value)? loadedState,
+    TResult Function(_BookingDataFetchingLoaded value)?
+        bookingDataFetchingLoaded,
+    TResult Function(_ErrorState value)? errorState,
+    required TResult orElse(),
+  }) {
+    if (bookingDataFetchingLoaded != null) {
+      return bookingDataFetchingLoaded(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _BookingDataFetchingLoaded implements AppointmentBookingState {
+  const factory _BookingDataFetchingLoaded(final List<BookingModel> booking) =
+      _$BookingDataFetchingLoadedImpl;
+
+  List<BookingModel> get booking;
+
+  /// Create a copy of AppointmentBookingState
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  _$$BookingDataFetchingLoadedImplCopyWith<_$BookingDataFetchingLoadedImpl>
+      get copyWith => throw _privateConstructorUsedError;
 }
 
 /// @nodoc
@@ -770,7 +1428,10 @@ class _$ErrorStateImpl implements _ErrorState {
   TResult when<TResult extends Object?>({
     required TResult Function() initialState,
     required TResult Function() loadingState,
+    required TResult Function() bookingConfirmationLoaded,
     required TResult Function(List<SlotModel> slots) loadedState,
+    required TResult Function(List<BookingModel> booking)
+        bookingDataFetchingLoaded,
     required TResult Function(String message) errorState,
   }) {
     return errorState(message);
@@ -781,7 +1442,9 @@ class _$ErrorStateImpl implements _ErrorState {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initialState,
     TResult? Function()? loadingState,
+    TResult? Function()? bookingConfirmationLoaded,
     TResult? Function(List<SlotModel> slots)? loadedState,
+    TResult? Function(List<BookingModel> booking)? bookingDataFetchingLoaded,
     TResult? Function(String message)? errorState,
   }) {
     return errorState?.call(message);
@@ -792,7 +1455,9 @@ class _$ErrorStateImpl implements _ErrorState {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initialState,
     TResult Function()? loadingState,
+    TResult Function()? bookingConfirmationLoaded,
     TResult Function(List<SlotModel> slots)? loadedState,
+    TResult Function(List<BookingModel> booking)? bookingDataFetchingLoaded,
     TResult Function(String message)? errorState,
     required TResult orElse(),
   }) {
@@ -807,7 +1472,11 @@ class _$ErrorStateImpl implements _ErrorState {
   TResult map<TResult extends Object?>({
     required TResult Function(_InitialState value) initialState,
     required TResult Function(_LoadingState value) loadingState,
+    required TResult Function(_BookingConfirmationLoaded value)
+        bookingConfirmationLoaded,
     required TResult Function(_LoadedState value) loadedState,
+    required TResult Function(_BookingDataFetchingLoaded value)
+        bookingDataFetchingLoaded,
     required TResult Function(_ErrorState value) errorState,
   }) {
     return errorState(this);
@@ -818,7 +1487,11 @@ class _$ErrorStateImpl implements _ErrorState {
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_InitialState value)? initialState,
     TResult? Function(_LoadingState value)? loadingState,
+    TResult? Function(_BookingConfirmationLoaded value)?
+        bookingConfirmationLoaded,
     TResult? Function(_LoadedState value)? loadedState,
+    TResult? Function(_BookingDataFetchingLoaded value)?
+        bookingDataFetchingLoaded,
     TResult? Function(_ErrorState value)? errorState,
   }) {
     return errorState?.call(this);
@@ -829,7 +1502,11 @@ class _$ErrorStateImpl implements _ErrorState {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_InitialState value)? initialState,
     TResult Function(_LoadingState value)? loadingState,
+    TResult Function(_BookingConfirmationLoaded value)?
+        bookingConfirmationLoaded,
     TResult Function(_LoadedState value)? loadedState,
+    TResult Function(_BookingDataFetchingLoaded value)?
+        bookingDataFetchingLoaded,
     TResult Function(_ErrorState value)? errorState,
     required TResult orElse(),
   }) {

@@ -20,21 +20,21 @@ mixin _$ManageRecordsEvent {
   TResult when<TResult extends Object?>({
     required TResult Function() pickImageFromGallery,
     required TResult Function() pickImageFromCamera,
-    required TResult Function() pickFileformDevice,
+    required TResult Function() pickFileFormDevice,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? pickImageFromGallery,
     TResult? Function()? pickImageFromCamera,
-    TResult? Function()? pickFileformDevice,
+    TResult? Function()? pickFileFormDevice,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? pickImageFromGallery,
     TResult Function()? pickImageFromCamera,
-    TResult Function()? pickFileformDevice,
+    TResult Function()? pickFileFormDevice,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -42,21 +42,21 @@ mixin _$ManageRecordsEvent {
   TResult map<TResult extends Object?>({
     required TResult Function(_PickImageFromGallery value) pickImageFromGallery,
     required TResult Function(_PickImageFromCamera value) pickImageFromCamera,
-    required TResult Function(_PickFileFormDevice value) pickFileformDevice,
+    required TResult Function(_PickFileFormDevice value) pickFileFormDevice,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_PickImageFromGallery value)? pickImageFromGallery,
     TResult? Function(_PickImageFromCamera value)? pickImageFromCamera,
-    TResult? Function(_PickFileFormDevice value)? pickFileformDevice,
+    TResult? Function(_PickFileFormDevice value)? pickFileFormDevice,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_PickImageFromGallery value)? pickImageFromGallery,
     TResult Function(_PickImageFromCamera value)? pickImageFromCamera,
-    TResult Function(_PickFileFormDevice value)? pickFileformDevice,
+    TResult Function(_PickFileFormDevice value)? pickFileFormDevice,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -127,7 +127,7 @@ class _$PickImageFromGalleryImpl implements _PickImageFromGallery {
   TResult when<TResult extends Object?>({
     required TResult Function() pickImageFromGallery,
     required TResult Function() pickImageFromCamera,
-    required TResult Function() pickFileformDevice,
+    required TResult Function() pickFileFormDevice,
   }) {
     return pickImageFromGallery();
   }
@@ -137,7 +137,7 @@ class _$PickImageFromGalleryImpl implements _PickImageFromGallery {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? pickImageFromGallery,
     TResult? Function()? pickImageFromCamera,
-    TResult? Function()? pickFileformDevice,
+    TResult? Function()? pickFileFormDevice,
   }) {
     return pickImageFromGallery?.call();
   }
@@ -147,7 +147,7 @@ class _$PickImageFromGalleryImpl implements _PickImageFromGallery {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? pickImageFromGallery,
     TResult Function()? pickImageFromCamera,
-    TResult Function()? pickFileformDevice,
+    TResult Function()? pickFileFormDevice,
     required TResult orElse(),
   }) {
     if (pickImageFromGallery != null) {
@@ -161,7 +161,7 @@ class _$PickImageFromGalleryImpl implements _PickImageFromGallery {
   TResult map<TResult extends Object?>({
     required TResult Function(_PickImageFromGallery value) pickImageFromGallery,
     required TResult Function(_PickImageFromCamera value) pickImageFromCamera,
-    required TResult Function(_PickFileFormDevice value) pickFileformDevice,
+    required TResult Function(_PickFileFormDevice value) pickFileFormDevice,
   }) {
     return pickImageFromGallery(this);
   }
@@ -171,7 +171,7 @@ class _$PickImageFromGalleryImpl implements _PickImageFromGallery {
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_PickImageFromGallery value)? pickImageFromGallery,
     TResult? Function(_PickImageFromCamera value)? pickImageFromCamera,
-    TResult? Function(_PickFileFormDevice value)? pickFileformDevice,
+    TResult? Function(_PickFileFormDevice value)? pickFileFormDevice,
   }) {
     return pickImageFromGallery?.call(this);
   }
@@ -181,7 +181,7 @@ class _$PickImageFromGalleryImpl implements _PickImageFromGallery {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_PickImageFromGallery value)? pickImageFromGallery,
     TResult Function(_PickImageFromCamera value)? pickImageFromCamera,
-    TResult Function(_PickFileFormDevice value)? pickFileformDevice,
+    TResult Function(_PickFileFormDevice value)? pickFileFormDevice,
     required TResult orElse(),
   }) {
     if (pickImageFromGallery != null) {
@@ -239,7 +239,7 @@ class _$PickImageFromCameraImpl implements _PickImageFromCamera {
   TResult when<TResult extends Object?>({
     required TResult Function() pickImageFromGallery,
     required TResult Function() pickImageFromCamera,
-    required TResult Function() pickFileformDevice,
+    required TResult Function() pickFileFormDevice,
   }) {
     return pickImageFromCamera();
   }
@@ -249,7 +249,7 @@ class _$PickImageFromCameraImpl implements _PickImageFromCamera {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? pickImageFromGallery,
     TResult? Function()? pickImageFromCamera,
-    TResult? Function()? pickFileformDevice,
+    TResult? Function()? pickFileFormDevice,
   }) {
     return pickImageFromCamera?.call();
   }
@@ -259,7 +259,7 @@ class _$PickImageFromCameraImpl implements _PickImageFromCamera {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? pickImageFromGallery,
     TResult Function()? pickImageFromCamera,
-    TResult Function()? pickFileformDevice,
+    TResult Function()? pickFileFormDevice,
     required TResult orElse(),
   }) {
     if (pickImageFromCamera != null) {
@@ -273,7 +273,7 @@ class _$PickImageFromCameraImpl implements _PickImageFromCamera {
   TResult map<TResult extends Object?>({
     required TResult Function(_PickImageFromGallery value) pickImageFromGallery,
     required TResult Function(_PickImageFromCamera value) pickImageFromCamera,
-    required TResult Function(_PickFileFormDevice value) pickFileformDevice,
+    required TResult Function(_PickFileFormDevice value) pickFileFormDevice,
   }) {
     return pickImageFromCamera(this);
   }
@@ -283,7 +283,7 @@ class _$PickImageFromCameraImpl implements _PickImageFromCamera {
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_PickImageFromGallery value)? pickImageFromGallery,
     TResult? Function(_PickImageFromCamera value)? pickImageFromCamera,
-    TResult? Function(_PickFileFormDevice value)? pickFileformDevice,
+    TResult? Function(_PickFileFormDevice value)? pickFileFormDevice,
   }) {
     return pickImageFromCamera?.call(this);
   }
@@ -293,7 +293,7 @@ class _$PickImageFromCameraImpl implements _PickImageFromCamera {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_PickImageFromGallery value)? pickImageFromGallery,
     TResult Function(_PickImageFromCamera value)? pickImageFromCamera,
-    TResult Function(_PickFileFormDevice value)? pickFileformDevice,
+    TResult Function(_PickFileFormDevice value)? pickFileFormDevice,
     required TResult orElse(),
   }) {
     if (pickImageFromCamera != null) {
@@ -333,7 +333,7 @@ class _$PickFileFormDeviceImpl implements _PickFileFormDevice {
 
   @override
   String toString() {
-    return 'ManageRecordsEvent.pickFileformDevice()';
+    return 'ManageRecordsEvent.pickFileFormDevice()';
   }
 
   @override
@@ -350,9 +350,9 @@ class _$PickFileFormDeviceImpl implements _PickFileFormDevice {
   TResult when<TResult extends Object?>({
     required TResult Function() pickImageFromGallery,
     required TResult Function() pickImageFromCamera,
-    required TResult Function() pickFileformDevice,
+    required TResult Function() pickFileFormDevice,
   }) {
-    return pickFileformDevice();
+    return pickFileFormDevice();
   }
 
   @override
@@ -360,9 +360,9 @@ class _$PickFileFormDeviceImpl implements _PickFileFormDevice {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? pickImageFromGallery,
     TResult? Function()? pickImageFromCamera,
-    TResult? Function()? pickFileformDevice,
+    TResult? Function()? pickFileFormDevice,
   }) {
-    return pickFileformDevice?.call();
+    return pickFileFormDevice?.call();
   }
 
   @override
@@ -370,11 +370,11 @@ class _$PickFileFormDeviceImpl implements _PickFileFormDevice {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? pickImageFromGallery,
     TResult Function()? pickImageFromCamera,
-    TResult Function()? pickFileformDevice,
+    TResult Function()? pickFileFormDevice,
     required TResult orElse(),
   }) {
-    if (pickFileformDevice != null) {
-      return pickFileformDevice();
+    if (pickFileFormDevice != null) {
+      return pickFileFormDevice();
     }
     return orElse();
   }
@@ -384,9 +384,9 @@ class _$PickFileFormDeviceImpl implements _PickFileFormDevice {
   TResult map<TResult extends Object?>({
     required TResult Function(_PickImageFromGallery value) pickImageFromGallery,
     required TResult Function(_PickImageFromCamera value) pickImageFromCamera,
-    required TResult Function(_PickFileFormDevice value) pickFileformDevice,
+    required TResult Function(_PickFileFormDevice value) pickFileFormDevice,
   }) {
-    return pickFileformDevice(this);
+    return pickFileFormDevice(this);
   }
 
   @override
@@ -394,9 +394,9 @@ class _$PickFileFormDeviceImpl implements _PickFileFormDevice {
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_PickImageFromGallery value)? pickImageFromGallery,
     TResult? Function(_PickImageFromCamera value)? pickImageFromCamera,
-    TResult? Function(_PickFileFormDevice value)? pickFileformDevice,
+    TResult? Function(_PickFileFormDevice value)? pickFileFormDevice,
   }) {
-    return pickFileformDevice?.call(this);
+    return pickFileFormDevice?.call(this);
   }
 
   @override
@@ -404,11 +404,11 @@ class _$PickFileFormDeviceImpl implements _PickFileFormDevice {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_PickImageFromGallery value)? pickImageFromGallery,
     TResult Function(_PickImageFromCamera value)? pickImageFromCamera,
-    TResult Function(_PickFileFormDevice value)? pickFileformDevice,
+    TResult Function(_PickFileFormDevice value)? pickFileFormDevice,
     required TResult orElse(),
   }) {
-    if (pickFileformDevice != null) {
-      return pickFileformDevice(this);
+    if (pickFileFormDevice != null) {
+      return pickFileFormDevice(this);
     }
     return orElse();
   }

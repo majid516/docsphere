@@ -77,7 +77,10 @@ void bookAppointment({required String date,required BuildContext context,require
     return;
   }
   await SlotBookServices().updateTimeSlot(uid, date, selectedTime, isBooked, user);
-  showCustomSnackBar(context, 'Successfully slot booked', false);
+  if (context.mounted) {
+      showCustomSnackBar(context, 'Successfully slot booked', false);
+
+  }
   return;
 }
 

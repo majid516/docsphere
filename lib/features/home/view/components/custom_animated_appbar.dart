@@ -2,7 +2,9 @@ import 'package:docshpere/core/constants/app_theme/app_theme.dart';
 import 'package:docshpere/core/constants/spaces/space.dart';
 import 'package:docshpere/core/constants/text_styles/common_styles.dart';
 import 'package:docshpere/features/home/view/widgets/custom_appbar_home.dart';
+import 'package:docshpere/routes/routes_name.dart';
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 
 class CustomAnimatedAppbar extends StatelessWidget {
   const CustomAnimatedAppbar({
@@ -44,8 +46,10 @@ class CustomAnimatedAppbar extends StatelessWidget {
                 ),
               ],
             ),
-            Icon(Icons.notifications_active,
-                size: 28, color: MyColors.whiteColor),
+            IconButton(onPressed: (){
+              context.push(MyRoutes.notificationScreen);
+            }, icon: Icon(Icons.notifications_active,
+                size: 28, color: MyColors.whiteColor)),
           ],
         ),
       ),

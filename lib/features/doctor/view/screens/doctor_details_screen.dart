@@ -3,6 +3,7 @@ import 'package:docshpere/core/components/page_not_found_screen.dart';
 import 'package:docshpere/core/constants/spaces/space.dart';
 import 'package:docshpere/core/constants/text_styles/common_styles.dart';
 import 'package:docshpere/core/models/basic_doctor_details.dart';
+import 'package:docshpere/features/chat/model/chat_partner_model.dart';
 import 'package:docshpere/features/doctor/view/widgets/details_loading_widget.dart';
 import 'package:docshpere/features/doctor/view_model/bloc/doctor_full_details_bloc/doctor_full_details_bloc.dart';
 import 'package:docshpere/routes/routes_name.dart';
@@ -24,9 +25,11 @@ import 'package:docshpere/features/doctor/view_model/provider/scorll_provider.da
 
 class DoctorDetailsScreen extends StatelessWidget {
   final String uid;
+  final String consultationType;
   DoctorDetailsScreen({
     super.key,
     required this.uid,
+    required this.consultationType,
   });
 
   final List<String> specializations = [
@@ -128,7 +131,9 @@ class DoctorDetailsScreen extends StatelessWidget {
                                     experience: doctor.experience,
                                     uid: uid,
                                     fees: doctor.fees,
-                                    profile: doctor.profile),
+                                    gender: doctor.gender,
+                                    profile: doctor.profile,
+                                    workType: doctor.workType),
                               ),
                               CommonDivider(),
                               FeeTileWidget(
@@ -149,16 +154,20 @@ class DoctorDetailsScreen extends StatelessWidget {
                                 mainAxisAlignment:
                                     MainAxisAlignment.spaceEvenly,
                                 children: [
-                                  MessageButton(action: () async{
+                                  MessageButton(action: () async {
                                     final user =
                                         FirebaseAuth.instance.currentUser;
-                                    final roomId = await  getChatRoomId(user!.uid, uid);
-                                        print(user.uid);
-                                    context.push(MyRoutes.chatPage, extra: {
-                                      'userId': user.uid.toString(),
-                                      'doctorId': uid,
-                                      'roomId': roomId,
-                                    });
+                                    final chatPartnerModel = ChatPartnerModel(
+                                        clientProfile: '',
+                                        doctorProfile: doctor.profile,
+                                        clientName: '',
+                                        doctorName: doctor.name,
+                                        doctorId: uid,
+                                        clientId: user!.uid.toString(),
+                                        lastMessage: '',
+                                        lastMessageTime: '');
+                                    context
+                                        .push(MyRoutes.chatingScreen, extra: chatPartnerModel);
                                   }),
                                   BookAppointmentButton(action: () {
                                     context.push(MyRoutes.bookAppointmentScreen,
@@ -166,7 +175,10 @@ class DoctorDetailsScreen extends StatelessWidget {
                                           'uid': uid,
                                           'name': doctor.name,
                                           'cat': doctor.category,
-                                          'profile': doctor.profile
+                                          'profile': doctor.profile,
+                                          'fees': doctor.fees,
+                                          'experience': doctor.experience,
+                                          'consultationType': consultationType,
                                         });
                                   }),
                                 ],
@@ -195,25 +207,20 @@ class DoctorDetailsScreen extends StatelessWidget {
   }
 }
 
-
 Future<String> getChatRoomId(String userId, String doctorId) async {
   final chatRoomRef = FirebaseFirestore.instance.collection('chatRooms');
 
-  // Check if a chat room exists for the user and doctor
   final querySnapshot = await chatRoomRef
-      .where('users', arrayContainsAny: [userId, doctorId])
-      .get();
+      .where('users', arrayContainsAny: [userId, doctorId]).get();
 
   if (querySnapshot.docs.isNotEmpty) {
-    // Chat room exists, return its ID
     return querySnapshot.docs.first.id;
   } else {
-    // No existing chat, create a new one
     final newRoomRef = await chatRoomRef.add({
       'users': [userId, doctorId],
       'createdAt': FieldValue.serverTimestamp(),
     });
 
-    return newRoomRef.id; // Return the newly created room ID
+    return newRoomRef.id;
   }
 }

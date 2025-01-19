@@ -1,4 +1,3 @@
-
 import 'dart:convert';
 
 import 'package:docshpere/core/constants/app_theme/app_theme.dart';
@@ -11,7 +10,8 @@ import 'package:go_router/go_router.dart';
 class DrawerHeaderWidget extends StatelessWidget {
   final UserModel user;
   const DrawerHeaderWidget({
-    super.key, required this.user,
+    super.key,
+    required this.user,
   });
 
   @override
@@ -32,13 +32,15 @@ class DrawerHeaderWidget extends StatelessWidget {
                   )
                 : CircleAvatar(
                     radius: 32,
-                    backgroundImage: MemoryImage(
-                        base64Decode(user.profileImage)),
+                    backgroundImage:
+                        MemoryImage(base64Decode(user.profileImage)),
                   )),
       ),
       title: Text(
         user.name,
         style: CommonStyles.doctorNameStyle,
+        maxLines: 1,
+        overflow: TextOverflow.ellipsis,
       ),
       subtitle: InkWell(
         onTap: () {

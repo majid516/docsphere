@@ -16,9 +16,11 @@ class DrawerWidget extends StatelessWidget {
     super.key,
   });
 
+
   @override
   Widget build(BuildContext context) {
     context.read<ProfileBloc>().add(ProfileEvent.getUserData());
+   String currUser = '';
 
     return Drawer(
       backgroundColor: MyColors.whiteColor,
@@ -31,7 +33,9 @@ class DrawerWidget extends StatelessWidget {
               child: BlocBuilder<ProfileBloc, ProfileState>(
                 builder: (context, state) {
                   return state.maybeWhen(
+       
                     userLoadedState: (user) {
+                      currUser = user.name;
                       return DrawerHeaderWidget(
                         user: user,
                       );
@@ -53,13 +57,15 @@ class DrawerWidget extends StatelessWidget {
           ),
           DrawerItemsWidgets(
             title: 'Consultation',
-            action: () {},
+            action: () {
+              context.push(MyRoutes.previousConsultationsPage);
+            },
             image: 'asset/Drawer icons/cusultations.png',
           ),
           DrawerItemsWidgets(
             title: 'My Doctor',
             action: () {
-              context.push(MyRoutes.myDoctorsScreen);
+              context.push(MyRoutes.myDoctorScreen);
             },
             image: 'asset/Drawer icons/doctor.png',
           ),
@@ -73,7 +79,7 @@ class DrawerWidget extends StatelessWidget {
           DrawerItemsWidgets(
             title: 'Upcoming Sessions',
             action: () {
-              context.push(MyRoutes.upcomingSessions);
+              context.push(MyRoutes.upcomingSessions, extra: currUser);
             },
             image: 'asset/Drawer icons/appointment.png',
           ),
@@ -86,8 +92,20 @@ class DrawerWidget extends StatelessWidget {
                 color: MyColors.blueIconsColor,
               )),
           DrawerItemsWidgets(
+              title: 'Chats',
+              action: () {
+                context.push(MyRoutes.myChatsScreen);
+              },
+              leadingIcon: Icon(
+                Icons.question_answer_outlined,
+                size: 37,
+                color: MyColors.blueIconsColor,
+              )),
+          DrawerItemsWidgets(
             title: 'Payments',
-            action: () {},
+            action: () {
+              context.push(MyRoutes.paymentHistoryScreen);
+            },
             leadingIcon: Icon(
               Icons.account_balance_wallet_rounded,
               size: 36,
@@ -141,33 +159,33 @@ class DrawerWidget extends StatelessWidget {
           ListTile(
             onTap: () {
               showDialog(
-      context: context,
-      builder: (BuildContext context) {
-        return AlertDialog(
-          shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(15)
-          ),
-          title: Text('Sign Out'),
-          content: Text('Are you sure you want to sign out?'),
-          actions: [
-            TextButton(
-              onPressed: () {
-                Navigator.of(context).pop();
-              },
-              child: Text('Cancel'),
-            ),
-            TextButton(
-              onPressed: () async{
-                await signoutUser();
-               context.go(MyRoutes.signInOrRegister); 
-              
-              },
-              child: Text('Sign Out'),
-            ),
-          ],
-        );
-      },
-    );
+                context: context,
+                builder: (BuildContext context) {
+                  return AlertDialog(
+                    shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(15)),
+                    title: Text('Sign Out'),
+                    content: Text('Are you sure you want to sign out?'),
+                    actions: [
+                      TextButton(
+                        onPressed: () {
+                          Navigator.of(context).pop();
+                        },
+                        child: Text('Cancel'),
+                      ),
+                      TextButton(
+                        onPressed: () async {
+                          await signoutUser();
+                          if (context.mounted) {
+                          context.go(MyRoutes.signInOrRegister);
+                          }
+                        },
+                        child: Text('Sign Out'),
+                      ),
+                    ],
+                  );
+                },
+              );
             },
             trailing: Row(
               mainAxisSize: MainAxisSize.min,
