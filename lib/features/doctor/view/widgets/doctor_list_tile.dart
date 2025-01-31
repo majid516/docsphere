@@ -1,4 +1,3 @@
-
 import 'package:docshpere/core/components/doctor_basic_details_widget.dart';
 import 'package:docshpere/core/constants/spaces/space.dart';
 import 'package:docshpere/core/constants/text_styles/common_styles.dart';
@@ -13,18 +12,22 @@ class DoctorListTile extends StatelessWidget {
   final String consultationType;
   final BasicDoctorModel doctor;
   const DoctorListTile({
-    super.key, required this.doctor, required this.consultationType,
+    super.key,
+    required this.doctor,
+    required this.consultationType,
   });
 
   @override
   Widget build(BuildContext context) {
     return SizedBox(
       width: ScreenSize.width,
-      height: 200,
+      height: 210,
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          DoctorBasicDetailsCard(doctor: doctor,),
+          DoctorBasicDetailsCard(
+            doctor: doctor,
+          ),
           Divider(
             indent: 10,
             endIndent: 10,
@@ -33,13 +36,24 @@ class DoctorListTile extends StatelessWidget {
             padding: const EdgeInsets.symmetric(horizontal: 20.0),
             child: Row(
               children: [
-                Text('₹${doctor.fees}',style: CommonStyles.feeTextStyle,),
+                Text(
+                  '₹${doctor.fees}',
+                  style: CommonStyles.feeTextStyle,
+                ),
                 Space.wSpace10,
-            Text('consultation fee',style: CommonStyles.commonButtonBlackTextStyle,),
-            Spacer(),
-            ViewDoctorProfileButton(action: (){
-              context.push(MyRoutes.doctorDetailsScreen, extra:{'uid': doctor.uid, 'consultationType': consultationType});
-            },)
+                Text(
+                  'consultation fee',
+                  style: CommonStyles.commonButtonBlackTextStyle,
+                ),
+                Spacer(),
+                ViewDoctorProfileButton(
+                  action: () {
+                    context.push(MyRoutes.doctorDetailsScreen, extra: {
+                      'uid': doctor.uid,
+                      'consultationType': consultationType
+                    });
+                  },
+                ),
               ],
             ),
           ),

@@ -34,9 +34,16 @@ class PreviousConsultationsPage extends StatelessWidget {
           return state.maybeWhen(
               loadedState: (consultations) {
                 if (consultations.isEmpty) {
-                  return Center(child: Text('Book Your First Consultation',style: AuthenticationSyles.hintTextStyle,),);
+                  return Center(
+                    child: Text(
+                      'Book Your First Consultation',
+                      style: AuthenticationSyles.hintTextStyle,
+                    ),
+                  );
                 }
                 return ListView.builder(
+                  reverse: true,
+                  shrinkWrap: true,
                   itemCount: consultations.length,
                   itemBuilder: (context, index) {
                     var consultation = consultations[index];
@@ -61,7 +68,8 @@ class PreviousConsultationsPage extends StatelessWidget {
                           ],
                         ),
                         onTap: () {
-                           context.push(MyRoutes.consultationDetailsScreen, extra: consultation);
+                          context.push(MyRoutes.consultationDetailsScreen,
+                              extra: consultation);
                         },
                       ),
                     );

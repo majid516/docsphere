@@ -10,6 +10,7 @@ class Space {
   static const wSpace40 = SizedBox(width: 40);
   static const wSpace50 = SizedBox(width: 50);
   static const wSpace60 = SizedBox(width: 60);
+  static const wSpace70 = SizedBox(width: 70);
 
   //! constant height space
   static const hSpace5 = SizedBox(height: 5);

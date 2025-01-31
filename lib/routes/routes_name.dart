@@ -19,9 +19,19 @@ class MyRoutes {
   static const myDoctorScreen = '/myDoctorScreen';
   static const paymentScreen = '/paymentScreen';
   static const myChatsScreen = '/myChatsScreen';
+  static const aiChattingScreen = '/aiChattingScreen';
+  static const settingsScreen = '/settingsScreen';
   static const bookingDetailsScreen = '/bookingDetailsScreen';
   static const notificationScreen = '/notificationScreen';
   static const previousConsultationsPage = '/previousConsultationsPage';
   static const consultationDetailsScreen = '/consultationDetailsScreen';
   static const paymentHistoryScreen = '/paymentHistoryScreen';
+  static const docsphereAIInfoScreen = '/docsphereAIInfoScreen';
+  static const contactUsPage = '/contactUsPage';
+  static const termsAndConditionsPage = '/termsAndConditionsPage';
+  static const suggestImprovementsPage = '/suggestImprovementsPage';
+  static const privacyPolicyPage = '/privacyPolicyPage';
+  static const medicalReminderScreen = '/medicalReminderScreen';
+  static const videoCallScreen = '/videoCallScreen';
+  static const areYouDoctorScreen = '/areYouDoctorScreen';
 }

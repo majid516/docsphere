@@ -1,16 +1,12 @@
-import 'dart:developer';
-
 import 'package:docshpere/core/components/custom_app_bar.dart';
 import 'package:docshpere/core/components/custom_snackbar.dart';
 import 'package:docshpere/core/components/somthing_went_worng_screen.dart';
 import 'package:docshpere/core/constants/app_theme/app_theme.dart';
-import 'package:docshpere/core/constants/spaces/space.dart';
 import 'package:docshpere/core/constants/text_styles/authentication_syles.dart';
-import 'package:docshpere/core/constants/text_styles/common_styles.dart';
 import 'package:docshpere/core/utils/screen_size/screen_size.dart';
+import 'package:docshpere/features/medical_records/view/widgets/add_record_button.dart';
 import 'package:docshpere/features/medical_records/view/widgets/record_loading_widget.dart';
 import 'package:docshpere/features/medical_records/view/widgets/record_tile_widget.dart';
-import 'package:docshpere/features/medical_records/view/widgets/records_picker_sheet.dart';
 import 'package:docshpere/features/medical_records/view/widgets/show_image_preview.dart';
 import 'package:docshpere/features/medical_records/view_model/manage_record_bloc/manage_records_bloc.dart';
 import 'package:docshpere/features/medical_records/view_model/medical_records/medical_records_bloc.dart';
@@ -74,35 +70,7 @@ class MedicalRecordsScreen extends StatelessWidget {
                               )
                             : RecordTileWidget(records: records),
                       ),
-                      Column(
-                        children: [
-                          const Spacer(),
-                          Align(
-                            alignment: Alignment.bottomCenter,
-                            child: InkWell(
-                              onTap: () {
-                                showRecordPicker(context);
-                              },
-                              child: Container(
-                                width: ScreenSize.width * 0.4,
-                                height: 35,
-                                decoration: BoxDecoration(
-                                  color: MyColors.primaryColor,
-                                  borderRadius: BorderRadius.circular(6),
-                                ),
-                                child: Center(
-                                  child: Text(
-                                    'Add Record',
-                                    style:
-                                        CommonStyles.commonButtonWhiteTextStyle,
-                                  ),
-                                ),
-                              ),
-                            ),
-                          ),
-                          Space.hSpace40
-                        ],
-                      )
+                      AddRecordButton()
                     ],
                   ),
                 );
@@ -123,4 +91,3 @@ class MedicalRecordsScreen extends StatelessWidget {
     );
   }
 }
-

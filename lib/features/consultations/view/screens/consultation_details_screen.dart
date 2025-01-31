@@ -1,11 +1,10 @@
 import 'package:docshpere/core/components/custom_app_bar.dart';
 import 'package:docshpere/core/constants/app_theme/app_theme.dart';
 import 'package:docshpere/core/constants/spaces/space.dart';
-import 'package:docshpere/core/constants/text_styles/common_styles.dart';
 import 'package:docshpere/core/utils/screen_size/screen_size.dart';
 import 'package:docshpere/features/consultations/model/consultation_model.dart';
 import 'package:docshpere/features/consultations/view/widgets/consultation_details_row.dart';
-import 'package:docshpere/features/consultations/view/widgets/patient_stories_box.dart';
+import 'package:docshpere/features/consultations/view/widgets/story_writing_button.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
@@ -64,40 +63,7 @@ class ConsultationDetailsScreen extends StatelessWidget {
                     ConsultationDetailsRow(
                         title: "Booked By", value: session.bookedDate),
                     Space.hSpace15,
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        InkWell(
-                          onTap: () {
-                            showStoryDialog(
-                                context, storyController, session.uid);
-                          },
-                          child: Container(
-                            width: ScreenSize.width * 0.5,
-                            height: 40,
-                            decoration: BoxDecoration(
-                                color: MyColors.whiteColor,
-                                border:
-                                    Border.all(color: MyColors.primaryColor),
-                                borderRadius: BorderRadius.circular(7)),
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: [
-                                Icon(
-                                  Icons.message_rounded,
-                                  color: MyColors.primaryColor,
-                                ),
-                                Space.wSpace5,
-                                Text(
-                                  'Write Your Stroy',
-                                  style: CommonStyles.commonButtonBlueTextStyle,
-                                ),
-                              ],
-                            ),
-                          ),
-                        ),
-                      ],
-                    ),
+                    StoryWritingButton(storyController: storyController, session: session),
                     Space.hSpace20
                   ],
                 ),

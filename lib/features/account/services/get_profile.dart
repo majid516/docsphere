@@ -17,20 +17,7 @@ Future<UserModel?> getUser() async {
         .get();
 
 
-    final userData = UserModel(
-      uid: user['uid'] ?? '',
-      name: user['name'] ?? '',
-      email: user['email'] ?? '',
-      role: user['role'] ?? '',
-      profileImage: user['profileImage'] ?? '',
-      contactNumber: user['contactNumber'] ?? '',
-      dob: user['dob'] ?? '',
-      bloodGroup: user['bloodGroup'] ?? '',
-      gender: user['gender'] ?? '',
-      appointments: List<String>.from(user['appointments'] ?? []),
-      notifications: List<String>.from(user['notifications'] ?? []),
-      createdAt: user['createdAt'] ?? '',
-    );
+    final userData = UserModel.fromMap(user.data()!);
 
     return userData;
   } catch (e) {

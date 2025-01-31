@@ -25,7 +25,7 @@ class ProfileScreen extends StatelessWidget {
     required this.contactNumber,
     required this.dob,
     required this.bloodGroup,
-    required this.gender,
+    required this.gender, 
   });
 
   @override
@@ -34,7 +34,7 @@ class ProfileScreen extends StatelessWidget {
       appBar: AppBar(
         leading: IconButton(
             onPressed: () {
-              context.pop(MyRoutes.home);
+              context.push(MyRoutes.home);
             },
             icon: Icon(
               Icons.arrow_back_ios_new,
@@ -55,7 +55,8 @@ class ProfileScreen extends StatelessWidget {
                         contactNumber: contactNumber,
                         dob: dob,
                         bloodGroup: bloodGroup,
-                        gender: gender));
+                        gender: gender,
+                        ));
               },
               child: Text(
                 'edit',

@@ -1,10 +1,14 @@
 import 'package:docshpere/features/account/model/user_model.dart';
 import 'package:docshpere/features/account/view/screens/edit_profile_screen.dart';
 import 'package:docshpere/features/account/view/screens/profile_screen.dart';
+import 'package:docshpere/features/ai/view/screens/ai_chatting_screen.dart';
+import 'package:docshpere/features/ai/view/screens/ai_info_screen.dart';
 import 'package:docshpere/features/appointment/model/upcoming_session_model.dart';
+import 'package:docshpere/features/appointment/model/video_call_model.dart';
 import 'package:docshpere/features/appointment/view/screens/booking_details_screen.dart';
 import 'package:docshpere/features/appointment/view/screens/my_appointment_screen.dart';
 import 'package:docshpere/features/appointment/view/screens/upcoming_sessions_screen.dart';
+import 'package:docshpere/features/appointment/view/screens/video_call_screen.dart';
 import 'package:docshpere/features/authentication/view/screens/login_and_register_screen.dart';
 import 'package:docshpere/features/authentication/view/screens/login_screen.dart';
 import 'package:docshpere/features/authentication/view/screens/register_screen.dart';
@@ -25,7 +29,14 @@ import 'package:docshpere/features/home/view/screens/home_screen.dart';
 import 'package:docshpere/features/notifications/view/screens/notification_screen.dart';
 import 'package:docshpere/features/payment/view/screen/payment_history.dart';
 import 'package:docshpere/features/payment/view/screen/payment_screen.dart';
+import 'package:docshpere/features/reminder/view/screens/medical_reminder_screen.dart';
 import 'package:docshpere/features/search/view/screens/medical_category_search_screen.dart';
+import 'package:docshpere/features/settings/view/screens/are_you_doctor_screen.dart';
+import 'package:docshpere/features/settings/view/screens/contact_us_screen.dart';
+import 'package:docshpere/features/settings/view/screens/privacy_policy_screen.dart';
+import 'package:docshpere/features/settings/view/screens/settings_screen.dart';
+import 'package:docshpere/features/settings/view/screens/suggest_app_improvements_screeen.dart';
+import 'package:docshpere/features/settings/view/screens/terms_and_condition_screeen.dart';
 import 'package:docshpere/routes/routes_name.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:go_router/go_router.dart';
@@ -136,6 +147,11 @@ final GoRouter router = GoRouter(
       builder: (context, state) => MyAppointmentScreen(),
     ),
     GoRoute(
+      name: 'settingsScreen',
+      path: MyRoutes.settingsScreen,
+      builder: (context, state) => SettingsScreen(),
+    ),
+    GoRoute(
         name: 'upcomingSessions',
         path: MyRoutes.upcomingSessions,
         builder: (context, state) {
@@ -177,6 +193,54 @@ final GoRouter router = GoRouter(
       path: MyRoutes.myChatsScreen,
       builder: (context, state) => MyChatsScreen(),
     ),
+    GoRoute(
+      name: 'docsphereAIInfoScreen',
+      path: MyRoutes.docsphereAIInfoScreen,
+      builder: (context, state) => DocsphereAIInfoScreen(),
+    ),
+    GoRoute(
+    name: 'aiChattingScreen',
+    path: MyRoutes.aiChattingScreen,
+    builder: (context, state) => AiChattingScreen(),
+  ),
+    GoRoute(
+    name: 'contactUsPage',
+    path: MyRoutes.contactUsPage,
+    builder: (context, state) => ContactUsPage(),
+  ),
+    GoRoute(
+    name: 'termsAndConditionsPage',
+    path: MyRoutes.termsAndConditionsPage,
+    builder: (context, state) => TermsAndConditionsPage(),
+  ),
+    GoRoute(
+    name: 'suggestImprovementsPage',
+    path: MyRoutes.suggestImprovementsPage,
+    builder: (context, state) => SuggestImprovementsPage(),
+  ),
+   GoRoute(
+      name: 'videoCallScreen',
+      path: MyRoutes.videoCallScreen,
+      builder: (context, state) {
+        final data = state.extra as VideoCallModel;
+        return VideoCallScreen(details: data);
+      },
+    ),
+    GoRoute(
+    name: 'areYouDoctorScreen',
+    path: MyRoutes.areYouDoctorScreen,
+    builder: (context, state) => AreYouDoctorScreen(),
+  ),
+    GoRoute(
+    name: 'privacyPolicyPage',
+    path: MyRoutes.privacyPolicyPage,
+    builder: (context, state) => PrivacyPolicyPage(),
+  ),
+    GoRoute(
+    name: 'medicalReminderScreen',
+    path: MyRoutes.medicalReminderScreen,
+    builder: (context, state) => MedicalReminderScreen(),
+  ),
     GoRoute(
         name: 'chatingScreen',
         path: MyRoutes.chatingScreen,

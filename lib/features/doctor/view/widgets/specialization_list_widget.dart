@@ -1,5 +1,6 @@
 import 'package:docshpere/core/constants/app_theme/app_theme.dart';
 import 'package:docshpere/core/constants/spaces/space.dart';
+import 'package:docshpere/core/utils/screen_size/screen_size.dart';
 import 'package:docshpere/features/doctor/view/widgets/doctor_text_styles.dart';
 import 'package:flutter/material.dart';
 
@@ -40,9 +41,12 @@ class SpecializationWidget extends StatelessWidget {
                         Icon(Icons.verified_user_outlined,
                             color: MyColors.darkGreyColor),
                         Space.wSpace10,
-                        Text(
-                          specializations[index],
-                          style: DoctorScreenStyles.medium,
+                        SizedBox(
+                          width: ScreenSize.width *0.8,
+                          child: Text(
+                            specializations[index],
+                            style: DoctorScreenStyles.medium,
+                          ),
                         ),
                       ],
                     ),

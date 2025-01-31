@@ -10,7 +10,7 @@ SlotUserModel getSlotBookedUserData(BuildContext context) {
   state.maybeWhen(
     userLoadedState: (user) {
       currUser = SlotUserModel(
-        uid: user.uid!,
+        uid: user.uid?? 'uid is null',
         name: user.name,
         email: user.email,
         profileImage: user.profileImage,

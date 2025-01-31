@@ -11,6 +11,7 @@ import 'package:docshpere/features/account/view/widgets/submit_button.dart';
 import 'package:docshpere/features/account/view_model/bloc/profile_bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:go_router/go_router.dart';
 
 class EditProfileScreen extends StatelessWidget {
   final UserModel? user;
@@ -42,6 +43,7 @@ class EditProfileScreen extends StatelessWidget {
     }
     return Scaffold(
       appBar: AppBar(
+        leading: IconButton(onPressed: ()=> context.pop(), icon: Icon(Icons.arrow_back_ios_new)),
         title: Text(
           'Edit Profile',
           style: CommonStyles.appbarTitleBlackStyle,

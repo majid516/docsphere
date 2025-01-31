@@ -10,7 +10,7 @@ Future<void> updateUser(UserModel user)async{
   await FirebaseFirestore.instance
         .collection('user')
         .doc(currUser!.uid)
-        .set(user.toMap())
+        .update(user.toMap())
         .then((_) {
       log("Firestore document created successfully!");
     }).catchError((error) {

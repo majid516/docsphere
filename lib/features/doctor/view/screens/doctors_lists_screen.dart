@@ -4,8 +4,7 @@ import 'package:docshpere/core/constants/app_theme/app_theme.dart';
 import 'package:docshpere/core/constants/spaces/space.dart';
 import 'package:docshpere/core/constants/text_styles/authentication_syles.dart';
 import 'package:docshpere/core/utils/screen_size/screen_size.dart';
-import 'package:docshpere/features/doctor/model/search_model.dart';
-import 'package:docshpere/features/doctor/view/widgets/doctor_list_tile.dart';
+import 'package:docshpere/features/doctor/view/widgets/filted_doctor_list.dart';
 import 'package:docshpere/features/doctor/view/widgets/sorting_button.dart';
 import 'package:docshpere/features/doctor/view_model/bloc/doctor_baic_details_bloc/doctor_basic_details_bloc.dart';
 import 'package:docshpere/features/doctor/view_model/cubit/search_cubit/search_cubit_cubit.dart';
@@ -17,7 +16,8 @@ import '../../../booking_appointment/view/widgets/loading_widget.dart';
 class DoctorsListsScreen extends StatelessWidget {
   final String title;
   final String type;
-  const DoctorsListsScreen({super.key, required this.title, required this.type});
+  const DoctorsListsScreen(
+      {super.key, required this.title, required this.type});
 
   @override
   Widget build(BuildContext context) {
@@ -38,8 +38,13 @@ class DoctorsListsScreen extends StatelessWidget {
         builder: (context, state) {
           return state.maybeWhen(
             basicDetaisLoadedState: (doctors) {
-              final doctorFilteredByType =  doctors.where((doctor) => doctor.workType == 'Both' || doctor.workType == type).toList();
-              context.read<SearchCubitCubit>().initializeDoctors(doctorFilteredByType);
+              final doctorFilteredByType = doctors
+                  .where((doctor) =>
+                      doctor.workType == 'Both' || doctor.workType == type)
+                  .toList();
+              context
+                  .read<SearchCubitCubit>()
+                  .initializeDoctors(doctorFilteredByType);
               return Column(
                 children: [
                   Padding(
@@ -76,44 +81,11 @@ class DoctorsListsScreen extends StatelessWidget {
                       ],
                     ),
                   ),
-                  Expanded(
-                    child: BlocBuilder<SearchCubitCubit, SearchModelState>(
-                      builder: (context, searchState) {
-                        final filteredDoctors = searchState.filteredDoctors;
-
-                        if (filteredDoctors.isEmpty) {
-                          return Center(
-                            child: Text(
-                              'No doctors found',
-                              style: AuthenticationSyles.hintTextStyle,
-                            ),
-                          );
-                        }
-
-                        return ListView.separated(
-                          itemCount: filteredDoctors.length,
-                          itemBuilder: (context, index) {
-                            final doctor = filteredDoctors[index];
-                            return DoctorListTile(doctor: doctor,consultationType: type,);
-                          },
-                          separatorBuilder: (context, index) {
-                            return Padding(
-                              padding: const EdgeInsets.only(top: 10.0),
-                              child: Divider(
-                                thickness: 7,
-                                color: MyColors.lightGreyColor
-                                    .withValues(alpha: 0.4),
-                              ),
-                            );
-                          },
-                        );
-                      },
-                    ),
-                  ),
+                  FiltedDoctorList(type: type),
                 ],
               );
             },
-            loadingState: () => LoadingWidget(),
+            loadingState: () => DoctorCardLoadingListWidget(),
             orElse: () => SomethingWentWrongScreen(),
           );
         },
@@ -121,4 +93,3 @@ class DoctorsListsScreen extends StatelessWidget {
     );
   }
 }
-

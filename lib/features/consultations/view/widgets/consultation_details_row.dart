@@ -4,7 +4,8 @@ class ConsultationDetailsRow extends StatelessWidget {
   final String title;
   final String value;
 
-  const ConsultationDetailsRow({super.key, required this.title, required this.value});
+  const ConsultationDetailsRow(
+      {super.key, required this.title, required this.value});
 
   @override
   Widget build(BuildContext context) {
@@ -13,8 +14,21 @@ class ConsultationDetailsRow extends StatelessWidget {
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          Text(title, style: const TextStyle(fontSize: 16, fontWeight: FontWeight.w600)),
-          Text(value, style: const TextStyle(fontSize: 16, fontWeight: FontWeight.w400, color: Colors.black87)),
+          Text(
+            title,
+            style: const TextStyle(
+              fontSize: 16,
+              fontWeight: FontWeight.w600,
+            ),
+          ),
+          Text(
+            value,
+            style: const TextStyle(
+              fontSize: 16,
+              fontWeight: FontWeight.w400,
+              color: Colors.black87,
+            ),
+          ),
         ],
       ),
     );

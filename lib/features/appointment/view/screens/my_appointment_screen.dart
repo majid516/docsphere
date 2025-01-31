@@ -15,7 +15,9 @@ class MyAppointmentScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    context.read<UpcomingSessionBloc>().add(UpcomingSessionEvent.fetchAllUpcomingSessions());
+    context
+        .read<UpcomingSessionBloc>()
+        .add(UpcomingSessionEvent.fetchAllUpcomingSessions());
     return Scaffold(
       appBar: PreferredSize(
           preferredSize: Size(ScreenSize.width, 100),

@@ -49,9 +49,9 @@ class NewChatLoadedStateWidget extends StatelessWidget {
                 .parse(currentMessage.timestamp);
 
             return ChatMessage(
-              text: currentMessage.text,
-              isSentByMe: currentMessage.senderRole == 'user',
-              timestamp: DateFormat("d MMM hh:mm a").format(currentDateTime),
+              message: currentMessage.text,
+              isUser: currentMessage.senderRole == 'user',
+              timestamp: DateFormat("hh:mm a").format(currentDateTime),
             );
           },
         );

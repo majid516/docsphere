@@ -11,6 +11,8 @@ Future<void> registerUser(String name, String email, String password) async {
       email: email,
       password: password,
     );
+      DateTime now = DateTime.now();
+     String formattedDateTime = DateFormat('yyyy-MM-dd HH:mm:ss').format(now);
     String uid = userCredential.user!.uid;
     final userRegisterModel = RegisterUserModel(
       uid: uid,
@@ -22,10 +24,7 @@ Future<void> registerUser(String name, String email, String password) async {
       dob: '',
       bloodGroup: '',
       gender: '',
-      medicalRecords: [],
-      appointments: [],
-      notifications: [],
-      createdAt: DateFormat.yMMMd().format(DateTime.now()),
+      createdAt: formattedDateTime,
     );
     final userData = userRegisterModel.toMap();
     await FirebaseFirestore.instance

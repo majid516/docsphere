@@ -9,6 +9,7 @@ import 'package:docshpere/features/payment/model/payment_model.dart';
 import 'package:docshpere/features/payment/view/widget/appointmet_details_card.dart';
 import 'package:docshpere/features/payment/view/widget/doctor_base_detail_card.dart';
 import 'package:docshpere/features/payment/view_model/bloc/payment_bloc.dart';
+import 'package:docshpere/routes/routes_name.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
@@ -75,15 +76,17 @@ class _PaymentScreenState extends State<PaymentScreen> {
      DateTime now = DateTime.now();
      String formattedDateTime = DateFormat('yyyy-MM-dd HH:mm:ss').format(now);
     final payment = PaymentModel(id: response.paymentId!, profile: widget.profile, doctorName: widget.doctorName, amount: widget.fees, status: 'success', transactionType: 'debit', date:formattedDateTime );
-    context.read<PaymentBloc>().add(PaymentEvent.addPayment(payment));
+    context.read<PaymentBloc>().add(PaymentEvent.addPayment(payment, widget.uid));
     showCustomSnackBar(context, 'Payment Successfull', false);
+    context.go(MyRoutes.home);
+    
   }
 
   void handlePaymentError(PaymentFailureResponse response) {
        DateTime now = DateTime.now();
      String formattedDateTime = DateFormat('yyyy-MM-dd HH:mm:ss').format(now);
     final payment = PaymentModel(id: 'id_failed', profile: widget.profile, doctorName: widget.doctorName, amount: widget.fees, status: 'failed', transactionType: 'debit', date:formattedDateTime );
-    context.read<PaymentBloc>().add(PaymentEvent.addPayment(payment));
+    context.read<PaymentBloc>().add(PaymentEvent.addPayment(payment,widget.uid));
     showCustomSnackBar(context, 'Payment Failed, Please try agian!', true);
   }
 

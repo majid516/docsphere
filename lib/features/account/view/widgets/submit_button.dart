@@ -34,6 +34,7 @@ class SubmitButton extends StatelessWidget {
   Widget build(BuildContext context) {
     return ElevatedButton(
       onPressed: () {
+      
         if (_formKey.currentState!.validate()) {
           final user = UserModel(
               name: nameController.text.trim(),
@@ -42,7 +43,8 @@ class SubmitButton extends StatelessWidget {
               contactNumber: contactController.text.trim(),
               dob: dobController.text.trim(),
               bloodGroup: bloodController.text.trim(),
-              gender: genderController.text.trim());
+              gender: genderController.text.trim(),
+              );
           context
               .read<ProfileBloc>()
               .add(ProfileEvent.updateUserData(user));

@@ -1,5 +1,4 @@
 import 'dart:convert';
-import 'dart:developer';
 import 'package:docshpere/core/components/custom_app_bar.dart';
 import 'package:docshpere/core/components/general_error_screen.dart';
 import 'package:docshpere/core/components/somthing_went_worng_screen.dart';
@@ -36,17 +35,22 @@ class MyDoctorScreen extends StatelessWidget {
                 itemBuilder: (context, index) {
                   final doctor = doctors[index];
                   return Padding(
-                    padding: const EdgeInsets.symmetric(horizontal:  8.0,vertical: 5),
+                    padding: const EdgeInsets.symmetric(
+                        horizontal: 8.0, vertical: 5),
                     child: Container(
                       width: ScreenSize.width,
-                      height:  90,
+                      height: 90,
                       decoration: BoxDecoration(
                         color: MyColors.lightColor.withValues(alpha: 0.3),
                         borderRadius: BorderRadius.circular(10),
                       ),
                       child: Center(
                         child: ListTile(
-                          onTap: () => context.push(MyRoutes.doctorDetailsScreen, extra: {"uid" : doctor.uid, "consultationType" : ''}),
+                          onTap: () => context
+                              .push(MyRoutes.doctorDetailsScreen, extra: {
+                            "uid": doctor.uid,
+                            "consultationType": ''
+                          }),
                           leading: CircleAvatar(
                             radius: 30,
                             backgroundImage:

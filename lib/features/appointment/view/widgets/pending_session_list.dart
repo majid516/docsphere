@@ -1,10 +1,9 @@
-import 'dart:convert';
-import 'dart:developer';
-
 import 'package:docshpere/core/constants/app_theme/app_theme.dart';
 import 'package:docshpere/core/constants/spaces/space.dart';
 import 'package:docshpere/features/appointment/model/upcoming_session_model.dart';
+import 'package:docshpere/features/appointment/view/widgets/basic_details_of_pending_list.dart';
 import 'package:docshpere/features/appointment/view/widgets/cancel_comfirmation_alert.dart';
+import 'package:docshpere/features/appointment/view/widgets/second_part_of_pending_list.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
@@ -23,6 +22,9 @@ class PendingSessionsList extends StatelessWidget {
       itemCount: pendingList.length,
       itemBuilder: (context, index) {
         final booking = pendingList[index];
+        final currentDate = DateFormat("yyyy-MM-dd").parse(booking.slotDate);
+        final formatedDate = DateFormat("yyyy-MMM-dd").format(currentDate);
+
         return Column(
           children: [
             Container(
@@ -37,99 +39,10 @@ class PendingSessionsList extends StatelessWidget {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Row(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      CircleAvatar(
-                        radius: 30,
-                        backgroundImage:
-                            MemoryImage(base64Decode(booking.profile)),
-                      ),
-                      Space.wSpace10,
-                      Expanded(
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Text(
-                              booking.doctorName,
-                              style: TextStyle(
-                                fontSize: 16,
-                                fontWeight: FontWeight.bold,
-                              ),
-                              maxLines: 2,
-                              overflow: TextOverflow.ellipsis,
-                            ),
-                            Text(
-                              " ${booking.doctorCategory}",
-                              style: TextStyle(
-                                fontSize: 15,
-                                color: MyColors.darkGreyColor,
-                              ),
-                              maxLines: 2,
-                              overflow: TextOverflow.ellipsis,
-                            ),
-                          ],
-                        ),
-                      ),
-                      Container(
-                        padding:
-                            EdgeInsets.symmetric(horizontal: 12, vertical: 2),
-                        decoration: BoxDecoration(
-                          color: Colors.green.withValues(alpha: 0.2),
-                          borderRadius: BorderRadius.circular(8),
-                        ),
-                        child: Row(
-                          mainAxisSize: MainAxisSize.min,
-                          children: [
-                            Icon(
-                              Icons.check_circle,
-                              color: Colors.green,
-                              size: 18,
-                            ),
-                            Space.wSpace5,
-                            Text(
-                              'Active',
-                              style: TextStyle(
-                                fontSize: 14,
-                                color: Colors.green,
-                                fontWeight: FontWeight.w500,
-                              ),
-                            ),
-                          ],
-                        ),
-                      ),
-                    ],
-                  ),
+                  BasicDetailsOfPendingList(booking: booking),
                   Space.hSpace10,
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Row(
-                        children: [
-                          Icon(Icons.calendar_today,
-                              size: 16, color: Colors.grey[600]),
-                          SizedBox(width: 6),
-                          Text(
-                            booking.slotDate,
-                            style: TextStyle(
-                                fontSize: 14, fontWeight: FontWeight.w500),
-                          ),
-                        ],
-                      ),
-                      Row(
-                        children: [
-                          Icon(Icons.access_time,
-                              size: 16, color: Colors.grey[600]),
-                          SizedBox(width: 6),
-                          Text(
-                            booking.slotTime,
-                            style: TextStyle(
-                                fontSize: 14, fontWeight: FontWeight.w500),
-                          ),
-                        ],
-                      ),
-                    ],
-                  ),
+                  SecondPartOfPendingList(
+                      formatedDate: formatedDate, booking: booking),
                   Space.hSpace10,
                   Align(
                     alignment: Alignment.centerRight,
@@ -145,21 +58,27 @@ class PendingSessionsList extends StatelessWidget {
                         bool isMoreThanOneDay =
                             now.difference(bookedDate).inHours > 24;
                         String refundWarning = '';
+                        String percent = '';
                         if (isMoreThanTwoHours && !isMoreThanOneDay) {
+                          percent = '50';
                           refundWarning =
                               "Note: If you cancel after 2 hours of booking, a ₹50 booking charge will be deducted from your refund.";
                         } else if (isMoreThanOneDay) {
+                          percent = '10';
                           refundWarning =
                               "Note: If you cancel after 24 hours of booking, a 10% charge will be deducted from your refund.";
                         }
 
                         showCancelConfirmationDialog(
+                            booking.fees,
                             context,
+                            bookedDateString,
                             booking.doctorName,
                             booking.slotDate,
                             booking.slotTime,
                             booking.uid,
                             refundWarning.isNotEmpty ? true : false,
+                            percent,
                             refundWarning);
                       },
                       style: TextButton.styleFrom(

@@ -1,7 +1,5 @@
 import 'dart:convert';
 
-import 'package:flutter/foundation.dart';
-
 class RegisterUserModel {
   String uid;
   String name;
@@ -12,9 +10,6 @@ class RegisterUserModel {
   String dob;
   String bloodGroup;
   String gender;
-  List<String> medicalRecords;
-  List<String> appointments;
-  List<String> notifications;
   String createdAt;
   RegisterUserModel({
     required this.uid,
@@ -26,9 +21,6 @@ class RegisterUserModel {
     required this.dob,
     required this.bloodGroup,
     required this.gender,
-    required this.medicalRecords,
-    required this.appointments,
-    required this.notifications,
     required this.createdAt,
   });
 
@@ -42,9 +34,6 @@ class RegisterUserModel {
     String? dob,
     String? bloodGroup,
     String? gender,
-    List<String>? medicalRecords,
-    List<String>? appointments,
-    List<String>? notifications,
     String? createdAt,
   }) {
     return RegisterUserModel(
@@ -57,9 +46,6 @@ class RegisterUserModel {
       dob: dob ?? this.dob,
       bloodGroup: bloodGroup ?? this.bloodGroup,
       gender: gender ?? this.gender,
-      medicalRecords: medicalRecords ?? this.medicalRecords,
-      appointments: appointments ?? this.appointments,
-      notifications: notifications ?? this.notifications,
       createdAt: createdAt ?? this.createdAt,
     );
   }
@@ -75,9 +61,6 @@ class RegisterUserModel {
       'dob': dob,
       'bloodGroup': bloodGroup,
       'gender': gender,
-      'medicalRecords': medicalRecords,
-      'appointments': appointments,
-      'notifications': notifications,
       'createdAt': createdAt,
     };
   }
@@ -93,56 +76,47 @@ class RegisterUserModel {
       dob: map['dob'] as String,
       bloodGroup: map['bloodGroup'] as String,
       gender: map['gender'] as String,
-      medicalRecords: List<String>.from((map['medicalRecords'] as List<String>),),
-      appointments: List<String>.from((map['appointments'] as List<String>),),
-      notifications: List<String>.from((map['notifications'] as List<String>),),
       createdAt: map['createdAt'] as String,
     );
   }
 
   String toJson() => json.encode(toMap());
 
-  factory RegisterUserModel.fromJson(String source) => RegisterUserModel.fromMap(json.decode(source) as Map<String, dynamic>);
+  factory RegisterUserModel.fromJson(String source) =>
+      RegisterUserModel.fromMap(json.decode(source) as Map<String, dynamic>);
 
   @override
   String toString() {
-    return 'RegisterUserModel(uid: $uid, name: $name, email: $email, role: $role, profileImage: $profileImage, contactNumber: $contactNumber, dob: $dob, bloodGroup: $bloodGroup, gender: $gender, medicalRecords: $medicalRecords, appointments: $appointments, notifications: $notifications, createdAt: $createdAt)';
+    return 'RegisterUserModel(uid: $uid, name: $name, email: $email, role: $role, profileImage: $profileImage, contactNumber: $contactNumber, dob: $dob, bloodGroup: $bloodGroup, gender: $gender, createdAt: $createdAt)';
   }
 
   @override
   bool operator ==(covariant RegisterUserModel other) {
     if (identical(this, other)) return true;
-  
-    return 
-      other.uid == uid &&
-      other.name == name &&
-      other.email == email &&
-      other.role == role &&
-      other.profileImage == profileImage &&
-      other.contactNumber == contactNumber &&
-      other.dob == dob &&
-      other.bloodGroup == bloodGroup &&
-      other.gender == gender &&
-      listEquals(other.medicalRecords, medicalRecords) &&
-      listEquals(other.appointments, appointments) &&
-      listEquals(other.notifications, notifications) &&
-      other.createdAt == createdAt;
+
+    return other.uid == uid &&
+        other.name == name &&
+        other.email == email &&
+        other.role == role &&
+        other.profileImage == profileImage &&
+        other.contactNumber == contactNumber &&
+        other.dob == dob &&
+        other.bloodGroup == bloodGroup &&
+        other.gender == gender &&
+        other.createdAt == createdAt;
   }
 
   @override
   int get hashCode {
     return uid.hashCode ^
-      name.hashCode ^
-      email.hashCode ^
-      role.hashCode ^
-      profileImage.hashCode ^
-      contactNumber.hashCode ^
-      dob.hashCode ^
-      bloodGroup.hashCode ^
-      gender.hashCode ^
-      medicalRecords.hashCode ^
-      appointments.hashCode ^
-      notifications.hashCode ^
-      createdAt.hashCode;
+        name.hashCode ^
+        email.hashCode ^
+        role.hashCode ^
+        profileImage.hashCode ^
+        contactNumber.hashCode ^
+        dob.hashCode ^
+        bloodGroup.hashCode ^
+        gender.hashCode ^
+        createdAt.hashCode;
   }
 }

@@ -18,19 +18,19 @@ final _privateConstructorUsedError = UnsupportedError(
 mixin _$PaymentEvent {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(PaymentModel payment) addPayment,
+    required TResult Function(PaymentModel payment, String docId) addPayment,
     required TResult Function() fetchAllPayments,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(PaymentModel payment)? addPayment,
+    TResult? Function(PaymentModel payment, String docId)? addPayment,
     TResult? Function()? fetchAllPayments,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(PaymentModel payment)? addPayment,
+    TResult Function(PaymentModel payment, String docId)? addPayment,
     TResult Function()? fetchAllPayments,
     required TResult orElse(),
   }) =>
@@ -83,7 +83,7 @@ abstract class _$$AddPaymentImplCopyWith<$Res> {
           _$AddPaymentImpl value, $Res Function(_$AddPaymentImpl) then) =
       __$$AddPaymentImplCopyWithImpl<$Res>;
   @useResult
-  $Res call({PaymentModel payment});
+  $Res call({PaymentModel payment, String docId});
 }
 
 /// @nodoc
@@ -100,12 +100,17 @@ class __$$AddPaymentImplCopyWithImpl<$Res>
   @override
   $Res call({
     Object? payment = null,
+    Object? docId = null,
   }) {
     return _then(_$AddPaymentImpl(
       null == payment
           ? _value.payment
           : payment // ignore: cast_nullable_to_non_nullable
               as PaymentModel,
+      null == docId
+          ? _value.docId
+          : docId // ignore: cast_nullable_to_non_nullable
+              as String,
     ));
   }
 }
@@ -113,14 +118,16 @@ class __$$AddPaymentImplCopyWithImpl<$Res>
 /// @nodoc
 
 class _$AddPaymentImpl implements _AddPayment {
-  const _$AddPaymentImpl(this.payment);
+  const _$AddPaymentImpl(this.payment, this.docId);
 
   @override
   final PaymentModel payment;
+  @override
+  final String docId;
 
   @override
   String toString() {
-    return 'PaymentEvent.addPayment(payment: $payment)';
+    return 'PaymentEvent.addPayment(payment: $payment, docId: $docId)';
   }
 
   @override
@@ -128,11 +135,12 @@ class _$AddPaymentImpl implements _AddPayment {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$AddPaymentImpl &&
-            (identical(other.payment, payment) || other.payment == payment));
+            (identical(other.payment, payment) || other.payment == payment) &&
+            (identical(other.docId, docId) || other.docId == docId));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, payment);
+  int get hashCode => Object.hash(runtimeType, payment, docId);
 
   /// Create a copy of PaymentEvent
   /// with the given fields replaced by the non-null parameter values.
@@ -145,30 +153,30 @@ class _$AddPaymentImpl implements _AddPayment {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(PaymentModel payment) addPayment,
+    required TResult Function(PaymentModel payment, String docId) addPayment,
     required TResult Function() fetchAllPayments,
   }) {
-    return addPayment(payment);
+    return addPayment(payment, docId);
   }
 
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(PaymentModel payment)? addPayment,
+    TResult? Function(PaymentModel payment, String docId)? addPayment,
     TResult? Function()? fetchAllPayments,
   }) {
-    return addPayment?.call(payment);
+    return addPayment?.call(payment, docId);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(PaymentModel payment)? addPayment,
+    TResult Function(PaymentModel payment, String docId)? addPayment,
     TResult Function()? fetchAllPayments,
     required TResult orElse(),
   }) {
     if (addPayment != null) {
-      return addPayment(payment);
+      return addPayment(payment, docId);
     }
     return orElse();
   }
@@ -206,9 +214,11 @@ class _$AddPaymentImpl implements _AddPayment {
 }
 
 abstract class _AddPayment implements PaymentEvent {
-  const factory _AddPayment(final PaymentModel payment) = _$AddPaymentImpl;
+  const factory _AddPayment(final PaymentModel payment, final String docId) =
+      _$AddPaymentImpl;
 
   PaymentModel get payment;
+  String get docId;
 
   /// Create a copy of PaymentEvent
   /// with the given fields replaced by the non-null parameter values.
@@ -258,7 +268,7 @@ class _$FetchAllPaymentsImpl implements _FetchAllPayments {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(PaymentModel payment) addPayment,
+    required TResult Function(PaymentModel payment, String docId) addPayment,
     required TResult Function() fetchAllPayments,
   }) {
     return fetchAllPayments();
@@ -267,7 +277,7 @@ class _$FetchAllPaymentsImpl implements _FetchAllPayments {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(PaymentModel payment)? addPayment,
+    TResult? Function(PaymentModel payment, String docId)? addPayment,
     TResult? Function()? fetchAllPayments,
   }) {
     return fetchAllPayments?.call();
@@ -276,7 +286,7 @@ class _$FetchAllPaymentsImpl implements _FetchAllPayments {
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(PaymentModel payment)? addPayment,
+    TResult Function(PaymentModel payment, String docId)? addPayment,
     TResult Function()? fetchAllPayments,
     required TResult orElse(),
   }) {

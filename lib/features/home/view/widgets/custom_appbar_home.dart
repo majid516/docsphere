@@ -1,8 +1,10 @@
 import 'dart:math';
-
 import 'package:docshpere/core/constants/app_theme/app_theme.dart';
+import 'package:docshpere/core/constants/spaces/space.dart';
 import 'package:docshpere/core/utils/screen_size/screen_size.dart';
+import 'package:docshpere/routes/routes_name.dart';
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 
 class CustomAppBarInHomeWidget extends StatelessWidget {
   const CustomAppBarInHomeWidget({super.key});
@@ -29,7 +31,6 @@ class CustomAppBarInHomeWidget extends StatelessWidget {
               width: ScreenSize.width * 0.6,
               height: ScreenSize.width,
               decoration: BoxDecoration(
-               
                 color: MyColors.secondaryColor,
                 borderRadius: BorderRadius.only(
                   bottomLeft: Radius.circular(60),
@@ -44,16 +45,33 @@ class CustomAppBarInHomeWidget extends StatelessWidget {
           right: 25,
           child: SizedBox(
             height: 45,
-            child: SearchBar(
-              backgroundColor: WidgetStatePropertyAll(MyColors.whiteColor),
-              leading: Icon(Icons.search, color: MyColors.darkGreyColor,),
-              elevation: WidgetStatePropertyAll(5),
-              padding: WidgetStatePropertyAll(EdgeInsets.only(left: 12)),
-              hintText: 'Search your category',
-              hintStyle: WidgetStatePropertyAll(
-                TextStyle(
-                  fontSize: 20,
-                  color: MyColors.darkGreyColor,
+            child: InkWell(
+              onTap: () => context.push(MyRoutes.aiChattingScreen),
+              child: Container(
+                width: ScreenSize.width * 0.9,
+                height: 40,
+                decoration: BoxDecoration(
+                  color: MyColors.whiteColor,
+                  borderRadius: BorderRadius.circular(20),
+                ),
+                child: Row(
+                  children: [
+                    Space.wSpace10,
+                    CircleAvatar(
+                      radius: 15,
+                      backgroundColor: MyColors.whiteColor,
+                      backgroundImage:
+                          AssetImage('asset/Drawer icons/ai_icon.png'),
+                    ),
+                    Space.wSpace10,
+                    Text(
+                      'Ask Docshpere Ai..',
+                      style: TextStyle(
+                        fontSize: 19,
+                        color: MyColors.darkGreyColor,
+                      ),
+                    )
+                  ],
                 ),
               ),
             ),

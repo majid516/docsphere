@@ -3,16 +3,13 @@ import 'dart:convert';
 import 'package:docshpere/core/components/custom_app_bar.dart';
 import 'package:docshpere/core/components/somthing_went_worng_screen.dart';
 import 'package:docshpere/core/constants/app_theme/app_theme.dart';
+import 'package:docshpere/core/constants/text_styles/authentication_syles.dart';
 import 'package:docshpere/core/utils/screen_size/screen_size.dart';
-import 'package:docshpere/features/chat/services/chat_services.dart';
 import 'package:docshpere/features/chat/view/widget/chat_partners_loading_widget.dart';
-import 'package:docshpere/features/chat/view_model/chat_bloc/chat_bloc.dart';
 import 'package:docshpere/routes/routes_name.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
-import 'package:shimmer/shimmer.dart';
-
 import '../../view_model/chat_partners_bloc/chat_partners_bloc.dart';
 
 class MyChatsScreen extends StatelessWidget {
@@ -36,6 +33,9 @@ class MyChatsScreen extends StatelessWidget {
         builder: (context, state) {
           return state.maybeWhen(
             chatPartnersLoaded: (chats) {
+              if(chats.isEmpty){
+                return Center(child: Text('No Chat Available', style: AuthenticationSyles.hintTextStyle,),);
+              }
               return ListView.builder(
                 itemCount: chats.length,
                 itemBuilder: (context, index) {

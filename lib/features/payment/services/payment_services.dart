@@ -5,7 +5,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 
 class PaymentServices {
   final currentUser = FirebaseAuth.instance.currentUser;
-  Future<void> addPayment(PaymentModel payment) async {
+  Future<void> addPayment(PaymentModel payment, String docId) async {
     final userId = currentUser?.uid;
 
     try {
@@ -23,6 +23,11 @@ class PaymentServices {
             .doc('payments')
             .collection('PaymentTransactions');
         paymentAdminDoc.add(payment.toMap());
+        final paymentDoctor = FirebaseFirestore.instance
+            .collection('doctor')
+            .doc(docId)
+            .collection('PaymentTransactions');
+        paymentDoctor.add(payment.toMap());
       }
     } catch (e, stackTrace) {
       log('Error adding payment: $e');

@@ -1,80 +1,80 @@
 import 'package:docshpere/core/constants/app_theme/app_theme.dart';
+import 'package:docshpere/core/utils/screen_size/screen_size.dart';
 import 'package:flutter/material.dart';
 
 class ChatMessage extends StatelessWidget {
-  final String text;
-  final bool isSentByMe;
+  final bool isUser;
+  final String message;
   final String timestamp;
 
   const ChatMessage({
     super.key,
-    required this.text,
-    required this.isSentByMe,
     required this.timestamp,
+    required this.isUser,
+    required this.message,
   });
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.symmetric(vertical: 6, horizontal: 12),
+    return SizedBox(
+      width: ScreenSize.width,
       child: Row(
+        crossAxisAlignment: CrossAxisAlignment.start,
         mainAxisAlignment:
-            isSentByMe ? MainAxisAlignment.end : MainAxisAlignment.start,
+            !isUser ? MainAxisAlignment.start : MainAxisAlignment.end,
         children: [
-          SizedBox(width: isSentByMe ? 30 : 0),
+          SizedBox(
+            width: isUser ? 30 : 0,
+          ),
           Flexible(
             child: Container(
-              padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 14),
+              margin: const EdgeInsets.symmetric(vertical: 5, horizontal: 10),
+              padding: const EdgeInsets.all(10),
               decoration: BoxDecoration(
-                color: isSentByMe ? MyColors.primaryColor : Colors.grey[200],
+                color: isUser ? MyColors.primaryColor : Colors.grey[200],
                 borderRadius: BorderRadius.only(
                   topLeft: const Radius.circular(12),
                   topRight: const Radius.circular(12),
-                  bottomLeft:
-                      isSentByMe ? const Radius.circular(12) : Radius.zero,
-                  bottomRight:
-                      isSentByMe ? Radius.zero : const Radius.circular(12),
+                  bottomLeft: isUser ? const Radius.circular(12) : Radius.zero,
+                  bottomRight: isUser ? Radius.zero : const Radius.circular(12),
                 ),
                 boxShadow: [
                   BoxShadow(
-                    color: Colors.black.withValues(alpha:  0.1),
+                    color: Colors.black.withValues(alpha: 0.1),
                     blurRadius: 5,
                     offset: Offset(2, 2),
                   ),
                 ],
               ),
               child: Column(
-                crossAxisAlignment: isSentByMe
-                    ? CrossAxisAlignment.end
-                    : CrossAxisAlignment.start,
+                crossAxisAlignment:
+                    isUser ? CrossAxisAlignment.end : CrossAxisAlignment.start,
                 children: [
                   Text(
-                    text,
+                    message,
                     style: TextStyle(
-                      fontSize: 16,
-                      color: isSentByMe ? Colors.white : Colors.black87,
+                      fontSize: 15,
+                      color: isUser ? Colors.white : Colors.black87,
                     ),
+                    softWrap: true,
                   ),
                   const SizedBox(height: 4),
-                  Align(
-                    alignment: !isSentByMe
-                        ? Alignment.bottomLeft
-                        : Alignment.bottomRight,
-                    child: Text(
-                      timestamp,
-                      style: TextStyle(
-                        fontSize: 12,
-                        color: isSentByMe
-                            ? Colors.white70
-                            : Colors.black54, 
-                      ),
+                  Text(
+                    timestamp,
+                    textAlign: TextAlign.end,
+                    softWrap: true,
+                    style: TextStyle(
+                      fontSize: 12,
+                      color: isUser ? Colors.white70 : Colors.black54,
                     ),
                   ),
                 ],
               ),
             ),
           ),
-          SizedBox(width: isSentByMe ? 0 : 30),
+          SizedBox(
+            width: !isUser ? 30 : 0,
+          ),
         ],
       ),
     );

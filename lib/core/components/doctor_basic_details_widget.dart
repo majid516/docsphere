@@ -15,7 +15,7 @@ class DoctorBasicDetailsCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return SizedBox(
         width: ScreenSize.width,
-        height: ScreenSize.height * 0.17,
+        height: ScreenSize.height * 0.160,
         child: Row(
           children: [
             Container(

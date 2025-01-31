@@ -85,7 +85,9 @@ class DrawerWidget extends StatelessWidget {
           ),
           DrawerItemsWidgets(
               title: 'Reminder',
-              action: () {},
+              action: () {
+                context.push(MyRoutes.medicalReminderScreen);
+              },
               leadingIcon: Icon(
                 Icons.alarm,
                 size: 38,
@@ -129,7 +131,9 @@ class DrawerWidget extends StatelessWidget {
           ),
           DrawerItemsWidgets(
             title: 'settings',
-            action: () {},
+            action: () {
+              context.push(MyRoutes.settingsScreen);
+            },
           ),
           DrawerItemsWidgets(
               title: 'Like us? Give 5 stars',
@@ -140,18 +144,13 @@ class DrawerWidget extends StatelessWidget {
               )),
           DrawerItemsWidgets(
             title: 'Are you a doctor',
-            action: () {},
+            action: () {
+              context.push(MyRoutes.areYouDoctorScreen);
+            },
             image: 'asset/Drawer icons/doc_n.png',
             size: 22,
           ),
-          DrawerItemsWidgets(
-            title: 'Help Center',
-            action: () {},
-            leadingIcon: Icon(
-              Icons.help_outline_outlined,
-              color: MyColors.darkGreyColor,
-            ),
-          ),
+        
           Divider(
             thickness: 12,
             color: MyColors.lightGreyColor.withValues(alpha: 0.4),
@@ -177,7 +176,7 @@ class DrawerWidget extends StatelessWidget {
                         onPressed: () async {
                           await signoutUser();
                           if (context.mounted) {
-                          context.go(MyRoutes.signInOrRegister);
+                          context.push(MyRoutes.signInOrRegister);
                           }
                         },
                         child: Text('Sign Out'),

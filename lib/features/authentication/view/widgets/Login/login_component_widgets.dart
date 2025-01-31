@@ -193,7 +193,7 @@ class LoginComponentsWidgets extends StatelessWidget {
                         ),
                         TextButton(
                           onPressed: () {
-                            context.go(MyRoutes.register);
+                            context.push(MyRoutes.register);
                           },
                           child: Text(
                             'Sign up',

@@ -77,7 +77,8 @@ void showStoryDialog(BuildContext context,
                                   doctorId: doctorId, story: story),
                             );
                         context.pop();
-                        showCustomSnackBar(context, 'successfully added your story', false);
+                        showCustomSnackBar(
+                            context, 'successfully added your story', false);
                       }
                     }
                   },

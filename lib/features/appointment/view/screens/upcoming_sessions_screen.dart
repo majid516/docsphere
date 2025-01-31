@@ -1,13 +1,11 @@
 import 'dart:developer';
-
 import 'package:docshpere/core/components/custom_app_bar.dart';
 import 'package:docshpere/core/components/general_error_screen.dart';
 import 'package:docshpere/core/components/somthing_went_worng_screen.dart';
 import 'package:docshpere/core/constants/app_theme/app_theme.dart';
 import 'package:docshpere/core/constants/text_styles/authentication_syles.dart';
 import 'package:docshpere/core/utils/screen_size/screen_size.dart';
-import 'package:docshpere/features/appointment/view/widgets/under_confirmation_list_tile.dart';
-import 'package:docshpere/features/appointment/view/widgets/upcoming_session_tile.dart';
+import 'package:docshpere/features/appointment/view/widgets/compined_upcoming_list_widget.dart';
 import 'package:docshpere/features/appointment/view_model/bloc/upcoming_session_bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -66,35 +64,9 @@ class UpcomingSessionsScreen extends StatelessWidget {
                     ),
                   );
                 }
-                return Column(
-                  children: [
-                    Padding(
-                      padding: const EdgeInsets.symmetric(vertical: 2, horizontal:  8.0),
-                      child: ListView.builder(
-                        shrinkWrap: true,
-                        padding: EdgeInsets.zero,
-                        itemCount: underComfirmationList.length,
-                        itemBuilder: (context, index) {
-                          final booking = underComfirmationList[index];
-                          return UnderConfirmationListTile(session: booking);
-                        },
-                      ),
-                    ),
-                    
-                    Padding(
-                      padding: const EdgeInsets.symmetric(vertical: 2, horizontal:  8.0),
-                      child: ListView.builder(
-                        shrinkWrap: true,
-                        padding: EdgeInsets.zero,
-                        itemCount: activeList.length,
-                        itemBuilder: (context, index) {
-                          final booking = activeList[index];
-                          return SessionTile(session: booking);
-                        },
-                      ),
-                    ),
-                  ],
-                );
+                return CompinedUpcomingListWidget(
+                    underComfirmationList: underComfirmationList,
+                    activeList: activeList);
               },
               loadingState: () {
                 return ListView.builder(

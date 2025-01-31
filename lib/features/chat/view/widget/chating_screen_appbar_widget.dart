@@ -70,7 +70,7 @@ class ChatingScreenAppbarWidget extends StatelessWidget {
                   )),
               CircleAvatar(
                 backgroundImage:
-                    MemoryImage(base64Decode(profile)), // Profile image
+                    MemoryImage(base64Decode(profile)), 
                 radius: 20,
               ),
               Space.wSpace20,

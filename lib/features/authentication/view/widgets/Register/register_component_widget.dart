@@ -33,7 +33,7 @@ class RegisterComponentsWidgets extends StatelessWidget {
         if (state is ErrorState) {
           showCustomSnackBar(context, state.error, true);
         } else if (state is LoadedState) {
-          context.go(MyRoutes.signIn);
+          context.push(MyRoutes.signIn);
         }
       },
       child: Padding(
@@ -127,6 +127,7 @@ class RegisterComponentsWidgets extends StatelessWidget {
                           final password = passwordController.text.trim();
                           final name = nameController.text.trim();
                           context.read<AuthBloc>().add(SignUp(email, password, name));
+                          context.push(MyRoutes.signIn);
                         } else {
                           showCustomSnackBar(context, 'Enter all valid data', true);
                         }
@@ -143,7 +144,7 @@ class RegisterComponentsWidgets extends StatelessWidget {
                         ),
                         TextButton(
                           onPressed: () {
-                            context.go(MyRoutes.signIn);
+                            context.push(MyRoutes.signIn);
                           },
                           child: Text(
                             'Sign In',

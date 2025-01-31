@@ -12,7 +12,7 @@ class PaymentBloc extends Bloc<PaymentEvent, PaymentState> {
     on<_AddPayment>((event, emit) async{
       try {
         emit(PaymentState.loadingState());
-        await PaymentServices().addPayment(event.payment);
+        await PaymentServices().addPayment(event.payment, event.docId);
         emit(PaymentState.loadedState());
       } catch (e) {
         emit(PaymentState.errorState());

@@ -36,7 +36,7 @@ class BookAppointmentScreen extends StatefulWidget {
   });
 
   @override
-  _BookAppointmentScreenState createState() => _BookAppointmentScreenState();
+  State<BookAppointmentScreen> createState() => _BookAppointmentScreenState();
 }
 
 class _BookAppointmentScreenState extends State<BookAppointmentScreen> {
@@ -94,9 +94,19 @@ class _BookAppointmentScreenState extends State<BookAppointmentScreen> {
                         timeSlots: []),
                   )
                   .timeSlots;
-              final nonBookedSlot = currentDateSlot
-                  .where((slot) => slot.isBooked == 'false')
-                  .toList();
+
+              final sortedSlots = currentDateSlot
+                  .where((slot) =>
+                      slot.isBooked == 'false' || slot.isBooked == 'true')
+                  .toList()
+                ..sort((a, b) {
+                  if (a.isBooked == 'false' && b.isBooked == 'true') {
+                    return -1;
+                  } else if (a.isBooked == 'true' && b.isBooked == 'false') {
+                    return 1;
+                  }
+                  return a.time.compareTo(b.time);
+                });
 
               return Padding(
                 padding: const EdgeInsets.all(6.0),
@@ -139,37 +149,43 @@ class _BookAppointmentScreenState extends State<BookAppointmentScreen> {
                       heading: 'Select Time Slot',
                     ),
                     SizedBox(height: 10),
-                    nonBookedSlot.isNotEmpty
+                    sortedSlots.isNotEmpty
                         ? SizedBox(
-                          width: ScreenSize.width,
-                          height: ScreenSize.height * 0.42,
-                          child: SingleChildScrollView(
-                            child: Wrap(
+                            width: ScreenSize.width,
+                            height: ScreenSize.height * 0.42,
+                            child: SingleChildScrollView(
+                              child: Wrap(
                                 spacing: 5,
                                 runSpacing: 2,
-                                children: nonBookedSlot.map((entry) {
+                                children: sortedSlots.map((entry) {
                                   return ChoiceChip(
-                                    checkmarkColor: MyColors.blackColor,
+                                    checkmarkColor: MyColors.whiteColor,
                                     label: Text(entry.time),
                                     selected: selectedTimeSlot == entry.time,
-                                    onSelected: (selected) {
-                                      setState(() {
-                                        selectedTimeSlot =
-                                            selected ? entry.time : "";
-                                      });
-                                    },
+                                    onSelected: entry.isBooked == 'false'
+                                        ? (selected) {
+                                            setState(() {
+                                              selectedTimeSlot =
+                                                  selected ? entry.time : "";
+                                            });
+                                          }
+                                        : null,
                                     backgroundColor: MyColors.whiteColor,
                                     selectedColor: MyColors.primaryColor,
                                     labelStyle: TextStyle(
-                                      color: selectedTimeSlot == entry.time
+                                      color: entry.isBooked == 'false' &&
+                                              selectedTimeSlot == entry.time
                                           ? Colors.white
-                                          : Colors.black,
+                                          : entry.isBooked == 'true'
+                                              ? MyColors.errorRed
+                                                  
+                                              : Colors.black,
                                     ),
                                   );
                                 }).toList(),
                               ),
-                          ),
-                        )
+                            ),
+                          )
                         : NoSlotAvailableWidget(),
                     Spacer(),
                     BookingButtonWidget(
@@ -181,7 +197,7 @@ class _BookAppointmentScreenState extends State<BookAppointmentScreen> {
                       fees: widget.fees,
                       profile: widget.profile,
                       experience: widget.experience,
-                      consultationType:widget.consultationType
+                      consultationType: widget.consultationType,
                     ),
                     Space.hSpace20,
                   ],
@@ -194,7 +210,7 @@ class _BookAppointmentScreenState extends State<BookAppointmentScreen> {
             errorState: (message) {
               return Text(message);
             },
-            loadingState: () => LoadingWidget(),
+            loadingState: () => DoctorCardLoadingListWidget(),
           );
         },
       ),
