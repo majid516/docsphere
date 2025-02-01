@@ -1,5 +1,4 @@
 import 'dart:developer';
-
 import 'package:docshpere/core/components/custom_snackbar.dart';
 import 'package:docshpere/core/constants/app_theme/app_theme.dart';
 import 'package:docshpere/core/constants/text_styles/authentication_syles.dart';
@@ -7,12 +6,14 @@ import 'package:docshpere/core/utils/screen_size/screen_size.dart';
 import 'package:docshpere/features/reminder/view/widgets/reminder_app_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
+import 'package:flutter_local_notifications/flutter_local_notifications.dart';
+import 'package:timezone/timezone.dart' as tz;
 
 class MedicalReminderScreen extends StatefulWidget {
   const MedicalReminderScreen({super.key});
 
   @override
-  _MedicalReminderScreenState createState() => _MedicalReminderScreenState();
+  State<MedicalReminderScreen> createState() => _MedicalReminderScreenState();
 }
 
 class _MedicalReminderScreenState extends State<MedicalReminderScreen> {
@@ -25,6 +26,24 @@ class _MedicalReminderScreenState extends State<MedicalReminderScreen> {
   bool _showFields = false;
 
   final List<Map<String, dynamic>> _reminders = [];
+
+  FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin =
+      FlutterLocalNotificationsPlugin();
+
+  @override
+  void initState() {
+    super.initState();
+    _initializeNotifications();
+  }
+
+  Future<void> _initializeNotifications() async {
+    final AndroidInitializationSettings initializationSettingsAndroid =
+        AndroidInitializationSettings('@mipmap/ic_launcher');
+    final InitializationSettings initializationSettings =
+        InitializationSettings(android: initializationSettingsAndroid);
+
+    await flutterLocalNotificationsPlugin.initialize(initializationSettings);
+  }
 
   Future<void> _selectDate(BuildContext context) async {
     final DateTime? pickedDate = await showDatePicker(
@@ -52,10 +71,22 @@ class _MedicalReminderScreenState extends State<MedicalReminderScreen> {
     }
   }
 
-  void _addReminder() {
+  Future<void> _addReminder() async {
     if (_reminderNameController.text.isNotEmpty &&
         _selectedDate != null &&
         _selectedTime != null) {
+      final DateTime reminderDateTime = DateTime(
+        _selectedDate!.year,
+        _selectedDate!.month,
+        _selectedDate!.day,
+        _selectedTime!.hour,
+        _selectedTime!.minute,
+      );
+
+      if (_notificationsEnabled) {
+        await _scheduleNotification(reminderDateTime);
+      }
+
       setState(() {
         _reminders.add({
           'name': _reminderNameController.text,
@@ -78,6 +109,34 @@ class _MedicalReminderScreenState extends State<MedicalReminderScreen> {
     }
   }
 
+Future<void> _scheduleNotification(DateTime scheduledDateTime) async {
+  final location = tz.getLocation('America/New_York'); 
+  final tzScheduledDateTime = tz.TZDateTime.from(scheduledDateTime, location);
+
+  final androidDetails = AndroidNotificationDetails(
+    'reminder_channel_id',
+    'Reminder Notifications',
+    channelDescription: 'Notifications for reminders',
+    importance: Importance.high,
+    priority: Priority.high,
+    enableVibration: true,
+    playSound: true,
+  );
+
+  final platformDetails = NotificationDetails(android: androidDetails);
+
+  await flutterLocalNotificationsPlugin.zonedSchedule(
+    0,
+    'Medical Reminder',
+    'It\'s time for your reminder!',
+    tzScheduledDateTime, 
+    platformDetails,
+    androidScheduleMode: AndroidScheduleMode.exact,
+    uiLocalNotificationDateInterpretation:
+        UILocalNotificationDateInterpretation.absoluteTime,
+  );
+}
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -92,7 +151,6 @@ class _MedicalReminderScreenState extends State<MedicalReminderScreen> {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             if (_showFields) ...[
-              // Reminder Name Input
               TextFormField(
                 controller: _reminderNameController,
                 decoration: InputDecoration(
@@ -103,8 +161,6 @@ class _MedicalReminderScreenState extends State<MedicalReminderScreen> {
                 ),
               ),
               SizedBox(height: 16),
-
-              // Date and Time Pickers
               Row(
                 children: [
                   Expanded(
@@ -149,8 +205,6 @@ class _MedicalReminderScreenState extends State<MedicalReminderScreen> {
                 ],
               ),
               SizedBox(height: 16),
-
-              // Repeat Frequency Dropdown
               DropdownButtonFormField<String>(
                 value: _repeatFrequency,
                 items: ["Daily", "Weekly", "Monthly", "Custom"]
@@ -172,8 +226,6 @@ class _MedicalReminderScreenState extends State<MedicalReminderScreen> {
                 ),
               ),
               SizedBox(height: 16),
-
-              // Notes Input
               TextFormField(
                 controller: _notesController,
                 maxLines: 3,
@@ -186,8 +238,6 @@ class _MedicalReminderScreenState extends State<MedicalReminderScreen> {
               ),
               SizedBox(height: 20),
             ],
-
-            // Add Reminder Button
             Center(
               child: ElevatedButton(
                 onPressed: () {
@@ -200,7 +250,6 @@ class _MedicalReminderScreenState extends State<MedicalReminderScreen> {
                   }
                 },
                 style: ElevatedButton.styleFrom(
-                  // padding: EdgeInsets.symmetric(vertical: 14, horizontal: 40),
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(20),
                   ),
@@ -218,8 +267,6 @@ class _MedicalReminderScreenState extends State<MedicalReminderScreen> {
               ),
             ),
             SizedBox(height: 20),
-
-            // Active Reminders List
             Expanded(
               child: _reminders.isEmpty
                   ? Center(
@@ -242,16 +289,14 @@ class _MedicalReminderScreenState extends State<MedicalReminderScreen> {
                                   vertical: 12, horizontal: 16),
                               tileColor:  MyColors.whiteColor,
                               shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(
-                                    12), 
+                                borderRadius: BorderRadius.circular(12), 
                               ),
                               title: Text(
                                 reminder['name'],
                                 style: TextStyle(
                                   fontSize: 18,
                                   fontWeight: FontWeight.bold,
-                                  color:
-                                       MyColors.primaryColor, 
+                                  color: MyColors.primaryColor, 
                                 ),
                               ),
                               subtitle: Column(
@@ -288,8 +333,7 @@ class _MedicalReminderScreenState extends State<MedicalReminderScreen> {
                                 },
                               ),
                               leading: Icon(
-                                Icons
-                                    .notifications_active, 
+                                Icons.notifications_active, 
                                 color:  MyColors.primaryColor,
                               ),
                               onTap: () {

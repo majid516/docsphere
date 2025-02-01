@@ -21,7 +21,7 @@ class DoctorDetailsCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return SizedBox(
       width: ScreenSize.width,
-      height: 220,
+      height: 180,
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [

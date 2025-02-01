@@ -62,7 +62,7 @@ class _SessionTileState extends State<SessionTile> {
     return AnimatedContainer(
       duration: Duration(milliseconds: 500),
       curve: Curves.easeInOut,
-      margin: EdgeInsets.symmetric(vertical: 5),
+      margin: EdgeInsets.symmetric(vertical: 4),
       decoration: BoxDecoration(
         color: Colors.white,
         borderRadius: BorderRadius.circular(15),
@@ -89,7 +89,7 @@ class _SessionTileState extends State<SessionTile> {
           borderRadius: BorderRadius.circular(15),
         ),
         title: Padding(
-          padding: const EdgeInsets.symmetric(vertical: 12, horizontal: 20),
+          padding: const EdgeInsets.symmetric(vertical: 6, horizontal: 20),
           child: Row(
             children: [
               Icon(Icons.alarm, size: 23),

@@ -1,8 +1,8 @@
 import 'dart:developer';
-import 'dart:io';
-import 'package:firebase_auth/firebase_auth.dart';
+import 'package:docshpere/features/notifications/view/screens/notification_screen.dart';
+import 'package:docshpere/routes/routes.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
-
+import 'package:flutter/material.dart';
 class NotificationServices {
   final FirebaseMessaging firebaseMessaging = FirebaseMessaging.instance;
 
@@ -15,41 +15,56 @@ class NotificationServices {
     }
 
     final String? fcmToken = await firebaseMessaging.getToken();
-  //  log('FCM Token: $fcmToken');
-    final currentUser = FirebaseAuth.instance.currentUser;
-    if (currentUser == null) {
-      log('No user is currently logged in.');
-      return;
-    }
-    if (Platform.isIOS) {
-      String? apnsToken = await firebaseMessaging.getAPNSToken();
-      if (apnsToken == null) {
-        log('APNS Token is NULL. Waiting and retrying...');
-        await Future.delayed(const Duration(seconds: 3));
-        apnsToken = await firebaseMessaging.getAPNSToken();
+    log('FCM Token: $fcmToken');
+
+    FirebaseMessaging.instance.getInitialMessage().then((RemoteMessage? message) {
+      if (message != null) {
+        _handleMessage(message);
       }
-
-      if (apnsToken != null) {
-    //    log('APNS Token: $apnsToken');
-        await firebaseMessaging.subscribeToTopic(currentUser.uid);
-      } else {
-        log('Failed to get APNS Token.');
-      }
-
-      firebaseMessaging.onTokenRefresh.listen((newToken) async {
-   //     log('New APNS Token Received: $newToken');
-        await firebaseMessaging.subscribeToTopic(currentUser.uid);
-      });
-    } else {
-      await firebaseMessaging.subscribeToTopic(currentUser.uid);
-    }
-
-    FirebaseMessaging.onMessage.listen((RemoteMessage message) {
-      log('Foreground Message Received: ${message.notification?.title}');
     });
 
     FirebaseMessaging.onMessageOpenedApp.listen((RemoteMessage message) {
-      log('Notification Clicked: ${message.notification?.title}');
+      _handleMessage(message);
     });
+
+    FirebaseMessaging.onMessage.listen((RemoteMessage message) {
+      _showNotificationDialog(message);
+    });
+  }
+
+  void _handleMessage(RemoteMessage message) {
+    if (navigatorKey.currentState != null) {
+      navigatorKey.currentState!.push(
+        MaterialPageRoute(
+          builder: (context) => NotificationScreen(),
+        ),
+      );
+    } else {
+      log("Navigator key is not available yet.");
+    }
+  }
+
+  void _showNotificationDialog(RemoteMessage message) {
+    final context = navigatorKey.currentContext;
+    if (context != null) {
+      showDialog(
+        context: context,
+        builder: (context) => AlertDialog(
+          title: Text(message.notification?.title ?? "Notification"),
+          content: Text(message.notification?.body ?? "No Message"),
+          actions: [
+            TextButton(
+              onPressed: () {
+                Navigator.pop(context);
+                _handleMessage(message);
+              },
+              child: Text("Open"),
+            ),
+          ],
+        ),
+      );
+    } else {
+      log("Context is not ready for dialog.");
+    }
   }
 }

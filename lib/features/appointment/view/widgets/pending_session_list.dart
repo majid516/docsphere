@@ -17,11 +17,18 @@ class PendingSessionsList extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final sortedList = List<UpcomingSessionModel>.from(pendingList)
+      ..sort((a, b) {
+        final dateTimeA = _combineDateAndTime(a.slotDate, a.slotTime);
+        final dateTimeB = _combineDateAndTime(b.slotDate, b.slotTime);
+        return dateTimeA.compareTo(dateTimeB);
+      });
+
     return ListView.builder(
       padding: EdgeInsets.zero,
-      itemCount: pendingList.length,
+      itemCount: sortedList.length,
       itemBuilder: (context, index) {
-        final booking = pendingList[index];
+        final booking = sortedList[index];
         final currentDate = DateFormat("yyyy-MM-dd").parse(booking.slotDate);
         final formatedDate = DateFormat("yyyy-MMM-dd").format(currentDate);
 
@@ -43,7 +50,6 @@ class PendingSessionsList extends StatelessWidget {
                   Space.hSpace10,
                   SecondPartOfPendingList(
                       formatedDate: formatedDate, booking: booking),
-                  Space.hSpace10,
                   Align(
                     alignment: Alignment.centerRight,
                     child: TextButton(
@@ -94,5 +100,11 @@ class PendingSessionsList extends StatelessWidget {
         );
       },
     );
+  }
+
+  DateTime _combineDateAndTime(String slotDate, String slotTime) {
+    final date = DateFormat("yyyy-MM-dd").parse(slotDate);
+    final time = DateFormat("hh:mm a").parse(slotTime); 
+    return DateTime(date.year, date.month, date.day, time.hour, time.minute);
   }
 }

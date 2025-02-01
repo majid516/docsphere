@@ -90,7 +90,7 @@ class TopDoctorDetailsCardWidget extends StatelessWidget {
                     ),
                   ],
                 ),
-                Space.hSpace15,
+                Space.hSpace10,
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [

@@ -11,11 +11,11 @@ class SuggestionLoadingWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return SizedBox(
       width: ScreenSize.width,
-      height: ScreenSize.height * 0.31,
-      child: Container(
+      height: 200,
+      child: Container( 
             width: ScreenSize.width * 0.96,
-            height: ScreenSize.height * 0.22,
-            decoration: BoxDecoration(
+            height: 200,
+            decoration: BoxDecoration( 
               borderRadius: BorderRadius.circular(12),
               color: MyColors.whiteColor,
             ),

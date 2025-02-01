@@ -37,126 +37,128 @@ class _SuggestImprovementsPageState extends State<SuggestImprovementsPage> {
       backgroundColor: MyColors.whiteColor,
       body: Padding(
         padding: const EdgeInsets.all(16.0),
-        child: Column(
-          children: [
-            SizedBox(height: 20),
-            Text(
-              "We'd love to hear from you!",
-              style: TextStyle(
-                fontSize: 22,
-                fontWeight: FontWeight.bold,
-                color: MyColors.primaryColor,
+        child: SingleChildScrollView(
+          child: Column(
+            children: [
+              SizedBox(height: 20),
+              Text(
+                "We'd love to hear from you!",
+                style: TextStyle(
+                  fontSize: 22,
+                  fontWeight: FontWeight.bold,
+                  color: MyColors.primaryColor,
+                ),
               ),
-            ),
-            SizedBox(height: 10),
-            Text(
-              "Help us improve Docsphere by sharing your suggestions below:",
-              textAlign: TextAlign.center,
-              style: TextStyle(fontSize: 16, color: MyColors.darkGreyColor),
-            ),
-            SizedBox(height: 20),
-
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceAround,
-              children: List.generate(5, (index) {
-                return IconButton(
-                  onPressed: () {
-                    setState(() {
-                      rating = index + 1;
-                    });
-                  },
-                  icon: Icon(
-                    Icons.emoji_emotions,
-                    color: index < rating
-                        ? MyColors.primaryColor
-                        : Colors.grey.shade400,
-                    size: 30,
+              SizedBox(height: 10),
+              Text(
+                "Help us improve Docsphere by sharing your suggestions below:",
+                textAlign: TextAlign.center,
+                style: TextStyle(fontSize: 16, color: MyColors.darkGreyColor),
+              ),
+              SizedBox(height: 20),
+          
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceAround,
+                children: List.generate(5, (index) {
+                  return IconButton(
+                    onPressed: () {
+                      setState(() {
+                        rating = index + 1;
+                      });
+                    },
+                    icon: Icon(
+                      Icons.emoji_emotions,
+                      color: index < rating
+                          ? MyColors.primaryColor
+                          : Colors.grey.shade400,
+                      size: 30,
+                    ),
+                  );
+                }),
+              ),
+              SizedBox(height: 10),
+              Text(
+                "How would you rate our app?",
+                style: TextStyle(fontSize: 16, color: MyColors.darkGreyColor),
+              ),
+              SizedBox(height: 20),
+              DropdownButtonFormField<String>(
+                value: category,
+                onChanged: (value) {
+                  setState(() {
+                    category = value!;
+                  });
+                },
+                decoration: InputDecoration(
+                  labelText: "Category",
+                  filled: true,
+                  fillColor: Colors.grey.shade200,
+                  border: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(12),
                   ),
-                );
-              }),
-            ),
-            SizedBox(height: 10),
-            Text(
-              "How would you rate our app?",
-              style: TextStyle(fontSize: 16, color: MyColors.darkGreyColor),
-            ),
-            SizedBox(height: 20),
-            DropdownButtonFormField<String>(
-              value: category,
-              onChanged: (value) {
-                setState(() {
-                  category = value!;
-                });
-              },
-              decoration: InputDecoration(
-                labelText: "Category",
-                filled: true,
-                fillColor: Colors.grey.shade200,
-                border: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(12),
+                ),
+                items: categories.map((String category) {
+                  return DropdownMenuItem<String>(
+                    value: category,
+                    child: Text(category),
+                  );
+                }).toList(),
+              ),
+              SizedBox(height: 20),
+              TextField(
+                controller: _feedbackController,
+                maxLines: 5,
+                decoration: InputDecoration(
+                  hintText: "Type your suggestion here...",
+                  filled: true,
+                  fillColor: Colors.grey.shade100,
+                  border: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(12),
+                  ),
                 ),
               ),
-              items: categories.map((String category) {
-                return DropdownMenuItem<String>(
-                  value: category,
-                  child: Text(category),
-                );
-              }).toList(),
-            ),
-            SizedBox(height: 20),
-            TextField(
-              controller: _feedbackController,
-              maxLines: 5,
-              decoration: InputDecoration(
-                hintText: "Type your suggestion here...",
-                filled: true,
-                fillColor: Colors.grey.shade100,
-                border: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(12),
+              SizedBox(height: 20),
+              ElevatedButton(
+                onPressed: () async {
+                  if (_feedbackController.text.trim().isEmpty) {
+                    showCustomSnackBar(context, 'enter your feedback', true);
+                    return;
+                  }
+                  showCustomSnackBar(
+                      context,
+                      "Your feedback has been submitted. We value your input!",
+                      false);
+                  DateTime now = DateTime.now();
+                  String formattedDateTime =
+                      DateFormat('yyyy-MM-dd HH:mm:ss').format(now);
+                  final appSuggestion = AppSuggestionModel(
+                      userMail: user!.email ?? 'not authenticated user',
+                      rating: rating,
+                      category: category,
+                      suggestion: _feedbackController.text.trim(),
+                      createdAt: formattedDateTime);
+                  await suggestAppImprovement(appSuggestion);
+          
+                  _feedbackController.clear();
+                  setState(() {
+                    rating = 3;
+                    category = categories.first;
+                  });
+                },
+                style: ElevatedButton.styleFrom(
+                  minimumSize: Size(ScreenSize.width * 0.8, 45),
+                  backgroundColor: MyColors.primaryColor,
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(12),
+                  ),
+                ),
+                child: Text(
+                  "Submit",
+                  style: TextStyle(fontSize: 18, color: Colors.white),
                 ),
               ),
-            ),
-            SizedBox(height: 20),
-            ElevatedButton(
-              onPressed: () async {
-                if (_feedbackController.text.trim().isEmpty) {
-                  showCustomSnackBar(context, 'enter your feedback', true);
-                  return;
-                }
-                showCustomSnackBar(
-                    context,
-                    "Your feedback has been submitted. We value your input!",
-                    false);
-                DateTime now = DateTime.now();
-                String formattedDateTime =
-                    DateFormat('yyyy-MM-dd HH:mm:ss').format(now);
-                final appSuggestion = AppSuggestionModel(
-                    userMail: user!.email ?? 'not authenticated user',
-                    rating: rating,
-                    category: category,
-                    suggestion: _feedbackController.text.trim(),
-                    createdAt: formattedDateTime);
-                await suggestAppImprovement(appSuggestion);
-
-                _feedbackController.clear();
-                setState(() {
-                  rating = 3;
-                  category = categories.first;
-                });
-              },
-              style: ElevatedButton.styleFrom(
-                minimumSize: Size(ScreenSize.width * 0.8, 45),
-                backgroundColor: MyColors.primaryColor,
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(12),
-                ),
-              ),
-              child: Text(
-                "Submit",
-                style: TextStyle(fontSize: 18, color: Colors.white),
-              ),
-            ),
-          ],
+            ],
+          ),
         ),
       ),
     );

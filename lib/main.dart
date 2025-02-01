@@ -31,12 +31,13 @@ import 'package:docshpere/routes/routes.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-
+import 'package:timezone/data/latest.dart' as tz;
 import 'features/chat/view_model/chat_partners_bloc/chat_partners_bloc.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   SuggestionServices().initializeHive();
+  tz.initializeTimeZones();
   await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
   await NotificationServices().initializeNotification();
   runApp(const MyApp());
@@ -76,7 +77,9 @@ class MyApp extends StatelessWidget {
         BlocProvider(create: (context) => SuggestionsBloc()),
         BlocProvider(create: (context) => DoctorsSuggestionsBloc()),
       ],
+      
       child: MaterialApp.router(
+        
         debugShowCheckedModeBanner: false,
         routerConfig: router,
       ),

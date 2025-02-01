@@ -58,7 +58,7 @@ class TopReviewedDoctorDetailsWidget extends StatelessWidget {
           Space.hSpace20,
           SizedBox(
             width: ScreenSize.width * 1,
-            height: ScreenSize.height * 0.22,
+            height: ScreenSize.height * 0.21,
             child: PageView.builder(
               itemCount: doctors.length,
               controller: PageController(viewportFraction: 0.9),

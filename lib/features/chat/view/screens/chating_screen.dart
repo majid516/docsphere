@@ -35,7 +35,7 @@ class ChatingScreen extends StatelessWidget {
           preferredSize: Size(ScreenSize.width, 100),
           child: ChatingScreenAppbarWidget(
             doctorName: chatPartnerModel.doctorName,
-            category: 'cardiologist',
+            category: '',
             profile: chatPartnerModel.doctorProfile,
           )),
       backgroundColor: MyColors.whiteColor,

@@ -1,137 +1,91 @@
-import 'package:firebase_messaging/firebase_messaging.dart';
+import 'dart:developer';
+
+import 'package:docshpere/core/components/custom_app_bar.dart';
+import 'package:docshpere/core/constants/app_theme/app_theme.dart';
+import 'package:docshpere/core/utils/screen_size/screen_size.dart';
+import 'package:docshpere/features/notifications/services/notification_firebase_services.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:firebase_messaging/firebase_messaging.dart';
+import 'package:go_router/go_router.dart';
 
-
-class NotificationScreen extends StatelessWidget {
+class NotificationScreen extends StatefulWidget {
   const NotificationScreen({super.key});
 
   @override
-  Widget build(BuildContext context) {
-    // Correct the type by extracting the RemoteMessage from the route arguments
-    final RemoteMessage message = ModalRoute.of(context)!.settings.arguments as RemoteMessage;
-
-    return Scaffold(
-      appBar: AppBar(
-        title: Text('Notifications'),
-        backgroundColor: Color(0xFF1C3D5F),
-      ),
-      body: ListView.builder(
-        itemCount: 1,
-        itemBuilder: (context, index) {
-          return NotificationCard(
-            title: message.notification?.title ?? "No Title",
-            message: message.notification?.body ?? "No Message",
-            time: message.sentTime?.toString() ?? "No Time",
-            status: "Unread", // Assuming unread status
-          );
-        },
-      ),
-    );
-  }
+  State<NotificationScreen> createState() => _NotificationScreenState();
 }
 
+class _NotificationScreenState extends State<NotificationScreen> {
+  final FirebaseMessaging _firebaseMessaging = FirebaseMessaging.instance;
 
+  final String userId = FirebaseAuth.instance.currentUser!.uid;
 
-class NotificationCard extends StatelessWidget {
-  final String title;
-  final String message;
-  final String time;
-  final String status;
+  @override
+  void initState() {
+    super.initState();
+    _requestNotificationPermission();
+    NotificationFirebaseServices().setupFCMListener();
+  }
 
-  NotificationCard({
-    required this.title,
-    required this.message,
-    required this.time,
-    required this.status,
-  });
+  void _requestNotificationPermission() async {
+    NotificationSettings settings = await _firebaseMessaging.requestPermission(
+      alert: true,
+      badge: true,
+      sound: true,
+    );
+
+    if (settings.authorizationStatus == AuthorizationStatus.authorized) {
+      log("✅ Notification permission granted.");
+    } else {
+      log("❌ Notification permission denied.");
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
-    IconData statusIcon;
-    Color statusColor;
-    Color titleColor;
+    return Scaffold(
+       appBar: PreferredSize(
+          preferredSize: Size(ScreenSize.width, 100),
+          child: CustomAppBar(
+            action: () => context.pop(),
+            title: 'Notifications',
+          )),
+      backgroundColor: MyColors.whiteColor,
+      body: StreamBuilder<List<Map<String, dynamic>>>(
+        stream: NotificationFirebaseServices().getUserNotifications(),
+        builder: (context, snapshot) {
+          if (snapshot.connectionState == ConnectionState.waiting) {
+            return Center(child: CircularProgressIndicator());
+          }
+          if (snapshot.hasError) {
+            log(snapshot.error.toString());
+            return Center(child: Text("Error: ${snapshot.error}"));
+          }
+          if (!snapshot.hasData || snapshot.data!.isEmpty) {
+            return Center(child: Text("No notifications yet!"));
+          }
 
-    // Determine icon and color based on status
-    switch (status) {
-      case 'upcoming':
-        statusIcon = Icons.calendar_today;
-        statusColor = Color(0xFF4A90E2); // Blue
-        titleColor = Color(0xFF4A90E2);
-        break;
-      case 'updated':
-        statusIcon = Icons.refresh;
-        statusColor = Color(0xFFF5A623); // Orange
-        titleColor = Color(0xFFF5A623);
-        break;
-      case 'confirmed':
-        statusIcon = Icons.check_circle;
-        statusColor = Color(0xFF50E3C2); // Green
-        titleColor = Color(0xFF50E3C2);
-        break;
-      default:
-        statusIcon = Icons.notifications;
-        statusColor = Color(0xFF9B9B9B); // Gray
-        titleColor = Colors.black87;
-    }
-
-    return Padding(
-      padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 15),
-      child: Container(
-        padding: EdgeInsets.all(16),
-        decoration: BoxDecoration(
-          color: Colors.white, // Clean white background
-          borderRadius: BorderRadius.circular(16),
-          border: Border.all(
-            color: statusColor.withOpacity(0.2),
-            width: 1.5,
-          ),
-        ),
-        child: Row(
-          children: [
-            CircleAvatar(
-              radius: 25,
-              backgroundColor: statusColor.withOpacity(0.1),
-              child: Icon(
-                statusIcon,
-                color: statusColor,
-                size: 30,
-              ),
-            ),
-            SizedBox(width: 15),
-            // Information Section
-            Expanded(
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(
-                    title,
-                    style: TextStyle(
-                      fontWeight: FontWeight.bold,
-                      fontSize: 16,
-                      color: titleColor,
-                    ),
+          var notifications = snapshot.data!;
+          return ListView.builder(
+            itemCount: notifications.length,
+            itemBuilder: (context, index) {
+              var notification = notifications[index];
+              return Card(
+                margin: EdgeInsets.symmetric(horizontal: 10, vertical: 5),
+                child: ListTile(
+                  title: Text(notification['title']),
+                  subtitle: Text(notification['message']),
+                  trailing: IconButton(
+                    icon: Icon(Icons.delete, color: Colors.red),
+                    onPressed: () => NotificationFirebaseServices()
+                        .deleteNotification(notification['notificationId']),
                   ),
-                  SizedBox(height: 5),
-                  Text(
-                    message,
-                    style: TextStyle(
-                      fontSize: 14,
-                      color: Colors.black87,
-                    ),
-                  ),
-                  SizedBox(height: 10),
-                  Text(
-                    time,
-                    style: TextStyle(
-                      fontSize: 12,
-                      color: Colors.grey.shade600,
-                    ),
-                  ),
-                ],
-              ),
-            ),
-          ],
-        ),
+                ),
+              );
+            },
+          );
+        },
       ),
     );
   }

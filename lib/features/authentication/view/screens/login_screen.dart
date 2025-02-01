@@ -10,14 +10,16 @@ class LoginScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Stack(
-        children: [
-          BackgroudStackWidget(),
-          LoginComponentsWidgets(
-              emailController: nameController,
-              passwordController: passwordController,
-              )
-        ],
+      body: SingleChildScrollView(
+        child: Stack(
+          children: [
+            BackgroudStackWidget(),
+            LoginComponentsWidgets(
+                emailController: nameController,
+                passwordController: passwordController,
+                )
+          ],
+        ),
       ),
     );
   }

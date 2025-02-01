@@ -39,10 +39,13 @@ import 'package:docshpere/features/settings/view/screens/suggest_app_improvement
 import 'package:docshpere/features/settings/view/screens/terms_and_condition_screeen.dart';
 import 'package:docshpere/routes/routes_name.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+    final GlobalKey<NavigatorState> navigatorKey = GlobalKey<NavigatorState>();
 
 final currentUser = FirebaseAuth.instance.currentUser;
 final GoRouter router = GoRouter(
+   navigatorKey: navigatorKey,
   initialLocation:
       currentUser == null ? MyRoutes.signInOrRegister : MyRoutes.home,
   routes: [
@@ -218,14 +221,14 @@ final GoRouter router = GoRouter(
     path: MyRoutes.suggestImprovementsPage,
     builder: (context, state) => SuggestImprovementsPage(),
   ),
-   GoRoute(
-      name: 'videoCallScreen',
-      path: MyRoutes.videoCallScreen,
-      builder: (context, state) {
-        final data = state.extra as VideoCallModel;
-        return VideoCallScreen(details: data);
-      },
-    ),
+  //  GoRoute(
+  //     name: 'videoCallScreen',
+  //     path: MyRoutes.videoCallScreen,
+  //     builder: (context, state) {
+  //       final data = state.extra as VideoCallModel;
+  //       return VideoCallScreen(details: data);
+  //     },
+  //   ),
     GoRoute(
     name: 'areYouDoctorScreen',
     path: MyRoutes.areYouDoctorScreen,

@@ -21,7 +21,7 @@ class DoctorListTile extends StatelessWidget {
   Widget build(BuildContext context) {
     return SizedBox(
       width: ScreenSize.width,
-      height: 210,
+      height: 170,
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [

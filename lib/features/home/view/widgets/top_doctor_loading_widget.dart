@@ -51,7 +51,7 @@ class TopReviewedDoctorLoadingWidget extends StatelessWidget {
           Space.hSpace20,
           Container(
             width: ScreenSize.width * 0.96,
-            height: ScreenSize.height * 0.22,
+            height: ScreenSize.height * 0.21,
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(12),
               color: MyColors.whiteColor,
